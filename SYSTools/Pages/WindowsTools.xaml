@@ -31,6 +31,7 @@
                             <Button x:Name="Eventvwr" Margin="5,5,0,0" Width="140" Height="40" Content="事件查看器" FontSize="15" Click="Eventvwr_Click" Background="{x:Null}"/>
                             <Button x:Name="Devmgmt" Margin="5,5,0,0" Width="140" Height="40" Content="设备管理器" FontSize="15" Click="Devmgmt_Click" Background="{x:Null}"/>
                             <Button x:Name="Gpedit" Margin="5,5,0,0" Width="140" Height="40" Content="组策略" FontSize="15" Click="Gpedit_Click" Background="{x:Null}"/>
+                            <Button x:Name="Taskschd" Margin="5,5,0,0" Width="140" Height="40" Content="计划任务" FontSize="15" Background="{x:Null}" Click="Taskschd_Click"/>
                             <Button x:Name="GodMode" Margin="5,5,0,0" Width="140" Height="40" Content="上帝模式" FontSize="15" Click="GodMode_Click" Background="{x:Null}"/>
                             <Button x:Name="Winver" Margin="5,5,0,0" Width="140" Height="40" Content="Windows版本" FontSize="15" Click="Winver_Click" Background="{x:Null}"/>
                         </WrapPanel>

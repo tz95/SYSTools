@@ -59,6 +59,11 @@ namespace SYSTools.Pages
             //组策略
             Process.Start("gpedit.msc");
         }
+        private void Taskschd_Click(object sender, RoutedEventArgs e)
+        {
+            //计划任务
+            Process.Start("taskschd.msc");
+        }
 
         private void GodMode_Click(object sender, RoutedEventArgs e)
         {
