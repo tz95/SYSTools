@@ -16,6 +16,25 @@
 - 🍕 开源，运行内存占用小，安全(工具包优先使用Kaspersky扫描)。  
 - 💫 更加符合Windows11的 Fluent 2 Design 界面设计(设置正在设计中)，全工具包显示图标重构。  
 
+> [!TIP]
+> 使用前请先进入设置更新工具包 (工具包更新位于OneDrive 请使用梯子)
+
+> [!NOTE]
+> 有任何疑问欢迎加群讨论或发一个issues(我看到了会回)
+
+### 更新计划
+>已完成
+- [x] 全局背景图片
+- [x] 全局模糊度
+- [x] 基础功能
+
+>未完成/待定
+- [ ] ADB功能
+- [ ] WindowsTime更新时间线
+- [ ] 本机更新版本记录
+- [ ] 自定义工具添加
+- [ ] 等待补充
+
 ### 特别鸣谢 
 
 [iNKORE.UI.WPF.Modern](https://github.com/iNKORE-NET/UI.WPF.Modern)
