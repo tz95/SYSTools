@@ -308,12 +308,12 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\UI.WPF.Modern\source\iNKORE.UI.WPF.Modern.Controls\iNKORE.UI.WPF.Modern.Controls.csproj">
-      <Project>{f1ccb3ff-fe6f-4d08-93c2-61efd88be91c}</Project>
+    <ProjectReference Include="..\..\UI.WPF.Modern\source\iNKORE.UI.WPF.Modern.Controls\iNKORE.UI.WPF.Modern.Controls.csproj">
+      <Project>{883c2983-bfd3-488e-b0bb-75184c709f16}</Project>
       <Name>iNKORE.UI.WPF.Modern.Controls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\UI.WPF.Modern\source\iNKORE.UI.WPF.Modern\iNKORE.UI.WPF.Modern.csproj">
-      <Project>{7656d6f9-d389-452f-aa5e-05ad9779cffb}</Project>
+    <ProjectReference Include="..\..\UI.WPF.Modern\source\iNKORE.UI.WPF.Modern\iNKORE.UI.WPF.Modern.csproj">
+      <Project>{b1f054e9-8b1a-445d-9a9c-4ee2f1f947a9}</Project>
       <Name>iNKORE.UI.WPF.Modern</Name>
     </ProjectReference>
   </ItemGroup>
