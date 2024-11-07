@@ -105,10 +105,7 @@
       <Version>1.9.2</Version>
     </PackageReference>
     <PackageReference Include="iNKORE.UI.WPF">
-      <Version>1.2.7.1</Version>
-    </PackageReference>
-    <PackageReference Include="iNKORE.UI.WPF.Modern">
-      <Version>0.9.30</Version>
+      <Version>1.2.8</Version>
     </PackageReference>
     <PackageReference Include="log4net">
       <Version>3.0.0</Version>
@@ -125,6 +122,16 @@
     <PackageReference Include="System.ValueTuple">
       <Version>4.5.0</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\UI.WPF.Modern\source\iNKORE.UI.WPF.Modern.Controls\iNKORE.UI.WPF.Modern.Controls.csproj">
+      <Project>{f1ccb3ff-fe6f-4d08-93c2-61efd88be91c}</Project>
+      <Name>iNKORE.UI.WPF.Modern.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\UI.WPF.Modern\source\iNKORE.UI.WPF.Modern\iNKORE.UI.WPF.Modern.csproj">
+      <Project>{7656d6f9-d389-452f-aa5e-05ad9779cffb}</Project>
+      <Name>iNKORE.UI.WPF.Modern</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
