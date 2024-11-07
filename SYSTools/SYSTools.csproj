@@ -305,9 +305,6 @@
     <Resource Include="Resources\NoBackImage.png" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\UI.WPF.Modern\source\iNKORE.UI.WPF.Modern.Controls\iNKORE.UI.WPF.Modern.Controls.csproj">
       <Project>{883c2983-bfd3-488e-b0bb-75184c709f16}</Project>
       <Name>iNKORE.UI.WPF.Modern.Controls</Name>
