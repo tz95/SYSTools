@@ -19,7 +19,6 @@
         <muxc:ScrollViewerEx Grid.Row="1" Margin="0,20,0,0" Padding="0,0,20,0">
             <ikw:SimpleStackPanel Spacing="10">
 
-
                 <muxc:SettingsExpander x:Name="BackImageSettingsExpander"
                                 Description="预览/设置 图片＆模糊度"
                                 Header="背景图片设置" IsExpanded="True">
@@ -28,18 +27,21 @@
                     </muxc:SettingsExpander.HeaderIcon>
 
                     <muxc:SettingsExpander.Items>
-                        <muxc:SettingsCard ContentAlignment="Left">
-                            <StackPanel x:Name="ThemePanel" Margin="0,10,0,0" Orientation="Horizontal">
-                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="50,20,0,10">
-                                    <Button Content="选择背景图片" Click="SelectBackgroundButton_Click" FontSize="15" VerticalAlignment="Center" Margin="0,0,0,10" HorizontalAlignment="Center"/>
-                                    <Button Content="清空背景图片" Click="DeleteBackgroundButton_Click" FontSize="15" VerticalAlignment="Center" Margin="0,0,0,10" HorizontalAlignment="Center"/>
-                                </StackPanel>
-                                <Image x:Name="BackgroundPreview" Height="150" HorizontalAlignment="Left" Margin="15,0,0,0">
-                                    <Image.Effect>
-                                        <BlurEffect Radius="{Binding Source={x:Static model:GlobalSettings.Instance}, Path=BackgroundImageBlurRadius, Mode=TwoWay}"/>
-                                    </Image.Effect>
-                                </Image>
 
+                        <muxc:SettingsCard Header="背景图片预览">
+
+                            <Image x:Name="BackgroundPreview" Height="150" HorizontalAlignment="Left" Margin="15,0,0,0">
+                                <Image.Effect>
+                                    <BlurEffect Radius="{Binding Source={x:Static model:GlobalSettings.Instance}, Path=BackgroundImageBlurRadius, Mode=TwoWay}"/>
+                                </Image.Effect>
+                            </Image>
+
+                        </muxc:SettingsCard>
+
+                        <muxc:SettingsCard ContentAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                    <Button Content="选择背景图片" Click="SelectBackgroundButton_Click" FontSize="15" VerticalAlignment="Center" Margin="0,0,10,0" HorizontalAlignment="Center"/>
+                                    <Button Content="清空背景图片" Click="DeleteBackgroundButton_Click" FontSize="15" VerticalAlignment="Center" Margin="0,0,10,0" HorizontalAlignment="Center"/>
                             </StackPanel>
                         </muxc:SettingsCard>
 
@@ -47,11 +49,26 @@
                             <Slider VerticalAlignment="Center" Width="150" Minimum="0" Maximum="20" Value="{Binding Source={x:Static model:GlobalSettings.Instance}, Path=BackgroundImageBlurRadius, Mode=TwoWay}"/>
                         </muxc:SettingsCard>
 
-                        </muxc:SettingsExpander.Items>
+                        <muxc:SettingsCard Header="图片透明度(实验性)">
+                            <Slider VerticalAlignment="Center" Width="150" Minimum="0" Maximum="100" Value="{Binding Source={x:Static model:GlobalSettings.Instance}, Path=BackgroundImageBlurRadius, Mode=TwoWay}"/>
+                        </muxc:SettingsCard>
+
+                    </muxc:SettingsExpander.Items>
                     
                 </muxc:SettingsExpander>
 
-                
+                <muxc:SettingsCard Header="程序主题设定"
+                         Description="可以设定程序的主题风格为深/浅色模式">
+                    <muxc:SettingsCard.HeaderIcon>
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xef1f;"/>
+                    </muxc:SettingsCard.HeaderIcon>
+                    <ComboBox SelectedIndex="2">
+                        <ComboBoxItem Content="跟随系统"/>
+                        <ComboBoxItem Content="深色"/>
+                        <ComboBoxItem Content="浅色"/>
+                    </ComboBox>
+                </muxc:SettingsCard>
+
             </ikw:SimpleStackPanel>
         </muxc:ScrollViewerEx>
         
