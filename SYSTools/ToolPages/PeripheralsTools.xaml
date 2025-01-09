@@ -6,9 +6,9 @@
       xmlns:muxc="http://schemas.inkore.net/lib/ui/wpf/modern"
       xmlns:local="clr-namespace:SYSTools.ToolPages"
       mc:Ignorable="d" 
-      d:DesignHeight="610" d:DesignWidth="1040"
+      d:DesignWidth="935" d:DesignHeight="560"
       KeepAlive="True"
-      Title="PeripheralsTools" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610" Loaded="Page_Loaded">
+      Title="PeripheralsTools" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="935" MinHeight="560" Loaded="Page_Loaded">
 
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

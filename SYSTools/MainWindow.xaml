@@ -98,7 +98,7 @@
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 
-                <muxc:NavigationViewItem Content="运行库安装工具" Tag="SYSTools.Pages.RepairingTools" x:Name="RepairingTools" IsTabStop="False">
+                <muxc:NavigationViewItem Content="运行库安装工具" Tag="SYSTools.ToolPages.RepairingTools" x:Name="RepairingTools" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE945;" />
                     </muxc:NavigationViewItem.Icon>
@@ -122,7 +122,7 @@
 
                 <muxc:NavigationViewItemSeparator/>
 
-                <muxc:NavigationViewItem Content="深色模式" Tag="ThemeDarkMode" x:Name="Dark" IsTabStop="False" MouseLeftButtonDown="Dark_MouseLeftButtonDown" >
+                <!--<muxc:NavigationViewItem Content="深色模式" Tag="ThemeDarkMode" x:Name="Dark" IsTabStop="False" MouseLeftButtonDown="Dark_MouseLeftButtonDown" >
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE708;" />
                     </muxc:NavigationViewItem.Icon>
@@ -131,6 +131,12 @@
                 <muxc:NavigationViewItem Content="亮色模式" Tag="ThemeLightMode" x:Name="Light" IsTabStop="False" MouseLeftButtonDown="Light_MouseLeftButtonDown" >
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE793;" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>-->
+
+                <muxc:NavigationViewItem Content="测试页面" Tag="SYSTools.Pages.Other" x:Name="Other" IsTabStop="False">
+                    <muxc:NavigationViewItem.Icon>
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE1C9;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 

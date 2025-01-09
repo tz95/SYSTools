@@ -90,6 +90,9 @@
     <Compile Include="Pages\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Other.xaml.cs">
+      <DependentUpon>Other.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\WSATools.xaml.cs">
       <DependentUpon>WSATools.xaml</DependentUpon>
     </Compile>
@@ -99,7 +102,7 @@
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\RepairingTools.xaml.cs">
+    <Compile Include="ToolPages\RepairingTools.xaml.cs">
       <DependentUpon>RepairingTools.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Test.xaml.cs">
@@ -161,6 +164,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Other.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\WSATools.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -173,7 +180,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\RepairingTools.xaml">
+    <Page Include="ToolPages\RepairingTools.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

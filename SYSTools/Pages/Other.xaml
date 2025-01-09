@@ -1,0 +1,61 @@
+﻿<Page x:Class="SYSTools.Pages.Other"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:muxc="http://schemas.inkore.net/lib/ui/wpf/modern"
+      xmlns:local="clr-namespace:SYSTools.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="610" d:DesignWidth="1040"
+      KeepAlive="True"
+      Title="Other" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610" Loaded="Window_Loading">
+
+    <Grid>
+        
+        <muxc:NavigationView x:Name="ToolsNavigation" PaneDisplayMode="Top" SelectionFollowsFocus="Enabled" IsBackButtonVisible="Collapsed" HorizontalContentAlignment="Center" IsTitleBarAutoPaddingEnabled="True" IsSettingsVisible="False" IsBackEnabled="False" AlwaysShowHeader="True" ItemInvoked="NavigationTriggered">
+
+            <FrameworkElement.Resources>
+                <SolidColorBrush x:Key="{x:Static muxc:ThemeKeys.NavigationViewContentBackgroundKey}" Color="Transparent"/>
+                <SolidColorBrush x:Key="{x:Static muxc:ThemeKeys.ExpanderHeaderBorderBrushKey}" Color="Transparent"/>
+                <Thickness x:Key="NavigationViewContentGridBorderThickness">0,0,0,0</Thickness>
+            </FrameworkElement.Resources>
+
+            <muxc:NavigationView.MenuItems>
+
+                <muxc:NavigationViewItem Content="检测工具" Tag="SYSTools.ToolPages.DetectionTools" x:Name="DetectionTools" IsTabStop="False">
+                    <muxc:NavigationViewItem.Icon>
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE9D9;" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+
+                <muxc:NavigationViewItem Content="硬件测试工具" Tag="SYSTools.ToolPages.TestTools" x:Name="TestTools" IsTabStop="False">
+                    <muxc:NavigationViewItem.Icon>
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE950;" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+
+                <muxc:NavigationViewItem Content="硬盘工具" Tag="SYSTools.ToolPages.DiskTools" x:Name="DiskTools" IsTabStop="False">
+                    <muxc:NavigationViewItem.Icon>
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xEB05;" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+
+                <muxc:NavigationViewItem Content="外设检测工具" Tag="SYSTools.ToolPages.PeripheralsTools" x:Name="PeripheralsTools" IsTabStop="False">
+                    <muxc:NavigationViewItem.Icon>
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE961;" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+
+                <muxc:NavigationViewItem Content="运行库安装工具" Tag="SYSTools.ToolPages.RepairingTools" x:Name="RepairingTools" IsTabStop="False">
+                    <muxc:NavigationViewItem.Icon>
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE945;" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+
+            </muxc:NavigationView.MenuItems>
+
+            <muxc:Frame x:Name="CurrentPage" />
+            
+        </muxc:NavigationView>
+    </Grid>
+</Page>

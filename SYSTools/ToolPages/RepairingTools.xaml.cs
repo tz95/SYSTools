@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using SYSTools.Dialog;
 
-namespace SYSTools.Pages
+namespace SYSTools.ToolPages
 {
     /// <summary>
     /// RepairingTools.xaml 的交互逻辑

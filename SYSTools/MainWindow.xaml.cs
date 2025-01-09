@@ -34,6 +34,7 @@ namespace SYSTools
         private readonly Page WSATools_Page = new WSATools();
         private readonly Page Configuration_Page = new Configuration();
         private readonly Page About_Page = new About();
+        private readonly Page Other_Page = new Other();
         string AppPath = Directory.GetCurrentDirectory();
 
         public MainWindow()
@@ -132,6 +133,9 @@ namespace SYSTools
                 case not null when navPageType == typeof(WSATools):
                     CurrentPage.Navigate(WSATools_Page);
                     break;
+                case not null when navPageType == typeof(Other):
+                    CurrentPage.Navigate(Other_Page);
+                    break;
                 case not null when navPageType == typeof(Configuration):
                     CurrentPage.Navigate(Configuration_Page);
                     break;
@@ -191,17 +195,19 @@ namespace SYSTools
             BackImage.Effect = blurEffect; 
         }
 
-        private void Dark_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            //实验性功能 设定为暗色模式
-            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
-        }
+        //private void Dark_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    //实验性功能 设定为暗色模式
+        //    ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
+        //}
 
-        private void Light_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            // 实验性功能 设定为亮色模式
-            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
-        }
+        //private void Light_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    // 实验性功能 设定为亮色模式
+        //    ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
+        //}
+
+
 
         private void Window_Closed(object sender, EventArgs e)
         {
