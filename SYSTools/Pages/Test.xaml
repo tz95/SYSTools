@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:SYSTools.Pages"
       mc:Ignorable="d" 
       KeepAlive="True"
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="610" d:DesignWidth="1040"
       Title="Test" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610">
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

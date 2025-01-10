@@ -11,7 +11,9 @@
       Title="Other" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610" Loaded="Window_Loading">
 
     <Grid>
-        
+
+        <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="3" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Width="160" Height="90"/>
+
         <muxc:NavigationView x:Name="ToolsNavigation" PaneDisplayMode="Top" SelectionFollowsFocus="Enabled" IsBackButtonVisible="Collapsed" HorizontalContentAlignment="Center" IsTitleBarAutoPaddingEnabled="True" IsSettingsVisible="False" IsBackEnabled="False" AlwaysShowHeader="True" ItemInvoked="NavigationTriggered">
 
             <FrameworkElement.Resources>
@@ -22,7 +24,7 @@
 
             <muxc:NavigationView.MenuItems>
 
-                <muxc:NavigationViewItem Content="检测工具" Tag="SYSTools.ToolPages.DetectionTools" x:Name="DetectionTools" IsTabStop="False">
+                <muxc:NavigationViewItem Content="检测工具" Tag="SYSTools.ToolPages.DetectionTools" x:Name="DetectionTools" IsTabStop="False" IsSelected="True">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE9D9;" />
                     </muxc:NavigationViewItem.Icon>
