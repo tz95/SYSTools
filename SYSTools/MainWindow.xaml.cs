@@ -112,21 +112,6 @@ namespace SYSTools
                 case not null when navPageType == typeof(Test):
                     CurrentPage.Navigate(Test_Page);
                     break;
-                case not null when navPageType == typeof(DetectionTools):
-                    CurrentPage.Navigate(DetectionTools_Page);
-                    break;
-                case not null when navPageType == typeof(TestTools):
-                    CurrentPage.Navigate(TestTools_Page);
-                    break;
-                case not null when navPageType == typeof(DiskTools):
-                    CurrentPage.Navigate(DiskTools_Page);
-                    break;
-                case not null when navPageType == typeof(PeripheralsTools):
-                    CurrentPage.Navigate(PeripheralsTools_Page);
-                    break;
-                case not null when navPageType == typeof(RepairingTools):
-                    CurrentPage.Navigate(RepairingTools_Page);
-                    break;
                 case not null when navPageType == typeof(WindowsTools):
                     CurrentPage.Navigate(WindowsTools_Page);
                     break;
