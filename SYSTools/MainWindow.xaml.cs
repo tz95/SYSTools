@@ -1,17 +1,15 @@
-﻿using System;
+﻿using iNKORE.UI.WPF.Modern.Controls;
+using iNKORE.UI.WPF.Modern.Media.Animation;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
-using iNKORE.UI.WPF.Modern;
-using iNKORE.UI.WPF.Modern.Controls;
-using iNKORE.UI.WPF.Modern.Media.Animation;
 using SYSTools.Model;
 using SYSTools.Pages;
-using SYSTools.ToolPages;
 using Page = System.Windows.Controls.Page;
 
 namespace SYSTools
@@ -23,19 +21,16 @@ namespace SYSTools
 
     public partial class MainWindow : Window
     {
-        private readonly Page Home_Page = new Home();
-        private readonly Page Test_Page = new Test();
-        private readonly Page DetectionTools_Page = new DetectionTools();
-        private readonly Page TestTools_Page = new TestTools();
-        private readonly Page DiskTools_Page = new DiskTools();
-        private readonly Page PeripheralsTools_Page = new PeripheralsTools();
-        private readonly Page RepairingTools_Page = new RepairingTools();
-        private readonly Page WindowsTools_Page = new WindowsTools();
-        private readonly Page WSATools_Page = new WSATools();
-        private readonly Page Configuration_Page = new Configuration();
-        private readonly Page About_Page = new About();
-        private readonly Page Other_Page = new Other();
-        string AppPath = Directory.GetCurrentDirectory();
+        private readonly Dictionary<Type, Page> _pages = new()
+        {
+            { typeof(Home), new Home() },
+            { typeof(Test), new Test() },
+            { typeof(WindowsTools), new WindowsTools() },
+            { typeof(WSATools), new WSATools() },
+            { typeof(Configuration), new Configuration() },
+            { typeof(About), new About() },
+            { typeof(Other), new Other() }
+        };
 
         public MainWindow()
         {
@@ -83,7 +78,7 @@ namespace SYSTools
             }
             TitleBarTextBlock.Text = "SYSTools Ver" + (Application.ResourceAssembly.GetName().Version.ToString());
             // 设置默认启动Page页
-            CurrentPage.Navigate(Home_Page, new DrillInNavigationTransitionInfo());
+            NavigateTo(typeof(Home), new DrillInNavigationTransitionInfo());
         }
 
         private void NavigationTriggered(
@@ -91,42 +86,31 @@ namespace SYSTools
             NavigationViewItemInvokedEventArgs args
         )
         {
-            if (args.InvokedItemContainer != null)
-                NavigateTo(
-                    Type.GetType(args.InvokedItemContainer.Tag.ToString()),
-                    args.RecommendedNavigationTransitionInfo
-                );
+            if (args.InvokedItemContainer?.Tag is string tag)
+            {
+                Type targetType = Type.GetType(tag);
+                if (targetType != null)
+                {
+                    // 统一切换动画
+                    NavigateTo(targetType, new DrillInNavigationTransitionInfo());
+                }
+            }
         }
 
         private void NavigateTo(Type navPageType, NavigationTransitionInfo transitionInfo)
         {
             // 导航到目标页
-            var preNavPageType = CurrentPage.Content.GetType();
-            if (navPageType == preNavPageType)
-                return;
-            switch (navPageType)
+            var preNavPageType = CurrentPage.Content?.GetType();
+            if (navPageType == preNavPageType) return;
+            transitionInfo ??= new DrillInNavigationTransitionInfo();
+            if (_pages.TryGetValue(navPageType, out var page))
             {
-                case not null when navPageType == typeof(Home):
-                    CurrentPage.Navigate(Home_Page);
-                    break;
-                case not null when navPageType == typeof(Test):
-                    CurrentPage.Navigate(Test_Page);
-                    break;
-                case not null when navPageType == typeof(WindowsTools):
-                    CurrentPage.Navigate(WindowsTools_Page);
-                    break;
-                case not null when navPageType == typeof(WSATools):
-                    CurrentPage.Navigate(WSATools_Page);
-                    break;
-                case not null when navPageType == typeof(Other):
-                    CurrentPage.Navigate(Other_Page);
-                    break;
-                case not null when navPageType == typeof(Configuration):
-                    CurrentPage.Navigate(Configuration_Page);
-                    break;
-                case not null when navPageType == typeof(About):
-                    CurrentPage.Navigate(About_Page);
-                    break;
+                CurrentPage.Navigate(page, transitionInfo);
+            }
+            else
+            {
+                // 处理未注册页面的逻辑
+                throw new InvalidOperationException($"Page type {navPageType.Name} is not registered.");
             }
         }
 
@@ -179,20 +163,6 @@ namespace SYSTools
             // 为背景图片应用模糊效果
             BackImage.Effect = blurEffect; 
         }
-
-        //private void Dark_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    //实验性功能 设定为暗色模式
-        //    ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
-        //}
-
-        //private void Light_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    // 实验性功能 设定为亮色模式
-        //    ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
-        //}
-
-
 
         private void Window_Closed(object sender, EventArgs e)
         {
