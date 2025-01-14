@@ -74,7 +74,7 @@
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 
-                <muxc:NavigationViewItem Content="工具合集" Tag="SYSTools.Pages.Other" x:Name="Other" IsTabStop="False">
+                <muxc:NavigationViewItem Content="工具合集" Tag="SYSTools.Pages.Toolkit" x:Name="Toolkit" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE2AC;" />
                     </muxc:NavigationViewItem.Icon>

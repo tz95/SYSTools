@@ -90,8 +90,8 @@
     <Compile Include="Pages\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Other.xaml.cs">
-      <DependentUpon>Other.xaml</DependentUpon>
+    <Compile Include="Pages\Toolkit.xaml.cs">
+      <DependentUpon>Toolkit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\WSATools.xaml.cs">
       <DependentUpon>WSATools.xaml</DependentUpon>
@@ -164,7 +164,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Other.xaml">
+    <Page Include="Pages\Toolkit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

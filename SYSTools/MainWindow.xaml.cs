@@ -29,7 +29,7 @@ namespace SYSTools
             { typeof(WSATools), new WSATools() },
             { typeof(Configuration), new Configuration() },
             { typeof(About), new About() },
-            { typeof(Other), new Other() }
+            { typeof(Toolkit), new Toolkit() }
         };
 
         public MainWindow()
