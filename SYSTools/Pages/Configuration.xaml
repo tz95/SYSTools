@@ -11,11 +11,9 @@
       d:DesignHeight="610" d:DesignWidth="1040"
       KeepAlive="True"
       Title="Configuration" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610">
-
     <Grid>
         <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="3" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Width="160" Height="90"/>
         <Border  BorderThickness="1" CornerRadius="5" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
-
         <ScrollViewer
             Padding="56,0,0,0"
             muxc:FocusVisualHelper.UseSystemFocusVisuals="False"
@@ -28,30 +26,24 @@
                         <Button Content="选择背景图片" Click="SelectBackgroundButton_Click" FontSize="15" VerticalAlignment="Center" Margin="0,0,0,10" HorizontalAlignment="Center"/>
                         <Button Content="清空背景图片" Click="DeleteBackgroundButton_Click" FontSize="15" VerticalAlignment="Center" Margin="0,0,0,10" HorizontalAlignment="Center"/>
                         <TextBlock Text="图片模糊度(实验性)" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,25,0,0" />
-                        <Slider VerticalAlignment="Center" Width="150" Minimum="0" Maximum="20" Value="{Binding Source={x:Static model:GlobalSettings.Instance}, Path=BackgroundImageBlurRadius, Mode=TwoWay}"/>
+                        <Slider VerticalAlignment="Center" Width="150" Minimum="0" Maximum="20" Value="{Binding Source={x:Static model:AppSettings.Instance}, Path=BackgroundImageBlurRadius, Mode=TwoWay}"/>
                     </StackPanel>
                     <Image x:Name="BackgroundPreview" Height="150" HorizontalAlignment="Left" Margin="15,0,0,0">
                         <Image.Effect>
-                            <BlurEffect Radius="{Binding Source={x:Static model:GlobalSettings.Instance}, Path=BackgroundImageBlurRadius, Mode=TwoWay}"/>
+                            <BlurEffect Radius="{Binding Source={x:Static model:AppSettings.Instance}, Path=BackgroundImageBlurRadius, Mode=TwoWay}"/>
                         </Image.Effect>
                     </Image>
-
                     <Image x:Name="nu" Height="150" HorizontalAlignment="Left" Margin="15,0,0,0">
                         
                     </Image>
-
                     <!--<Rectangle Fill="{muxc:ThemeResource CustomAcrylicInAppLuminosity}" />
 
                     <ResourceDictionary x:Key="Default">
                         <muxc:AcrylicBrush x:Key="CustomAcrylicInAppLuminosity"
             TintOpacity="" TintLuminosityOpacity="" TintColor="SkyBlue" FallbackColor="SkyBlue" />
                     </ResourceDictionary>-->
-
                 </StackPanel>
-
             </StackPanel>
         </ScrollViewer>
-
-        
     </Grid>
 </Page>

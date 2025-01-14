@@ -36,27 +36,19 @@ namespace SYSTools
         {
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
-            GlobalSettings.Instance.PropertyChanged += OnSettingsPropertyChanged;
+            AppSettings.Instance.PropertyChanged += OnSettingsPropertyChanged;
         }
 
         // 监听全局设置修改
         private void OnSettingsPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(GlobalSettings.BackgroundImagePath))
+            if (e.PropertyName == nameof(AppSettings.BackgroundImagePath))
             {
-                if (!string.IsNullOrEmpty(GlobalSettings.Instance.BackgroundImagePath))
-                {
-                    BackImage.Source = new BitmapImage(
-                        new Uri(
-                            GlobalSettings.Instance.BackgroundImagePath,
-                            UriKind.RelativeOrAbsolute
-                        )
-                    );
-                }
+                LoadBackgroundImage(AppSettings.Instance.BackgroundImagePath);
             }
-            else if (e.PropertyName == nameof(GlobalSettings.BackgroundImageBlurRadius))
+            else if (e.PropertyName == nameof(AppSettings.BackgroundImageBlurRadius))
             {
-                LoadBackgroundImageBlurRadius(GlobalSettings.Instance.BackgroundImageBlurRadius);
+                LoadBackgroundImageBlurRadius(AppSettings.Instance.BackgroundImageBlurRadius);
             }
         }
 
@@ -116,52 +108,35 @@ namespace SYSTools
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).HasFile)
-                Properties.Settings.Default.Upgrade();
-                Properties.Settings.Default.Save();
-                LoadUserSettings();
-            // 加载用户配置
-            LoadUserSettings();
-        }
-
-        private void LoadUserSettings()
-        {
-            // 启动程序时加载 user.config 文件
-            string savedImagePath = Properties.Settings.Default.BackgroundImagePath;
-            double savedBlurRadius = Properties.Settings.Default.BackgroundImageBlurRadius;
-            if (!string.IsNullOrWhiteSpace(savedImagePath) && File.Exists(savedImagePath))
-            {
-                LoadBackgroundImage(savedImagePath);
-                LoadBackgroundImageBlurRadius(savedBlurRadius);
-            }
-            else
-            {
-                // 读取不到Config的背景图片路径或路径为空则设定为全透明图片路径
-                LoadBackgroundImage("pack://application:,,,/Resources/NoBackImage.png");
-                LoadBackgroundImageBlurRadius(savedBlurRadius);
-            }
+            // 加载设置并应用
+            LoadBackgroundImage(AppSettings.Instance.BackgroundImagePath);
+            LoadBackgroundImageBlurRadius(AppSettings.Instance.BackgroundImageBlurRadius);
         }
 
         private void LoadBackgroundImage(string imagePath)
         {
-            // 加载背景图片
-            BitmapImage bitmap = new BitmapImage();
-            bitmap.BeginInit();
-            bitmap.UriSource = new Uri(imagePath, UriKind.Absolute);
-            bitmap.EndInit();
-            BackImage.Source = bitmap;
+            try
+            {
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(imagePath, UriKind.Absolute);
+                bitmap.EndInit();
+                BackImage.Source = bitmap;
+            }
+            catch (Exception)
+            {
+                // 如果加载失败，使用默认图片
+                LoadBackgroundImage("pack://application:,,,/Resources/NoBackImage.png");
+            }
         }
 
-        private void LoadBackgroundImageBlurRadius(double RadiusInt)
+        private void LoadBackgroundImageBlurRadius(double radiusInt)
         {
-            // 加载背景模糊
             var blurEffect = new BlurEffect
             {
-                // 获取模糊度
-                Radius = RadiusInt 
+                Radius = radiusInt
             };
-            // 为背景图片应用模糊效果
-            BackImage.Effect = blurEffect; 
+            BackImage.Effect = blurEffect;
         }
 
         private void Window_Closed(object sender, EventArgs e)

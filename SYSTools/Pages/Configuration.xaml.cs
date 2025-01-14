@@ -12,8 +12,6 @@ namespace SYSTools.Pages
     /// </summary>
     public partial class Configuration : Page
     {
-        public Action OnBackgroundChanged { get; set; }
-
         public Configuration()
         {
             InitializeComponent();
@@ -28,8 +26,7 @@ namespace SYSTools.Pages
             openFileDialog.Filter = "Image files (*.jpg;*.png)|*.jpg;*.png";
             if (openFileDialog.ShowDialog() == true)
             {
-                GlobalSettings.Instance.BackgroundImagePath = openFileDialog.FileName;
-                SaveBackgroundImagePath(openFileDialog.FileName);
+                AppSettings.Instance.BackgroundImagePath = openFileDialog.FileName;
                 LoadBackgroundImage(openFileDialog.FileName);
             }
         }
@@ -37,16 +34,8 @@ namespace SYSTools.Pages
         // 背景图片清除按钮(设定为内置透明图片)
         private void DeleteBackgroundButton_Click(object sender, RoutedEventArgs e)
         {
-            GlobalSettings.Instance.BackgroundImagePath = "pack://application:,,,/Resources/NoBackImage.png";
-            SaveBackgroundImagePath("");
+            AppSettings.Instance.BackgroundImagePath = "pack://application:,,,/Resources/NoBackImage.png";
             LoadBackgroundImage("");
-        }
-
-        // 保存图片地址到Config文件
-        private void SaveBackgroundImagePath(string imagePath)
-        {
-            Properties.Settings.Default.BackgroundImagePath = imagePath;
-            Properties.Settings.Default.Save();
         }
 
         // 加载背景图片到预览窗口
@@ -58,24 +47,28 @@ namespace SYSTools.Pages
             }
             else
             {
-                BitmapImage bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(imagePath, UriKind.Absolute);
-                bitmap.EndInit();
-                BackgroundPreview.Source = bitmap;
+                try
+                {
+                    BitmapImage bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(imagePath, UriKind.Absolute);
+                    bitmap.EndInit();
+                    BackgroundPreview.Source = bitmap;
+                }
+                catch (Exception)
+                {
+                    BackgroundPreview.Source = null;
+                }
             }
         }
 
         // 加载用户Config文件
         private void LoadUserSettings()
         {
-            string savedImagePath = Properties.Settings.Default.BackgroundImagePath;
-            double savedBlurRadius = Properties.Settings.Default.BackgroundImageBlurRadius;
+            string savedImagePath = AppSettings.Instance.BackgroundImagePath;
             if (!string.IsNullOrWhiteSpace(savedImagePath) && File.Exists(savedImagePath))
             {
                 LoadBackgroundImage(savedImagePath);
-                GlobalSettings.Instance.BackgroundImageBlurRadius = savedBlurRadius;
-                GlobalSettings.Instance.BackgroundImagePath = savedImagePath;
             }
         }
     }

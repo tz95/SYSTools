@@ -85,10 +85,14 @@
     <Compile Include="Dialog\TestQueryDialog.xaml.cs">
       <DependentUpon>TestQueryDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\AppSettings.cs" />
     <Compile Include="Model\BackGroudImageSetting.cs" />
     <Compile Include="Model\NotifyIconViewModel.cs" />
     <Compile Include="Pages\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\HardwareMonitor.xaml.cs">
+      <DependentUpon>HardwareMonitor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Toolkit.xaml.cs">
       <DependentUpon>Toolkit.xaml</DependentUpon>
@@ -161,6 +165,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\HardwareMonitor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -248,6 +256,9 @@
     </PackageReference>
     <PackageReference Include="iNKORE.UI.WPF.Modern">
       <Version>0.9.30</Version>
+    </PackageReference>
+    <PackageReference Include="LibreHardwareMonitorLib">
+      <Version>0.9.4</Version>
     </PackageReference>
     <PackageReference Include="log4net">
       <Version>3.0.0</Version>
