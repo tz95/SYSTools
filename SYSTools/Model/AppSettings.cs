@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using System.Configuration;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Xml.Linq;
@@ -93,11 +92,6 @@ namespace SYSTools.Model
                         }
                     }
                 }
-                else
-                {
-                    // 如果配置文件不存在，尝试从旧版本迁移设置
-                    MigrateFromOldSettings();
-                }
 
                 // 验证背景图片路径
                 if (string.IsNullOrWhiteSpace(_backgroundImagePath) || !File.Exists(_backgroundImagePath))
@@ -108,29 +102,6 @@ namespace SYSTools.Model
             catch (Exception)
             {
                 // 如果加载失败，使用默认值
-                _backgroundImagePath = "pack://application:,,,/Resources/NoBackImage.png";
-                _backgroundImageBlurRadius = 0;
-            }
-        }
-
-        private void MigrateFromOldSettings()
-        {
-            try
-            {
-                // 从旧的 Properties.Settings 迁移数据
-                _backgroundImagePath = Properties.Settings.Default.BackgroundImagePath;
-                _backgroundImageBlurRadius = Properties.Settings.Default.BackgroundImageBlurRadius;
-                
-                // 保存到新的配置文件
-                SaveSettings();
-                
-                // 清理旧的配置
-                Properties.Settings.Default.Reset();
-                Properties.Settings.Default.Save();
-            }
-            catch (Exception)
-            {
-                // 迁移失败时使用默认值
                 _backgroundImagePath = "pack://application:,,,/Resources/NoBackImage.png";
                 _backgroundImageBlurRadius = 0;
             }
