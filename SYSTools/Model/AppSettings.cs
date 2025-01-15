@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 
 namespace SYSTools.Model
 {
@@ -10,6 +11,7 @@ namespace SYSTools.Model
     {
         private static readonly Lazy<AppSettings> _instance = new(() => new AppSettings());
         public static AppSettings Instance => _instance.Value;
+        private readonly string _settingsFilePath;
 
         private string _backgroundImagePath;
         private double _backgroundImageBlurRadius;
@@ -18,6 +20,13 @@ namespace SYSTools.Model
 
         private AppSettings()
         {
+            // 设置配置文件路径
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            _settingsFilePath = Path.Combine(appDataPath, "HikarisameTechnologyStudio", "SYSTools", "settings.config");
+            
+            // 确保目录存在
+            Directory.CreateDirectory(Path.GetDirectoryName(_settingsFilePath));
+            
             LoadSettings();
         }
 
@@ -29,8 +38,7 @@ namespace SYSTools.Model
                 if (_backgroundImagePath != value)
                 {
                     _backgroundImagePath = value;
-                    Properties.Settings.Default.BackgroundImagePath = value;
-                    Properties.Settings.Default.Save();
+                    SaveSettings();
                     OnPropertyChanged();
                 }
             }
@@ -44,27 +52,87 @@ namespace SYSTools.Model
                 if (_backgroundImageBlurRadius != value)
                 {
                     _backgroundImageBlurRadius = value;
-                    Properties.Settings.Default.BackgroundImageBlurRadius = value;
-                    Properties.Settings.Default.Save();
+                    SaveSettings();
                     OnPropertyChanged();
                 }
             }
         }
 
+        private void SaveSettings()
+        {
+            try
+            {
+                var settings = new XDocument(
+                    new XElement("Settings",
+                        new XElement("BackgroundImagePath", _backgroundImagePath),
+                        new XElement("BackgroundImageBlurRadius", _backgroundImageBlurRadius)
+                    )
+                );
+                settings.Save(_settingsFilePath);
+            }
+            catch (Exception)
+            {
+                // 保存失败时忽略错误
+            }
+        }
+
         public void LoadSettings()
         {
-            if (!ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).HasFile)
+            try
             {
-                Properties.Settings.Default.Upgrade();
+                if (File.Exists(_settingsFilePath))
+                {
+                    var doc = XDocument.Load(_settingsFilePath);
+                    var settings = doc.Element("Settings");
+                    if (settings != null)
+                    {
+                        _backgroundImagePath = settings.Element("BackgroundImagePath")?.Value;
+                        if (double.TryParse(settings.Element("BackgroundImageBlurRadius")?.Value, out double blurRadius))
+                        {
+                            _backgroundImageBlurRadius = blurRadius;
+                        }
+                    }
+                }
+                else
+                {
+                    // 如果配置文件不存在，尝试从旧版本迁移设置
+                    MigrateFromOldSettings();
+                }
+
+                // 验证背景图片路径
+                if (string.IsNullOrWhiteSpace(_backgroundImagePath) || !File.Exists(_backgroundImagePath))
+                {
+                    _backgroundImagePath = "pack://application:,,,/Resources/NoBackImage.png";
+                }
+            }
+            catch (Exception)
+            {
+                // 如果加载失败，使用默认值
+                _backgroundImagePath = "pack://application:,,,/Resources/NoBackImage.png";
+                _backgroundImageBlurRadius = 0;
+            }
+        }
+
+        private void MigrateFromOldSettings()
+        {
+            try
+            {
+                // 从旧的 Properties.Settings 迁移数据
+                _backgroundImagePath = Properties.Settings.Default.BackgroundImagePath;
+                _backgroundImageBlurRadius = Properties.Settings.Default.BackgroundImageBlurRadius;
+                
+                // 保存到新的配置文件
+                SaveSettings();
+                
+                // 清理旧的配置
+                Properties.Settings.Default.Reset();
                 Properties.Settings.Default.Save();
             }
-
-            _backgroundImagePath = Properties.Settings.Default.BackgroundImagePath;
-            _backgroundImageBlurRadius = Properties.Settings.Default.BackgroundImageBlurRadius;
-
-            if (string.IsNullOrWhiteSpace(_backgroundImagePath) || !File.Exists(_backgroundImagePath))
+            catch (Exception)
             {
+                // 迁移失败时使用默认值
                 _backgroundImagePath = "pack://application:,,,/Resources/NoBackImage.png";
+                _backgroundImageBlurRadius = 0;
             }
         }
 
