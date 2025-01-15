@@ -26,6 +26,7 @@ namespace SYSTools
             { typeof(Home), new Home() },
             { typeof(Test), new Test() },
             { typeof(WindowsTools), new WindowsTools() },
+            { typeof(HardwareMonitor), new HardwareMonitor() },
             { typeof(WSATools), new WSATools() },
             { typeof(Configuration), new Configuration() },
             { typeof(About), new About() },

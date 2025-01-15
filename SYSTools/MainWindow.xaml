@@ -80,6 +80,12 @@
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 
+                <muxc:NavigationViewItem Content="硬件传感器信息" Tag="SYSTools.Pages.HardwareMonitor" x:Name="HardwareMonitor" IsTabStop="False">
+                    <muxc:NavigationViewItem.Icon>
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xECAD;" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+
                 <muxc:NavigationViewItemSeparator/>
 
                 <muxc:NavigationViewItem Content="Windows快捷小工具" Tag="SYSTools.Pages.WindowsTools" x:Name="WindowsTools" IsTabStop="False">
