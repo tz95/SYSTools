@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using SYSTools.Model;
 using SYSTools.Pages;
 using Page = System.Windows.Controls.Page;
+using System.Security.Principal;
 
 namespace SYSTools
 {
@@ -25,12 +26,12 @@ namespace SYSTools
         {
             { typeof(Home), new Home() },
             { typeof(Test), new Test() },
-            { typeof(WindowsTools), new WindowsTools() },
+            { typeof(Toolkit), new Toolkit() },
             { typeof(HardwareMonitor), new HardwareMonitor() },
+            { typeof(WindowsTools), new WindowsTools() },
             { typeof(WSATools), new WSATools() },
             { typeof(Configuration), new Configuration() },
-            { typeof(About), new About() },
-            { typeof(Toolkit), new Toolkit() }
+            { typeof(About), new About() }
         };
 
         public MainWindow()
@@ -69,7 +70,15 @@ namespace SYSTools
                 );
                 Close();
             }
-            TitleBarTextBlock.Text = "SYSTools Ver" + (Application.ResourceAssembly.GetName().Version.ToString());
+            
+            // 检测是否以管理员身份运行
+            bool isAdmin = new WindowsPrincipal(WindowsIdentity.GetCurrent())
+                .IsInRole(WindowsBuiltInRole.Administrator);
+            
+            // 在标题后添加管理员标识
+            string adminFlag = isAdmin ? " [管理员模式]" : "";
+            TitleBarTextBlock.Text = "SYSTools Ver" + (Application.ResourceAssembly.GetName().Version.ToString()) + adminFlag;
+            
             // 设置默认启动Page页
             NavigateTo(typeof(Home), new DrillInNavigationTransitionInfo());
         }
