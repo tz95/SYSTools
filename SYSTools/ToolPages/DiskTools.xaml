@@ -6,20 +6,18 @@
       xmlns:muxc="http://schemas.inkore.net/lib/ui/wpf/modern"
       xmlns:local="clr-namespace:SYSTools.ToolPages"
       mc:Ignorable="d" 
-      d:DesignHeight="610" d:DesignWidth="1040"
+      d:DesignWidth="1040" d:DesignHeight="560"
       KeepAlive="True"
-      Title="DiskTools" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610" Loaded="Page_Loaded">
+      Title="DiskTools" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  MinWidth="1040" MinHeight="560" Loaded="Page_Loaded">
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         
         <Border  BorderThickness="1" CornerRadius="5" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
         
-        <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="3" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Width="160" Height="90"/>
-
-        <ScrollViewer  VerticalScrollBarVisibility="Auto" MinWidth="1040" MinHeight="610" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <ScrollViewer  VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <TextBlock Text="该页工具存放于'应用根目录/Software Package/DiskTools/'文件夹内(鼠标右键点击这条文字可打开文件夹)       下列工具请单击打开" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" FontSize="10" Height="13" MouseRightButtonDown="TextBlock_MouseRightButtonDown"/>
                 <!--按钮固定上下大小66(px?)-->
-                <Button x:Name="AS_SSD" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="AS_SSD_Click" Background="{x:Null}">
+                <Button x:Name="AS_SSD" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1015" MinHeight="66" Margin="5,5,20,0" HorizontalContentAlignment="Left" Click="AS_SSD_Click" Background="{x:Null}">
                     <TextBlock><InlineUIContainer>
                             <Image Source="/SYSTools;component/Resources/Icon/DiskToolsICON/AS SSD.png" Width="50" Height="50"/>
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
@@ -30,7 +28,7 @@
 
                     </TextBlock>
                 </Button>
-                <Button x:Name="CrystalDiskInfo" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="CrystalDiskInfo_Click" Background="{x:Null}">
+                <Button x:Name="CrystalDiskInfo" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1015" MinHeight="66" Margin="5,5,20,0" HorizontalContentAlignment="Left" Click="CrystalDiskInfo_Click" Background="{x:Null}">
                     <TextBlock><InlineUIContainer>
                             <Image Source="/SYSTools;component/Resources/Icon/DiskToolsICON/CrystalDiskInfo.png" Width="50" Height="50"/>
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
@@ -41,7 +39,7 @@
 
                     </TextBlock>
                 </Button>
-                <Button x:Name="CrystalDiskMark" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="CrystalDiskMark_Click" Background="{x:Null}">
+                <Button x:Name="CrystalDiskMark" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1015" MinHeight="66" Margin="5,5,20,0" HorizontalContentAlignment="Left" Click="CrystalDiskMark_Click" Background="{x:Null}">
                     <TextBlock><InlineUIContainer>
                             <Image Source="/SYSTools;component/Resources/Icon/DiskToolsICON/CrystalDiskMark.png" Width="50" Height="50"/>
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
@@ -52,7 +50,7 @@
 
                     </TextBlock>
                 </Button>
-                <Button x:Name="DiskBenchmark" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="DiskBenchmark_Click" Background="{x:Null}">
+                <Button x:Name="DiskBenchmark" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1015" MinHeight="66" Margin="5,5,20,0" HorizontalContentAlignment="Left" Click="DiskBenchmark_Click" Background="{x:Null}">
                     <TextBlock><InlineUIContainer>
                             <Image Source="/SYSTools;component/Resources/Icon/DiskToolsICON/Disk Benchmark.png" Width="50" Height="50"/>
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
@@ -63,7 +61,7 @@
 
                     </TextBlock>
                 </Button>
-                <Button x:Name="DiskGenius" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="DiskGenius_Click" Background="{x:Null}">
+                <Button x:Name="DiskGenius" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1015" MinHeight="66" Margin="5,5,20,0" HorizontalContentAlignment="Left" Click="DiskGenius_Click" Background="{x:Null}">
                     <TextBlock><InlineUIContainer>
                             <Image Source="/SYSTools;component/Resources/Icon/DiskToolsICON/DiskGenius.png" Width="50" Height="50"/>
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
@@ -74,7 +72,7 @@
 
                     </TextBlock>
                 </Button>
-                <Button x:Name="HDTune" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="HDTune_Click" Background="{x:Null}">
+                <Button x:Name="HDTune" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1015" MinHeight="66" Margin="5,5,20,0" HorizontalContentAlignment="Left" Click="HDTune_Click" Background="{x:Null}">
                     <TextBlock><InlineUIContainer>
                             <Image Source="/SYSTools;component/Resources/Icon/DiskToolsICON/HD Tune.png" Width="50" Height="50"/>
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
@@ -85,7 +83,7 @@
 
                     </TextBlock>
                 </Button>
-                <Button x:Name="LLFTOOL" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="LLFTOOL_Click" Background="{x:Null}">
+                <Button x:Name="LLFTOOL" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1015" MinHeight="66" Margin="5,5,20,0" HorizontalContentAlignment="Left" Click="LLFTOOL_Click" Background="{x:Null}">
                     <TextBlock><InlineUIContainer>
                             <Image Source="/SYSTools;component/Resources/Icon/DiskToolsICON/LLFTOOL.png" Width="50" Height="50"/>
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
@@ -96,7 +94,7 @@
 
                     </TextBlock>
                 </Button>
-                <Button x:Name="PartAssist" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="PartAssist_Click" Background="{x:Null}">
+                <Button x:Name="PartAssist" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1015" MinHeight="66" Margin="5,5,20,0" HorizontalContentAlignment="Left" Click="PartAssist_Click" Background="{x:Null}">
                     <TextBlock><InlineUIContainer>
                             <Image Source="/SYSTools;component/Resources/Icon/DiskToolsICON/PartAssist.png" Width="50" Height="50"/>
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
@@ -107,7 +105,7 @@
 
                     </TextBlock>
                 </Button>
-                <Button x:Name="SSDZ" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="SSDZ_Click" Background="{x:Null}">
+                <Button x:Name="SSDZ" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1015" MinHeight="66" Margin="5,5,20,0" HorizontalContentAlignment="Left" Click="SSDZ_Click" Background="{x:Null}">
                     <TextBlock><InlineUIContainer>
                             <Image Source="/SYSTools;component/Resources/Icon/DiskToolsICON/SSD-Z.png" Width="50" Height="50"/>
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
@@ -118,7 +116,7 @@
 
                     </TextBlock>
                 </Button>
-                <Button x:Name="Victoria" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="Victoria_Click" Background="{x:Null}">
+                <Button x:Name="Victoria" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1015" MinHeight="66" Margin="5,5,20,0" HorizontalContentAlignment="Left" Click="Victoria_Click" Background="{x:Null}">
                     <TextBlock><InlineUIContainer>
                             <Image Source="/SYSTools;component/Resources/Icon/DiskToolsICON/Victoria.png" Width="50" Height="50"/>
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>
@@ -129,7 +127,7 @@
 
                     </TextBlock>
                 </Button>
-                <Button x:Name="H2TestW" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1030" MinHeight="66" Margin="5,5,5,0" HorizontalContentAlignment="Left" Click="H2TestW_Click" Background="{x:Null}">
+                <Button x:Name="H2TestW" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1015" MinHeight="66" Margin="5,5,20,5" HorizontalContentAlignment="Left" Click="H2TestW_Click" Background="{x:Null}">
                     <TextBlock><InlineUIContainer>
                             <Image Source="/SYSTools;component/Resources/Icon/DiskToolsICON/H2TestW.png" Width="50" Height="50"/>
                         </InlineUIContainer><Run Text=" "/><Run Text=" "/><InlineUIContainer>

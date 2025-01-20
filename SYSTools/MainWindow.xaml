@@ -74,33 +74,15 @@
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 
-                <muxc:NavigationViewItem Content="检测工具" Tag="SYSTools.ToolPages.DetectionTools" x:Name="DetectionTools" IsTabStop="False">
+                <muxc:NavigationViewItem Content="工具合集" Tag="SYSTools.Pages.Toolkit" x:Name="Toolkit" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
-                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE9D9;" />
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE2AC;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 
-                <muxc:NavigationViewItem Content="硬件测试工具" Tag="SYSTools.ToolPages.TestTools" x:Name="TestTools" IsTabStop="False">
+                <muxc:NavigationViewItem Content="硬件传感器信息" Tag="SYSTools.Pages.HardwareMonitor" x:Name="HardwareMonitor" IsTabStop="False">
                     <muxc:NavigationViewItem.Icon>
-                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE950;" />
-                    </muxc:NavigationViewItem.Icon>
-                </muxc:NavigationViewItem>
-
-                <muxc:NavigationViewItem Content="硬盘工具" Tag="SYSTools.ToolPages.DiskTools" x:Name="DiskTools" IsTabStop="False">
-                    <muxc:NavigationViewItem.Icon>
-                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xEB05;" />
-                    </muxc:NavigationViewItem.Icon>
-                </muxc:NavigationViewItem>
-
-                <muxc:NavigationViewItem Content="外设检测工具" Tag="SYSTools.ToolPages.PeripheralsTools" x:Name="PeripheralsTools" IsTabStop="False">
-                    <muxc:NavigationViewItem.Icon>
-                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE961;" />
-                    </muxc:NavigationViewItem.Icon>
-                </muxc:NavigationViewItem>
-
-                <muxc:NavigationViewItem Content="运行库安装工具" Tag="SYSTools.Pages.RepairingTools" x:Name="RepairingTools" IsTabStop="False">
-                    <muxc:NavigationViewItem.Icon>
-                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE945;" />
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xECAD;" />
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
 
@@ -122,7 +104,7 @@
 
                 <muxc:NavigationViewItemSeparator/>
 
-                <muxc:NavigationViewItem Content="深色模式" Tag="ThemeDarkMode" x:Name="Dark" IsTabStop="False" MouseLeftButtonDown="Dark_MouseLeftButtonDown" >
+                <!--<muxc:NavigationViewItem Content="深色模式" Tag="ThemeDarkMode" x:Name="Dark" IsTabStop="False" MouseLeftButtonDown="Dark_MouseLeftButtonDown" >
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE708;" />
                     </muxc:NavigationViewItem.Icon>
@@ -132,7 +114,7 @@
                     <muxc:NavigationViewItem.Icon>
                         <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE793;" />
                     </muxc:NavigationViewItem.Icon>
-                </muxc:NavigationViewItem>
+                </muxc:NavigationViewItem>-->
 
             </muxc:NavigationView.MenuItems>
 

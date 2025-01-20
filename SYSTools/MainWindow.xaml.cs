@@ -1,17 +1,15 @@
-﻿using System;
+﻿using iNKORE.UI.WPF.Modern.Controls;
+using iNKORE.UI.WPF.Modern.Media.Animation;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
-using iNKORE.UI.WPF.Modern;
-using iNKORE.UI.WPF.Modern.Controls;
-using iNKORE.UI.WPF.Modern.Media.Animation;
 using SYSTools.Model;
 using SYSTools.Pages;
-using SYSTools.ToolPages;
 using Page = System.Windows.Controls.Page;
 
 namespace SYSTools
@@ -23,44 +21,35 @@ namespace SYSTools
 
     public partial class MainWindow : Window
     {
-        private readonly Page Home_Page = new Home();
-        private readonly Page Test_Page = new Test();
-        private readonly Page DetectionTools_Page = new DetectionTools();
-        private readonly Page TestTools_Page = new TestTools();
-        private readonly Page DiskTools_Page = new DiskTools();
-        private readonly Page PeripheralsTools_Page = new PeripheralsTools();
-        private readonly Page RepairingTools_Page = new RepairingTools();
-        private readonly Page WindowsTools_Page = new WindowsTools();
-        private readonly Page WSATools_Page = new WSATools();
-        private readonly Page Configuration_Page = new Configuration();
-        private readonly Page About_Page = new About();
-        string AppPath = Directory.GetCurrentDirectory();
+        private readonly Dictionary<Type, Page> _pages = new()
+        {
+            { typeof(Home), new Home() },
+            { typeof(Test), new Test() },
+            { typeof(WindowsTools), new WindowsTools() },
+            { typeof(HardwareMonitor), new HardwareMonitor() },
+            { typeof(WSATools), new WSATools() },
+            { typeof(Configuration), new Configuration() },
+            { typeof(About), new About() },
+            { typeof(Toolkit), new Toolkit() }
+        };
 
         public MainWindow()
         {
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
-            GlobalSettings.Instance.PropertyChanged += OnSettingsPropertyChanged;
+            AppSettings.Instance.PropertyChanged += OnSettingsPropertyChanged;
         }
 
         // 监听全局设置修改
         private void OnSettingsPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(GlobalSettings.BackgroundImagePath))
+            if (e.PropertyName == nameof(AppSettings.BackgroundImagePath))
             {
-                if (!string.IsNullOrEmpty(GlobalSettings.Instance.BackgroundImagePath))
-                {
-                    BackImage.Source = new BitmapImage(
-                        new Uri(
-                            GlobalSettings.Instance.BackgroundImagePath,
-                            UriKind.RelativeOrAbsolute
-                        )
-                    );
-                }
+                LoadBackgroundImage(AppSettings.Instance.BackgroundImagePath);
             }
-            else if (e.PropertyName == nameof(GlobalSettings.BackgroundImageBlurRadius))
+            else if (e.PropertyName == nameof(AppSettings.BackgroundImageBlurRadius))
             {
-                LoadBackgroundImageBlurRadius(GlobalSettings.Instance.BackgroundImageBlurRadius);
+                LoadBackgroundImageBlurRadius(AppSettings.Instance.BackgroundImageBlurRadius);
             }
         }
 
@@ -82,7 +71,7 @@ namespace SYSTools
             }
             TitleBarTextBlock.Text = "SYSTools Ver" + (Application.ResourceAssembly.GetName().Version.ToString());
             // 设置默认启动Page页
-            CurrentPage.Navigate(Home_Page, new DrillInNavigationTransitionInfo());
+            NavigateTo(typeof(Home), new DrillInNavigationTransitionInfo());
         }
 
         private void NavigationTriggered(
@@ -90,117 +79,65 @@ namespace SYSTools
             NavigationViewItemInvokedEventArgs args
         )
         {
-            if (args.InvokedItemContainer != null)
-                NavigateTo(
-                    Type.GetType(args.InvokedItemContainer.Tag.ToString()),
-                    args.RecommendedNavigationTransitionInfo
-                );
+            if (args.InvokedItemContainer?.Tag is string tag)
+            {
+                Type targetType = Type.GetType(tag);
+                if (targetType != null)
+                {
+                    // 统一切换动画
+                    NavigateTo(targetType, new DrillInNavigationTransitionInfo());
+                }
+            }
         }
 
         private void NavigateTo(Type navPageType, NavigationTransitionInfo transitionInfo)
         {
             // 导航到目标页
-            var preNavPageType = CurrentPage.Content.GetType();
-            if (navPageType == preNavPageType)
-                return;
-            switch (navPageType)
+            var preNavPageType = CurrentPage.Content?.GetType();
+            if (navPageType == preNavPageType) return;
+            transitionInfo ??= new DrillInNavigationTransitionInfo();
+            if (_pages.TryGetValue(navPageType, out var page))
             {
-                case not null when navPageType == typeof(Home):
-                    CurrentPage.Navigate(Home_Page);
-                    break;
-                case not null when navPageType == typeof(Test):
-                    CurrentPage.Navigate(Test_Page);
-                    break;
-                case not null when navPageType == typeof(DetectionTools):
-                    CurrentPage.Navigate(DetectionTools_Page);
-                    break;
-                case not null when navPageType == typeof(TestTools):
-                    CurrentPage.Navigate(TestTools_Page);
-                    break;
-                case not null when navPageType == typeof(DiskTools):
-                    CurrentPage.Navigate(DiskTools_Page);
-                    break;
-                case not null when navPageType == typeof(PeripheralsTools):
-                    CurrentPage.Navigate(PeripheralsTools_Page);
-                    break;
-                case not null when navPageType == typeof(RepairingTools):
-                    CurrentPage.Navigate(RepairingTools_Page);
-                    break;
-                case not null when navPageType == typeof(WindowsTools):
-                    CurrentPage.Navigate(WindowsTools_Page);
-                    break;
-                case not null when navPageType == typeof(WSATools):
-                    CurrentPage.Navigate(WSATools_Page);
-                    break;
-                case not null when navPageType == typeof(Configuration):
-                    CurrentPage.Navigate(Configuration_Page);
-                    break;
-                case not null when navPageType == typeof(About):
-                    CurrentPage.Navigate(About_Page);
-                    break;
+                CurrentPage.Navigate(page, transitionInfo);
+            }
+            else
+            {
+                // 处理未注册页面的逻辑
+                throw new InvalidOperationException($"Page type {navPageType.Name} is not registered.");
             }
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!System.Configuration.ConfigurationManager.OpenExeConfiguration(System.Configuration.ConfigurationUserLevel.PerUserRoamingAndLocal).HasFile)
-                Properties.Settings.Default.Upgrade();
-                Properties.Settings.Default.Save();
-                LoadUserSettings();
-            // 加载用户配置
-            LoadUserSettings();
-        }
-
-        private void LoadUserSettings()
-        {
-            // 启动程序时加载 user.config 文件
-            string savedImagePath = Properties.Settings.Default.BackgroundImagePath;
-            double savedBlurRadius = Properties.Settings.Default.BackgroundImageBlurRadius;
-            if (!string.IsNullOrWhiteSpace(savedImagePath) && File.Exists(savedImagePath))
-            {
-                LoadBackgroundImage(savedImagePath);
-                LoadBackgroundImageBlurRadius(savedBlurRadius);
-            }
-            else
-            {
-                // 读取不到Config的背景图片路径或路径为空则设定为全透明图片路径
-                LoadBackgroundImage("pack://application:,,,/Resources/NoBackImage.png");
-                LoadBackgroundImageBlurRadius(savedBlurRadius);
-            }
+            // 加载设置并应用
+            LoadBackgroundImage(AppSettings.Instance.BackgroundImagePath);
+            LoadBackgroundImageBlurRadius(AppSettings.Instance.BackgroundImageBlurRadius);
         }
 
         private void LoadBackgroundImage(string imagePath)
         {
-            // 加载背景图片
-            BitmapImage bitmap = new BitmapImage();
-            bitmap.BeginInit();
-            bitmap.UriSource = new Uri(imagePath, UriKind.Absolute);
-            bitmap.EndInit();
-            BackImage.Source = bitmap;
+            try
+            {
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(imagePath, UriKind.Absolute);
+                bitmap.EndInit();
+                BackImage.Source = bitmap;
+            }
+            catch (Exception)
+            {
+                // 如果加载失败，使用默认图片
+                LoadBackgroundImage("pack://application:,,,/Resources/NoBackImage.png");
+            }
         }
 
-        private void LoadBackgroundImageBlurRadius(double RadiusInt)
+        private void LoadBackgroundImageBlurRadius(double radiusInt)
         {
-            // 加载背景模糊
             var blurEffect = new BlurEffect
             {
-                // 获取模糊度
-                Radius = RadiusInt 
+                Radius = radiusInt
             };
-            // 为背景图片应用模糊效果
-            BackImage.Effect = blurEffect; 
-        }
-
-        private void Dark_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            //实验性功能 设定为暗色模式
-            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
-        }
-
-        private void Light_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            // 实验性功能 设定为亮色模式
-            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
+            BackImage.Effect = blurEffect;
         }
 
         private void Window_Closed(object sender, EventArgs e)
