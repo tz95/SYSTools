@@ -1,6 +1,7 @@
 ﻿using iNKORE.UI.WPF.Modern.Controls;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace SYSTools.Pages
 {
@@ -135,5 +136,36 @@ namespace SYSTools.Pages
             ContentDialogResult result = await noWifiDialog.ShowAsync();
         }
 
+        private void MenuStyle_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (MenuStyle.SelectedIndex == 0) // Win10风格
+            {
+                string command = "reg add \"HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\" /f /ve";
+                string output = RunCommand(command);
+                DisplayNoWifiDialog(output);
+            }
+            else if (MenuStyle.SelectedIndex == 1) // Win11风格
+            {
+                string command = "reg delete \"HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\" /f /va";
+                string output = RunCommand(command);
+                DisplayNoWifiDialog(output);
+            }
+        }
+
+        private void ExplorerDefault_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ExplorerDefault.SelectedIndex == 0) // 此电脑
+            {
+                string command = "reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v LaunchTo /t REG_DWORD /d 1 /f";
+                string output = RunCommand(command);
+                DisplayNoWifiDialog(output);
+            }
+            else if (ExplorerDefault.SelectedIndex == 1) // 快速访问
+            {
+                string command = "reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v LaunchTo /t REG_DWORD /d 2 /f";
+                string output = RunCommand(command);
+                DisplayNoWifiDialog(output);
+            }
+        }
     }
 }

@@ -9,18 +9,13 @@
       d:DesignHeight="610" d:DesignWidth="1040"
       KeepAlive="True"
       Title="WindowsTools" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610" >
-
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Border  BorderThickness="1" CornerRadius="5" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
-        
         <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="3" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Width="160" Height="90"/>
-
         <ScrollViewer  VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <!--按钮固定上下大小66(px?)-->
-
-
-                <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Top" Header="快捷启动" IsExpanded="True" FontSize="20" VerticalAlignment="Top" UseLayoutRounding="False" Margin="10,10,10,0">
+                <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Top" Header="快捷启动" IsExpanded="True" FontSize="17" VerticalAlignment="Top" UseLayoutRounding="False" Margin="10,10,10,0">
                     <Expander.Content>
                         <WrapPanel>
                             <Button x:Name="CMD" Margin="5,5,0,0" Width="140" Height="40" Content="CMD终端" FontSize="15" Click="CMD_Click" Background="{x:Null}"/>
@@ -37,8 +32,7 @@
                         </WrapPanel>
                     </Expander.Content>
                 </Expander>
-
-                <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Header="网络工具( 管理员权限 需要手动重启 )" IsExpanded="True" FontSize="20" Margin="10,10,10,0">
+                <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Header="网络工具( 管理员权限 需要手动重启 )" IsExpanded="True" FontSize="17" Margin="10,10,10,0">
                     <Expander.Content>
                         <WrapPanel>
                             <Button x:Name="ClearDNS" Margin="5,5,0,0" Width="140" Height="40" Content="清除DNS缓存" FontSize="15" Click="ClearDNS_Click" Background="{x:Null}"/>
@@ -48,10 +42,39 @@
                         </WrapPanel>
                     </Expander.Content>
                 </Expander>
-
+                <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Header="Explorer功能( 重启资源管理器生效 )" IsExpanded="True" FontSize="17" Margin="10,10,10,0">
+                    <Expander.Content>
+                        <WrapPanel>
+                            <ToggleButton Margin="5,5,0,0" Width="140" Height="40" Content="文件夹后缀" FontSize="15" Background="{x:Null}"/>
+                            <ToggleButton Margin="5,5,0,0" Width="140" Height="40" Content="隐藏文件/文件夹" FontSize="15" Background="{x:Null}"/>
+                            <ToggleButton Margin="5,5,0,0" Width="140" Height="40" Content="受保护文件" FontSize="15" Background="{x:Null}"/>
+                            <ToggleButton Margin="5,5,0,0" Width="140" Height="40" Content="去快捷小箭头" FontSize="15" Background="{x:Null}"/>
+                            <ToggleButton Margin="5,5,0,0" Width="140" Height="40" Content="去快捷文本" FontSize="15" Background="{x:Null}"/>
+                            <ToggleButton Margin="5,5,0,0" Width="140" Height="40" Content="去UAC盾牌" FontSize="15" Background="{x:Null}"/>
+                            <WrapPanel>
+                                <ComboBox x:Name="MenuStyle" 
+                                          Margin="5,5,0,0" 
+                                          muxc:ControlHelper.Header="右键菜单风格" 
+                                          FontSize="15" 
+                                          Width="140"
+                                          SelectionChanged="MenuStyle_SelectionChanged">
+                                    <ComboBoxItem Content="Win10风格"/>
+                                    <ComboBoxItem Content="Win11风格"/>
+                                </ComboBox>
+                                <ComboBox x:Name="ExplorerDefault" 
+                                          Margin="5,5,0,0" 
+                                          muxc:ControlHelper.Header="资源管理器打开默认" 
+                                          FontSize="15" 
+                                          Width="140"
+                                          SelectionChanged="ExplorerDefault_SelectionChanged">
+                                    <ComboBoxItem Content="此电脑"/>
+                                    <ComboBoxItem Content="快速访问"/>
+                                </ComboBox>
+                            </WrapPanel>
+                        </WrapPanel>
+                    </Expander.Content>
+                </Expander>
             </StackPanel>
         </ScrollViewer>
-
     </Grid>
-
 </Page>
