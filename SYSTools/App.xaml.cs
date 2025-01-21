@@ -1,10 +1,4 @@
-﻿using Hardcodet.Wpf.TaskbarNotification;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using iNKORE.UI.WPF.TrayIcons;
 using System.Windows;
 
 namespace SYSTools
@@ -14,14 +8,12 @@ namespace SYSTools
     /// </summary>
     public partial class App : Application
     {
-        public static TaskbarIcon TaskbarIcon;
+        public static TrayIcon TaskbarIcon;
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnStartup(e);
-            TaskbarIcon = (TaskbarIcon)FindResource("Taskbar");
+            TaskbarIcon = (TrayIcon)FindResource("Taskbar");
             TaskbarIcon.ToolTipText = "SYSTools Ver" + (Application.ResourceAssembly.GetName().Version.ToString());
-
         }
     }
 }
