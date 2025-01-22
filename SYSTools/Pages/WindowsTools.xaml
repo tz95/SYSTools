@@ -29,6 +29,7 @@
                             <Button x:Name="Taskschd" Margin="5,5,0,0" Width="140" Height="40" Content="计划任务" FontSize="15" Background="{x:Null}" Click="Taskschd_Click"/>
                             <Button x:Name="GodMode" Margin="5,5,0,0" Width="140" Height="40" Content="上帝模式" FontSize="15" Click="GodMode_Click" Background="{x:Null}"/>
                             <Button x:Name="Winver" Margin="5,5,0,0" Width="140" Height="40" Content="Windows版本" FontSize="15" Click="Winver_Click" Background="{x:Null}"/>
+                            <Button x:Name="Explorer_Restart" Margin="5,5,0,0" Width="140" Height="40" Content="重启资源管理器" FontSize="15" Click="Explorer_Re" Background="{x:Null}"/>
                         </WrapPanel>
                     </Expander.Content>
                 </Expander>
@@ -45,12 +46,24 @@
                 <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Header="Explorer功能( 重启资源管理器生效 )" IsExpanded="True" FontSize="17" Margin="10,10,10,0">
                     <Expander.Content>
                         <WrapPanel>
-                            <ToggleButton Margin="5,5,0,0" Width="140" Height="40" Content="文件夹后缀" FontSize="15" Background="{x:Null}"/>
-                            <ToggleButton Margin="5,5,0,0" Width="140" Height="40" Content="隐藏文件/文件夹" FontSize="15" Background="{x:Null}"/>
-                            <ToggleButton Margin="5,5,0,0" Width="140" Height="40" Content="受保护文件" FontSize="15" Background="{x:Null}"/>
-                            <ToggleButton Margin="5,5,0,0" Width="140" Height="40" Content="去快捷小箭头" FontSize="15" Background="{x:Null}"/>
-                            <ToggleButton Margin="5,5,0,0" Width="140" Height="40" Content="去快捷文本" FontSize="15" Background="{x:Null}"/>
-                            <ToggleButton Margin="5,5,0,0" Width="140" Height="40" Content="去UAC盾牌" FontSize="15" Background="{x:Null}"/>
+                            <ToggleButton x:Name="ShowFileExt" Margin="5,5,0,0" Width="140" Height="40" 
+                                          Content="文件夹后缀" FontSize="15" Background="{x:Null}" 
+                                          Checked="ShowFileExt_Toggled" Unchecked="ShowFileExt_Toggled"/>
+                            <ToggleButton x:Name="ShowHidden" Margin="5,5,0,0" Width="140" Height="40" 
+                                          Content="隐藏文件/文件夹" FontSize="15" Background="{x:Null}"
+                                          Checked="ShowHidden_Toggled" Unchecked="ShowHidden_Toggled"/>
+                            <ToggleButton x:Name="ShowSuper" Margin="5,5,0,0" Width="140" Height="40" 
+                                          Content="受保护文件" FontSize="15" Background="{x:Null}"
+                                          Checked="ShowSuper_Toggled" Unchecked="ShowSuper_Toggled"/>
+                            <ToggleButton x:Name="HideArrow" Margin="5,5,0,0" Width="140" Height="40" 
+                                          Content="去快捷小箭头" FontSize="15" Background="{x:Null}"
+                                          Checked="HideArrow_Toggled" Unchecked="HideArrow_Toggled"/>
+                            <ToggleButton x:Name="HideText" Margin="5,5,0,0" Width="140" Height="40" 
+                                          Content="去快捷文本" FontSize="15" Background="{x:Null}"
+                                          Checked="HideText_Toggled" Unchecked="HideText_Toggled"/>
+                            <ToggleButton x:Name="HideUAC" Margin="5,5,0,0" Width="140" Height="40" 
+                                          Content="去UAC盾牌" FontSize="15" Background="{x:Null}"
+                                          Checked="HideUAC_Toggled" Unchecked="HideUAC_Toggled"/>
                             <WrapPanel>
                                 <ComboBox x:Name="MenuStyle" 
                                           Margin="5,5,0,0" 

@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Win32;
+using System;
 
 namespace SYSTools.Pages
 {
@@ -10,10 +12,190 @@ namespace SYSTools.Pages
     /// </summary>
     public partial class WindowsTools : System.Windows.Controls.Page
     {
+        private bool isInitializing = true;
+
         public WindowsTools()
         {
             InitializeComponent();
+            InitializeSettings();
         }
+
+        private void InitializeSettings()
+        {
+            // 初始化文件夹选项状态
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"))
+            {
+                if (key != null)
+                {
+                    ShowFileExt.IsChecked = (int)key.GetValue("HideFileExt", 1) == 0;
+                    ShowHidden.IsChecked = (int)key.GetValue("Hidden", 0) == 1;
+                    ShowSuper.IsChecked = (int)key.GetValue("ShowSuperHidden", 0) == 1;
+                    HideArrow.IsChecked = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Link") != null;
+                    HideText.IsChecked = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Link") != null;
+                    HideUAC.IsChecked = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons")?.GetValue("29") != null;
+                }
+            }
+
+            // 初始化右键菜单风格
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32"))
+            {
+                MenuStyle.SelectedIndex = (key == null) ? 1 : 0;
+            }
+
+            // 初始化资源管理器默认打开位置
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"))
+            {
+                if (key != null)
+                {
+                    // LaunchTo=2 时选择"快速访问"，LaunchTo=1 时选择"此电脑"
+                    ExplorerDefault.SelectedIndex = (int)key.GetValue("LaunchTo", 1) == 2 ? 1 : 0;
+                }
+            }
+
+            isInitializing = false;
+        }
+
+        private void ShowFileExt_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (isInitializing) return;
+            
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", true))
+            {
+                if (key != null)
+                {
+                    key.SetValue("HideFileExt", ShowFileExt.IsChecked == true ? 0 : 1, RegistryValueKind.DWord);
+                    ShowMessage("设置已更改，需要重启资源管理器生效");
+                }
+            }
+        }
+
+        private void ShowHidden_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (isInitializing) return;
+
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", true))
+            {
+                if (key != null)
+                {
+                    key.SetValue("Hidden", ShowHidden.IsChecked == true ? 1 : 0, RegistryValueKind.DWord);
+                    ShowMessage("设置已更改，需要重启资源管理器生效");
+                }
+            }
+        }
+
+        private void ShowSuper_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (isInitializing) return;
+
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", true))
+            {
+                if (key != null)
+                {
+                    key.SetValue("ShowSuperHidden", ShowSuper.IsChecked == true ? 1 : 0, RegistryValueKind.DWord);
+                    ShowMessage("设置已更改，需要重启资源管理器生效");
+                }
+            }
+        }
+
+        private void HideArrow_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (isInitializing) return;
+
+            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons", true))
+            {
+                if (key != null)
+                {
+                    if (HideArrow.IsChecked == true)
+                    {
+                        key.SetValue("29", "%SystemRoot%\\system32\\imageres.dll,197", RegistryValueKind.String);
+                    }
+                    else
+                    {
+                        key.DeleteValue("29", false);
+                    }
+                    ShowMessage("设置已更改，需要重启资源管理器生效");
+                }
+            }
+        }
+
+        private void HideText_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (isInitializing) return;
+
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer", true))
+            {
+                if (key != null)
+                {
+                    if (HideText.IsChecked == true)
+                    {
+                        key.SetValue("link", new byte[] { 0x00, 0x00, 0x00, 0x00 }, RegistryValueKind.Binary);
+                    }
+                    else
+                    {
+                        key.SetValue("link", new byte[] { 0x19, 0x00, 0x00, 0x00 }, RegistryValueKind.Binary);
+                    }
+                    ShowMessage("设置已更改，需要重启资源管理器生效");
+                }
+            }
+        }
+
+        private void HideUAC_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (isInitializing) return;
+
+            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons", true))
+            {
+                if (key != null)
+                {
+                    if (HideUAC.IsChecked == true)
+                    {
+                        key.SetValue("77", "%SystemRoot%\\system32\\imageres.dll,197", RegistryValueKind.String);
+                    }
+                    else
+                    {
+                        key.DeleteValue("77", false);
+                    }
+                    ShowMessage("设置已更改，需要重启资源管理器生效");
+                }
+            }
+        }
+
+        private void MenuStyle_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (isInitializing) return;
+
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32", true))
+            {
+                if (key != null)
+                {
+                    if (MenuStyle.SelectedIndex == 0) // Win10风格
+                    {
+                        key.SetValue("", "", RegistryValueKind.String);
+                    }
+                    else // Win11风格
+                    {
+                        Registry.CurrentUser.DeleteSubKey(@"Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32", false);
+                    }
+                    ShowMessage("设置已更改，需要重启资源管理器生效");
+                }
+            }
+        }
+
+        private void ExplorerDefault_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (isInitializing) return;
+
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", true))
+            {
+                if (key != null)
+                {
+                    // 选择"此电脑"(SelectedIndex=0)时设置LaunchTo=1，选择"快速访问"(SelectedIndex=1)时设置LaunchTo=2
+                    key.SetValue("LaunchTo", ExplorerDefault.SelectedIndex == 0 ? 1 : 2, RegistryValueKind.DWord);
+                    ShowMessage("设置已更改，需要重启资源管理器生效");
+                }
+            }
+        }
+
         //快捷启动分类
         private void CMD_Click(object sender, RoutedEventArgs e)
         {
@@ -77,35 +259,47 @@ namespace SYSTools.Pages
             //关于Windows
             Process.Start("winver");
         }
+        
+        private void Explorer_Re(object sender, RoutedEventArgs e)
+        {
+            // 重启资源管理器
+            Process[] processes = Process.GetProcessesByName("explorer");
+            foreach (Process process in processes)
+            {
+                process.Kill();
+            }
+            Process.Start("explorer.exe");
+        }
         //网络工具分类
         private void ClearDNS_Click(object sender, RoutedEventArgs e)
         {
             string command = "ipconfig /flushdns";
             string output = RunCommand(command);
-            DisplayNoWifiDialog(output);
+            ShowMessage(output);
         }
 
         private void ResetWS_Click(object sender, RoutedEventArgs e)
         {
             string command = "netsh winsock reset";
             string output = RunCommand(command);
-            DisplayNoWifiDialog(output);
+            ShowMessage(output);
         }
 
         private void ResetWS_LSP_Click(object sender, RoutedEventArgs e)
         {
             string command = "netsh winsock reset catalog";
             string output = RunCommand(command);
-            DisplayNoWifiDialog(output);
+            ShowMessage(output);
         }
 
         private void ResetTCP_Click(object sender, RoutedEventArgs e)
         {
             string command = "netsh int ip reset";
             string output = RunCommand(command);
-            DisplayNoWifiDialog(output);
+            ShowMessage(output);
         }
 
+        // cmd命令执行
         static string RunCommand(string command)
         {
             Process process = new Process
@@ -124,48 +318,19 @@ namespace SYSTools.Pages
             process.WaitForExit();
             return output;
         }
-        private async void DisplayNoWifiDialog(string output)
+
+        // 窗口提示
+        private async void ShowMessage(string message)
         {
-            ContentDialog noWifiDialog = new ContentDialog
+            ContentDialog dialog = new ContentDialog
             {
-                Title = "运行完成",
-                Content = output,
-                CloseButtonText = "Ok"
+                Title = "提示",
+                Content = message,
+                CloseButtonText = "确定"
             };
 
-            ContentDialogResult result = await noWifiDialog.ShowAsync();
-        }
-
-        private void MenuStyle_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (MenuStyle.SelectedIndex == 0) // Win10风格
-            {
-                string command = "reg add \"HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\" /f /ve";
-                string output = RunCommand(command);
-                DisplayNoWifiDialog(output);
-            }
-            else if (MenuStyle.SelectedIndex == 1) // Win11风格
-            {
-                string command = "reg delete \"HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32\" /f /va";
-                string output = RunCommand(command);
-                DisplayNoWifiDialog(output);
-            }
-        }
-
-        private void ExplorerDefault_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (ExplorerDefault.SelectedIndex == 0) // 此电脑
-            {
-                string command = "reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v LaunchTo /t REG_DWORD /d 1 /f";
-                string output = RunCommand(command);
-                DisplayNoWifiDialog(output);
-            }
-            else if (ExplorerDefault.SelectedIndex == 1) // 快速访问
-            {
-                string command = "reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v LaunchTo /t REG_DWORD /d 2 /f";
-                string output = RunCommand(command);
-                DisplayNoWifiDialog(output);
-            }
+            await dialog.ShowAsync();
         }
     }
 }
+
