@@ -2,8 +2,13 @@
 
 ![SYSTools](https://socialify.git.ci/Hikarisame-Technology/SYSTools/image?description=1&font=Jost&forks=1&issues=1&language=1&logo=https%3A%2F%2Fone.hksstudio.work%2Fd%2FOther%2FOther_Resource%2FSYSTools_LOGO.svg&name=1&owner=1&pattern=Floating%20Cogs&pulls=1&stargazers=1&theme=Dark)
   
-![](https://img.shields.io/badge/Language-C%23-blue)
+<a href="https://learn.microsoft.com/en-us/dotnet/csharp">
+  <img src="https://img.shields.io/badge/Language-C%23-512BD4?style=for-the-badge&logo=dotnet">
+</a>
 
+<a href="https://docs.inkore.net/ui-wpf-modern/introduction">
+  <img src="https://github.com/iNKORE-NET/UI.WPF.Modern/blob/main/assets/images/badges/UI.WPF.Modern_Main_Button.svg">
+</a>
   
 ### 截图
   
