@@ -53,7 +53,7 @@
                                           Content="隐藏文件/文件夹" FontSize="15" Background="{x:Null}"
                                           Checked="ShowHidden_Toggled" Unchecked="ShowHidden_Toggled"/>
                             <ToggleButton x:Name="ShowSuper" Margin="5,5,0,0" Width="140" Height="40" 
-                                          Content="受保护文件" FontSize="15" Background="{x:Null}"
+                                          Content="显示受保护文件" FontSize="15" Background="{x:Null}"
                                           Checked="ShowSuper_Toggled" Unchecked="ShowSuper_Toggled"/>
                             <ToggleButton x:Name="HideArrow" Margin="5,5,0,0" Width="140" Height="40" 
                                           Content="去快捷小箭头" FontSize="15" Background="{x:Null}"

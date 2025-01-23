@@ -30,9 +30,12 @@ namespace SYSTools.Pages
                     ShowFileExt.IsChecked = (int)key.GetValue("HideFileExt", 1) == 0;
                     ShowHidden.IsChecked = (int)key.GetValue("Hidden", 0) == 1;
                     ShowSuper.IsChecked = (int)key.GetValue("ShowSuperHidden", 0) == 1;
-                    HideArrow.IsChecked = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Link") != null;
-                    HideText.IsChecked = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Link") != null;
-                    HideUAC.IsChecked = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons")?.GetValue("29") != null;
+                    HideArrow.IsChecked = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons")?.GetValue("29") != null;
+                    byte[] linkValue = (byte[])Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer")?.GetValue("link");
+                    HideText.IsChecked = linkValue != null && linkValue.Length == 4 && 
+                        linkValue[0] == 0x00 && linkValue[1] == 0x00 && 
+                        linkValue[2] == 0x00 && linkValue[3] == 0x00;
+                    HideUAC.IsChecked = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons")?.GetValue("77") != null;
                 }
             }
 
@@ -107,7 +110,7 @@ namespace SYSTools.Pages
                 {
                     if (HideArrow.IsChecked == true)
                     {
-                        key.SetValue("29", "%SystemRoot%\\system32\\imageres.dll,197", RegistryValueKind.String);
+                        key.SetValue("29", "%systemroot%\\system32\\imageres.dll,197", RegistryValueKind.String);
                     }
                     else
                     {
@@ -149,7 +152,7 @@ namespace SYSTools.Pages
                 {
                     if (HideUAC.IsChecked == true)
                     {
-                        key.SetValue("77", "%SystemRoot%\\system32\\imageres.dll,197", RegistryValueKind.String);
+                        key.SetValue("77", "%systemroot%\\system32\\imageres.dll,197", RegistryValueKind.String);
                     }
                     else
                     {
@@ -164,7 +167,7 @@ namespace SYSTools.Pages
         {
             if (isInitializing) return;
 
-            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32", true))
+            using (RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32", true))
             {
                 if (key != null)
                 {
