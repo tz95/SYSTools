@@ -103,18 +103,6 @@
 
                 <muxc:NavigationViewItemSeparator/>
 
-                <!--<muxc:NavigationViewItem Content="深色模式" Tag="ThemeDarkMode" x:Name="Dark" IsTabStop="False" MouseLeftButtonDown="Dark_MouseLeftButtonDown" >
-                    <muxc:NavigationViewItem.Icon>
-                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE708;" />
-                    </muxc:NavigationViewItem.Icon>
-                </muxc:NavigationViewItem>
-
-                <muxc:NavigationViewItem Content="亮色模式" Tag="ThemeLightMode" x:Name="Light" IsTabStop="False" MouseLeftButtonDown="Light_MouseLeftButtonDown" >
-                    <muxc:NavigationViewItem.Icon>
-                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE793;" />
-                    </muxc:NavigationViewItem.Icon>
-                </muxc:NavigationViewItem>-->
-
             </muxc:NavigationView.MenuItems>
 
             <muxc:NavigationView.FooterMenuItems>
@@ -135,9 +123,6 @@
 
 
             <muxc:Frame x:Name="CurrentPage" />
-
-            <!--<ContentControl x:Name="FrameContent"  HorizontalAlignment="stretch" VerticalAlignment="stretch" Margin="4" IsTabStop="False"/>-->
-
 
         </muxc:NavigationView>
 

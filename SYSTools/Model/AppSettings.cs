@@ -14,6 +14,9 @@ namespace SYSTools.Model
 
         private string _backgroundImagePath;
         private double _backgroundImageBlurRadius;
+        private double _backgroundImageOpacity;
+        private bool _isBackgroundEnabled;
+        private int _themeMode;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -57,6 +60,70 @@ namespace SYSTools.Model
             }
         }
 
+        public double BackgroundImageOpacity
+        {
+            get => _backgroundImageOpacity;
+            set
+            {
+                if (_backgroundImageOpacity != value)
+                {
+                    _backgroundImageOpacity = value;
+                    SaveSettings();
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(ActualOpacity));
+                }
+            }
+        }
+
+        public double ActualOpacity => _backgroundImageOpacity / 100.0;
+
+        public bool IsBackgroundEnabled
+        {
+            get => _isBackgroundEnabled;
+            set
+            {
+                if (_isBackgroundEnabled != value)
+                {
+                    _isBackgroundEnabled = value;
+                    SaveSettings();
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public int ThemeMode
+        {
+            get => _themeMode;
+            set
+            {
+                if (_themeMode != value)
+                {
+                    _themeMode = value;
+                    SaveSettings();
+                    OnPropertyChanged();
+                    ApplyTheme();
+                }
+            }
+        }
+
+        private void ApplyTheme()
+        {
+            switch (_themeMode)
+            {
+                case 0: // 跟随系统
+                    iNKORE.UI.WPF.Modern.ThemeManager.Current.ApplicationTheme = null;
+                    break;
+                case 1: // 深色
+                    iNKORE.UI.WPF.Modern.ThemeManager.Current.ApplicationTheme = 
+                        iNKORE.UI.WPF.Modern.ApplicationTheme.Dark;
+                    break;
+                case 2: // 浅色
+                    iNKORE.UI.WPF.Modern.ThemeManager.Current.ApplicationTheme = 
+                        iNKORE.UI.WPF.Modern.ApplicationTheme.Light;
+                    break;
+            }
+        }
+
         private void SaveSettings()
         {
             try
@@ -64,7 +131,10 @@ namespace SYSTools.Model
                 var settings = new XDocument(
                     new XElement("Settings",
                         new XElement("BackgroundImagePath", _backgroundImagePath),
-                        new XElement("BackgroundImageBlurRadius", _backgroundImageBlurRadius)
+                        new XElement("BackgroundImageBlurRadius", _backgroundImageBlurRadius),
+                        new XElement("BackgroundImageOpacity", _backgroundImageOpacity),
+                        new XElement("IsBackgroundEnabled", _isBackgroundEnabled),
+                        new XElement("ThemeMode", _themeMode)
                     )
                 );
                 settings.Save(_settingsFilePath);
@@ -90,6 +160,18 @@ namespace SYSTools.Model
                         {
                             _backgroundImageBlurRadius = blurRadius;
                         }
+                        if (double.TryParse(settings.Element("BackgroundImageOpacity")?.Value, out double opacity))
+                        {
+                            _backgroundImageOpacity = opacity;
+                        }
+                        if (bool.TryParse(settings.Element("IsBackgroundEnabled")?.Value, out bool isEnabled))
+                        {
+                            _isBackgroundEnabled = isEnabled;
+                        }
+                        if (int.TryParse(settings.Element("ThemeMode")?.Value, out int themeMode))
+                        {
+                            _themeMode = themeMode;
+                        }
                     }
                 }
 
@@ -98,12 +180,18 @@ namespace SYSTools.Model
                 {
                     _backgroundImagePath = "pack://application:,,,/Resources/NoBackImage.png";
                 }
+
+                // 应用主题设置
+                ApplyTheme();
             }
             catch (Exception)
             {
                 // 如果加载失败，使用默认值
                 _backgroundImagePath = "pack://application:,,,/Resources/NoBackImage.png";
                 _backgroundImageBlurRadius = 0;
+                _backgroundImageOpacity = 100.0;
+                _isBackgroundEnabled = false;
+                _themeMode = 0; // 默认跟随系统 无需应用ApplyTheme变更程序主题
             }
         }
 

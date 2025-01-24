@@ -41,9 +41,10 @@ namespace SYSTools.Pages
         // 加载背景图片到预览窗口
         private void LoadBackgroundImage(string imagePath)
         {
-            if (imagePath == "")
+            if (string.IsNullOrEmpty(imagePath))
             {
                 BackgroundPreview.Source = null;
+                return;
             }
             else
             {
@@ -70,6 +71,11 @@ namespace SYSTools.Pages
             {
                 LoadBackgroundImage(savedImagePath);
             }
+        }
+
+        private void BackgroundToggle_Toggled(object sender, RoutedEventArgs e)
+        {
+            BackImageSettingsExpander.IsExpanded = BackgroundToggle.IsOn;
         }
     }
 }

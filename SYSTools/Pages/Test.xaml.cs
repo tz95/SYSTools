@@ -1,13 +1,13 @@
-﻿using System;
+﻿using iNKORE.UI.WPF.Modern.Common.IconKeys;
+using iNKORE.UI.WPF.Modern.Helpers.Styles;
+using System;
 using System.IO;
 using System.Linq;
 using System.Management;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Xml;
-using SYSTools.Dialog;
 
 namespace SYSTools.Pages
 {
@@ -20,6 +20,7 @@ namespace SYSTools.Pages
         {
             InitializeComponent();
             CommandBindings.Add(new CommandBinding(ApplicationCommands.Copy, CopyCommandExecuted));
+            iNKORE.UI.WPF.Modern.Controls.MessageBox.DefaultBackdropType = BackdropType.Acrylic11;
         }
 
         private void HardwareTestAsync()
@@ -173,14 +174,12 @@ namespace SYSTools.Pages
                     Xml_Writer.WriteEndElement();
                     Xml_Writer.WriteEndDocument();
                 }
-
-                TestConfigDialog dialog = new TestConfigDialog();
-                dialog.ShowAsync();
+                
+                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("配置获取成功", "系统配置测试", MessageBoxButton.OK, SegoeFluentIcons.SpecialEffectSize);
             }
             catch (Exception)
             {
-                TestErrorDialog dialog = new TestErrorDialog();
-                dialog.ShowAsync();
+                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("系统配置获取失败 请联系开发者", "系统配置测试", MessageBoxButton.OK, MessageBoxImage.Warning);
 
                 using (XmlWriter Xml_Writer = XmlWriter.Create("Info.xml", XmlSettings))
                 {
@@ -250,8 +249,7 @@ namespace SYSTools.Pages
         }
         private void Info_Click(object sender, RoutedEventArgs e)
         {
-            TestQueryDialog dialog = new TestQueryDialog();
-            dialog.ShowAsync();
+            iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("配置提取基于WMI, 获取时会发生短暂卡顿(根据电脑配置). \r\n正常现象 耐心等待, 文件保存至软件根目录下Info.xml", "系统配置测试 ( 疑问 )", MessageBoxButton.OK, MessageBoxImage.Question);
         }
 
         private void TestBotton_Click(object sender, RoutedEventArgs e)

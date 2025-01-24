@@ -85,17 +85,7 @@
     <Compile Include="Dialog\ProgramFailed.xaml.cs">
       <DependentUpon>ProgramFailed.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialog\TestConfigDialog.xaml.cs">
-      <DependentUpon>TestConfigDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialog\TestErrorDialog.xaml.cs">
-      <DependentUpon>TestErrorDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialog\TestQueryDialog.xaml.cs">
-      <DependentUpon>TestQueryDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Model\AppSettings.cs" />
-    <Compile Include="Model\BackGroudImageSetting.cs" />
     <Compile Include="Model\NotifyIconViewModel.cs" />
     <Compile Include="Pages\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
@@ -146,18 +136,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialog\ProgramFailed.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialog\TestConfigDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialog\TestErrorDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialog\TestQueryDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -235,20 +213,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\app.manifest" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
     <Resource Include="Resources\SegoeIcons.ttf" />
   </ItemGroup>
   <ItemGroup>
@@ -257,9 +226,6 @@
   <ItemGroup>
     <PackageReference Include="Autoupdater.NET.Official">
       <Version>1.9.2</Version>
-    </PackageReference>
-    <PackageReference Include="iNKORE.UI.WPF">
-      <Version>1.2.8</Version>
     </PackageReference>
     <PackageReference Include="iNKORE.UI.WPF.Modern">
       <Version>0.10.0</Version>
@@ -331,16 +297,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\NoBackImage.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\UI.WPF.Modern\source\iNKORE.UI.WPF.Modern.Controls\iNKORE.UI.WPF.Modern.Controls.csproj">
-      <Project>{883c2983-bfd3-488e-b0bb-75184c709f16}</Project>
-      <Name>iNKORE.UI.WPF.Modern.Controls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\UI.WPF.Modern\source\iNKORE.UI.WPF.Modern\iNKORE.UI.WPF.Modern.csproj">
-      <Project>{b1f054e9-8b1a-445d-9a9c-4ee2f1f947a9}</Project>
-      <Name>iNKORE.UI.WPF.Modern</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

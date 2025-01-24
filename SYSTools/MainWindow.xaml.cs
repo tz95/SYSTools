@@ -12,6 +12,7 @@ using SYSTools.Model;
 using SYSTools.Pages;
 using Page = System.Windows.Controls.Page;
 using System.Security.Principal;
+using iNKORE.UI.WPF.Modern;
 
 namespace SYSTools
 {
@@ -51,6 +52,15 @@ namespace SYSTools
             else if (e.PropertyName == nameof(AppSettings.BackgroundImageBlurRadius))
             {
                 LoadBackgroundImageBlurRadius(AppSettings.Instance.BackgroundImageBlurRadius);
+            }
+            else if (e.PropertyName == nameof(AppSettings.BackgroundImageOpacity))
+            {
+                LoadBackgroundImageOpacity(AppSettings.Instance.ActualOpacity);
+            }
+            // 添加对背景启用状态的监听
+            else if (e.PropertyName == nameof(AppSettings.IsBackgroundEnabled))
+            {
+                UpdateBackgroundVisibility(AppSettings.Instance.IsBackgroundEnabled);
             }
         }
 
@@ -121,6 +131,8 @@ namespace SYSTools
             // 加载设置并应用
             LoadBackgroundImage(AppSettings.Instance.BackgroundImagePath);
             LoadBackgroundImageBlurRadius(AppSettings.Instance.BackgroundImageBlurRadius);
+            LoadBackgroundImageOpacity(AppSettings.Instance.ActualOpacity);
+            UpdateBackgroundVisibility(AppSettings.Instance.IsBackgroundEnabled);
         }
 
         private void LoadBackgroundImage(string imagePath)
@@ -139,7 +151,7 @@ namespace SYSTools
                 LoadBackgroundImage("pack://application:,,,/Resources/NoBackImage.png");
             }
         }
-
+        // 图片模糊度
         private void LoadBackgroundImageBlurRadius(double radiusInt)
         {
             var blurEffect = new BlurEffect
@@ -147,6 +159,18 @@ namespace SYSTools
                 Radius = radiusInt
             };
             BackImage.Effect = blurEffect;
+        }
+
+        // 图片透明度
+        private void LoadBackgroundImageOpacity(double opacity)
+        {
+            BackImage.Opacity = opacity;
+        }
+
+        // 启用/禁用背景修改
+        private void UpdateBackgroundVisibility(bool isEnabled)
+        {
+            BackImage.Visibility = isEnabled ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void Window_Closed(object sender, EventArgs e)
