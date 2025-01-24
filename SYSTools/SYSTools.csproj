@@ -332,5 +332,15 @@
   <ItemGroup>
     <Resource Include="Resources\NoBackImage.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\UI.WPF.Modern\source\iNKORE.UI.WPF.Modern.Controls\iNKORE.UI.WPF.Modern.Controls.csproj">
+      <Project>{883c2983-bfd3-488e-b0bb-75184c709f16}</Project>
+      <Name>iNKORE.UI.WPF.Modern.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\UI.WPF.Modern\source\iNKORE.UI.WPF.Modern\iNKORE.UI.WPF.Modern.csproj">
+      <Project>{b1f054e9-8b1a-445d-9a9c-4ee2f1f947a9}</Project>
+      <Name>iNKORE.UI.WPF.Modern</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

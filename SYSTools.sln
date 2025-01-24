@@ -10,6 +10,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SYSTools", "SYSTools\SYSToo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SYSTools_Update(Tools)", "SYSTools_Update(Tools)\SYSTools_Update(Tools).csproj", "{F217C29B-02EE-435D-A537-3CABE65308CB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iNKORE.UI.WPF.Modern", "..\UI.WPF.Modern\source\iNKORE.UI.WPF.Modern\iNKORE.UI.WPF.Modern.csproj", "{B1F054E9-8B1A-445D-9A9C-4EE2F1F947A9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iNKORE.UI.WPF.Modern.Controls", "..\UI.WPF.Modern\source\iNKORE.UI.WPF.Modern.Controls\iNKORE.UI.WPF.Modern.Controls.csproj", "{883C2983-BFD3-488E-B0BB-75184C709F16}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +28,14 @@ Global
 		{F217C29B-02EE-435D-A537-3CABE65308CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F217C29B-02EE-435D-A537-3CABE65308CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F217C29B-02EE-435D-A537-3CABE65308CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1F054E9-8B1A-445D-9A9C-4EE2F1F947A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1F054E9-8B1A-445D-9A9C-4EE2F1F947A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1F054E9-8B1A-445D-9A9C-4EE2F1F947A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1F054E9-8B1A-445D-9A9C-4EE2F1F947A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{883C2983-BFD3-488E-B0BB-75184C709F16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{883C2983-BFD3-488E-B0BB-75184C709F16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{883C2983-BFD3-488E-B0BB-75184C709F16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{883C2983-BFD3-488E-B0BB-75184C709F16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
