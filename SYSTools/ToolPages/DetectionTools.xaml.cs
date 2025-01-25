@@ -1,10 +1,10 @@
-﻿using System.Diagnostics;
+﻿using iNKORE.UI.WPF.Modern.Common.IconKeys;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using SYSTools.Dialog;
 
 namespace SYSTools.ToolPages
 {
@@ -15,7 +15,6 @@ namespace SYSTools.ToolPages
     {
         string AppPath = Directory.GetCurrentDirectory();
         string DetectionTools_Path = @"Software Package\DetectionTools\";
-        ProgramFailed ProgramFailed_Dialog = new ProgramFailed();
 
         public DetectionTools()
         {
@@ -42,6 +41,7 @@ namespace SYSTools.ToolPages
             }
         }
 
+        // 顶部文版右键打开文件夹
         public void TextBlock_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (DirExist(Path.Combine(AppPath, DetectionTools_Path)))
@@ -49,6 +49,7 @@ namespace SYSTools.ToolPages
                 Process.Start("explorer.exe", Path.Combine(AppPath, DetectionTools_Path));
             }
         }
+
         public void HandleMouseClick(string ToolName, string ExeName)
         {
             string ExePath = Path.Combine(AppPath, DetectionTools_Path, ToolName, ExeName + ".exe");
@@ -60,13 +61,12 @@ namespace SYSTools.ToolPages
                 }
                 catch (Exception e)
                 {
-                    // Handle the exception if needed
-                    // MessageBox.Show(e.Message);
+                    iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("请检查程序包内是否存在该工具, 或工具存放位置是否正确 \r\n 或检查杀毒软件是否拦截.", "找不到工具启动文件", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             else
             {
-                ProgramFailed_Dialog.ShowAsync();
+                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("请检查程序包内是否存在该工具 \r\n 或工具存放位置是否正确", "无法打开该工具", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
         private void Aida64_Click(object sender, RoutedEventArgs e)

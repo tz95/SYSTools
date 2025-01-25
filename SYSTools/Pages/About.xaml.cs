@@ -1,4 +1,5 @@
 ﻿using AutoUpdaterDotNET;
+using iNKORE.UI.WPF.Modern.Common.IconKeys;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -7,8 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
-using SYSTools.Dialog;
 
 namespace SYSTools.Pages
 {
@@ -56,8 +55,7 @@ namespace SYSTools.Pages
 
             if (currentVersion >= webVersion)
             {
-                NoUpdate Dialog = new NoUpdate();
-                await Dialog.ShowAsync().ConfigureAwait(false);
+                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("暂未获取更新", "暂无更新🤐",MessageBoxButton.OK,SegoeFluentIcons.UpdateRestore);
             }
             else
             {
@@ -78,8 +76,7 @@ namespace SYSTools.Pages
 
             if (ToolsFileVersionInfo.FileVersion == webCode)
             {
-                NoUpdate Dialog = new NoUpdate();
-                await Dialog.ShowAsync().ConfigureAwait(false);
+                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("暂未获取更新", "暂无更新🤐", MessageBoxButton.OK, SegoeFluentIcons.UpdateRestore);
             }
             else
             {

@@ -4,7 +4,6 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using SYSTools.Dialog;
 
 namespace SYSTools.ToolPages
 {
@@ -15,7 +14,7 @@ namespace SYSTools.ToolPages
     {
         string AppPath = Directory.GetCurrentDirectory();
         string TestTools_Path = @"Software Package\TestTools\";
-        ProgramFailed ProgramFailed_Dialog = new ProgramFailed();
+
         public TestTools()
         {
             InitializeComponent();
@@ -59,13 +58,12 @@ namespace SYSTools.ToolPages
                 }
                 catch (Exception e)
                 {
-                    // Handle the exception if needed
-                    // MessageBox.Show(e.Message);
+                    iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("请检查程序包内是否存在该工具, 或工具存放位置是否正确 \r\n 或检查杀毒软件是否拦截.", "找不到工具启动文件", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             else
             {
-                ProgramFailed_Dialog.ShowAsync();
+                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("请检查程序包内是否存在该工具 \r\n 或工具存放位置是否正确", "无法打开该工具", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 

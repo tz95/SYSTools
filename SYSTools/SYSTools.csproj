@@ -76,15 +76,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Dialog\AdbDialog.xaml.cs">
-      <DependentUpon>AdbDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialog\NoUpdate.xaml.cs">
-      <DependentUpon>NoUpdate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialog\ProgramFailed.xaml.cs">
-      <DependentUpon>ProgramFailed.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Model\AppSettings.cs" />
     <Compile Include="Model\NotifyIconViewModel.cs" />
     <Compile Include="Pages\About.xaml.cs">
@@ -127,18 +118,6 @@
     <Compile Include="ToolPages\TestTools.xaml.cs">
       <DependentUpon>TestTools.xaml</DependentUpon>
     </Compile>
-    <Page Include="Dialog\AdbDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialog\NoUpdate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialog\ProgramFailed.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
