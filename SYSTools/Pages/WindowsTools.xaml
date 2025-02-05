@@ -15,7 +15,9 @@
         <ScrollViewer  VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <!--按钮固定上下大小66(px?)-->
-                <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Top" Header="快捷启动" IsExpanded="True" FontSize="17" VerticalAlignment="Top" UseLayoutRounding="False" Margin="10,10,10,0">
+                <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Top" Header="快捷启动" IsExpanded="True" FontSize="17" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" UseLayoutRounding="False" Margin="10,10,10,0"
+                          ExpandDirection="Down"
+                          Style="{StaticResource {x:Static muxc:ThemeKeys.ExpanderCardStyleKey}}" >
                     <Expander.Content>
                         <WrapPanel>
                             <Button x:Name="CMD" Margin="5,5,0,0" Width="140" Height="40" Content="CMD终端" FontSize="15" Click="CMD_Click" Background="{x:Null}"/>
@@ -33,7 +35,9 @@
                         </WrapPanel>
                     </Expander.Content>
                 </Expander>
-                <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Header="网络工具( 管理员权限 需要手动重启 )" IsExpanded="True" FontSize="17" Margin="10,10,10,0">
+                <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Stretch" Header="网络工具( 管理员权限 需要手动重启 )" IsExpanded="True" FontSize="17" Margin="10,10,10,0"
+                          ExpandDirection="Down"
+                          Style="{StaticResource {x:Static muxc:ThemeKeys.ExpanderCardStyleKey}}"  >
                     <Expander.Content>
                         <WrapPanel>
                             <Button x:Name="ClearDNS" Margin="5,5,0,0" Width="140" Height="40" Content="清除DNS缓存" FontSize="15" Click="ClearDNS_Click" Background="{x:Null}"/>
@@ -43,27 +47,31 @@
                         </WrapPanel>
                     </Expander.Content>
                 </Expander>
-                <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Center" VerticalAlignment="Top" Header="Explorer功能( 重启资源管理器生效 )" IsExpanded="True" FontSize="17" Margin="10,10,10,0">
+                <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Stretch" Header="Explorer功能( 重启资源管理器生效 )" IsExpanded="True" FontSize="17" Margin="10,10,10,0"
+                          ExpandDirection="Down"
+                          Style="{StaticResource {x:Static muxc:ThemeKeys.ExpanderCardStyleKey}}" >
                     <Expander.Content>
-                        <WrapPanel>
-                            <ToggleButton x:Name="ShowFileExt" Margin="5,5,0,0" Width="140" Height="40" 
+                        <WrapPanel Orientation="Vertical">
+                            <WrapPanel>
+                                <ToggleButton x:Name="ShowFileExt" Margin="5,5,0,0" Width="140" Height="40" 
                                           Content="文件夹后缀" FontSize="15" Background="{x:Null}" 
                                           Checked="ShowFileExt_Toggled" Unchecked="ShowFileExt_Toggled"/>
-                            <ToggleButton x:Name="ShowHidden" Margin="5,5,0,0" Width="140" Height="40" 
+                                <ToggleButton x:Name="ShowHidden" Margin="5,5,0,0" Width="140" Height="40" 
                                           Content="隐藏文件/文件夹" FontSize="15" Background="{x:Null}"
                                           Checked="ShowHidden_Toggled" Unchecked="ShowHidden_Toggled"/>
-                            <ToggleButton x:Name="ShowSuper" Margin="5,5,0,0" Width="140" Height="40" 
+                                <ToggleButton x:Name="ShowSuper" Margin="5,5,0,0" Width="140" Height="40" 
                                           Content="显示受保护文件" FontSize="15" Background="{x:Null}"
                                           Checked="ShowSuper_Toggled" Unchecked="ShowSuper_Toggled"/>
-                            <ToggleButton x:Name="HideArrow" Margin="5,5,0,0" Width="140" Height="40" 
+                                <ToggleButton x:Name="HideArrow" Margin="5,5,0,0" Width="140" Height="40" 
                                           Content="去快捷小箭头" FontSize="15" Background="{x:Null}"
                                           Checked="HideArrow_Toggled" Unchecked="HideArrow_Toggled"/>
-                            <ToggleButton x:Name="HideText" Margin="5,5,0,0" Width="140" Height="40" 
+                                <ToggleButton x:Name="HideText" Margin="5,5,0,0" Width="140" Height="40" 
                                           Content="去快捷文本" FontSize="15" Background="{x:Null}"
                                           Checked="HideText_Toggled" Unchecked="HideText_Toggled"/>
-                            <ToggleButton x:Name="HideUAC" Margin="5,5,0,0" Width="140" Height="40" 
+                                <ToggleButton x:Name="HideUAC" Margin="5,5,0,0" Width="140" Height="40" 
                                           Content="去UAC盾牌" FontSize="15" Background="{x:Null}"
                                           Checked="HideUAC_Toggled" Unchecked="HideUAC_Toggled"/>
+                            </WrapPanel>
                             <WrapPanel>
                                 <ComboBox x:Name="MenuStyle" 
                                           Margin="5,5,0,0" 

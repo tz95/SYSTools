@@ -10,23 +10,6 @@
       KeepAlive="True"
       Title="About" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610" >
 
-    <!--<Page.Resources>
-        <Style x:Key="NoUnderlineHyperlinkButton" TargetType="muxc:HyperlinkButton">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="muxc:HyperlinkButton">
-                        <TextBlock x:Name="TextBlock" Text="{TemplateBinding Content}" TextDecorations="None"/>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="TextBlock" Property="Foreground" Value="White" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Page.Resources>-->
-
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
