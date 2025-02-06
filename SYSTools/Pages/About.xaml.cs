@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Collections.Generic;
 
 namespace SYSTools.Pages
 {
@@ -20,6 +21,33 @@ namespace SYSTools.Pages
         public About()
         {
             InitializeComponent();
+            
+            var libraries = new List<Library>
+            {
+                new Library { Name = "AutoUpdater.NET (MIT License)", Uri = "https://github.com/ravibpatel/AutoUpdater.NET" },
+                new Library { Name = "iNKORE.UI.WPF (LGPL-2.1 license)", Uri = "https://github.com/iNKORE-NET/UI.WPF" },
+                new Library { Name = "iNKORE.UI.WPF.Modern (LGPL-2.1 license)", Uri = "https://github.com/iNKORE-Public/UI.WPF.Modern" },
+                new Library { Name = "LibreHardwareMonitorLib", Uri = "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor" },
+                new Library { Name = "Log4Net (Apache-2.0 License)", Uri = "https://logging.apache.org/log4net/" },
+                new Library { Name = "Microsoft.Windows.SDK.Contracts", Uri = "https://aka.ms/WinSDKProjectURL" },
+                new Library { Name = "System.Runtime.WindowsRuntime", Uri = "https://github.com/dotnet/corefx" },
+                new Library { Name = "System.Runtime.WindowsRuntime.UI.Xaml", Uri = "https://github.com/dotnet/corefx" },
+                new Library { Name = "System.ValueTuple", Uri = "https://dot.net" },
+                new Library { Name = "TextCopy", Uri = "https://github.com/CopyText/TextCopy" },
+                new Library { Name = ".NET Runtime", Uri = "https://github.com/dotnet/runtime" },
+                new Library { Name = "HidSharp", Uri = "http://www.zer7.com/software/hidsharp" },
+                new Library { Name = "Microsoft.Bcl.AsyncInterfaces", Uri = "https://dot.net/" },
+                new Library { Name = "Microsoft.Extensions.DependencyInjection.Abstractions", Uri = "https://dot.net/" },
+                new Library { Name = "Microsoft.Web.WebView2", Uri = "https://aka.me/webview" },
+                new Library { Name = "System.CodeDom", Uri = "https://dot.net/" },
+                new Library { Name = "System.Management", Uri = "https://dot.net/" },
+                new Library { Name = "System.Runtime.CompilerServices.Unsafe", Uri = "https://dot.net/" },
+                new Library { Name = "System.Runtime.InteropServices.RuntimeInformation", Uri = "https://dot.net/" },
+                new Library { Name = "System.Runtime.InteropServices.WindowsRuntime", Uri = "https://dot.net/" },
+                new Library { Name = "System.Threading.Tasks.Extensions", Uri = "https://dot.net/" }
+            };
+            
+            librariesItemsControl.ItemsSource = libraries;
         }
 
         private void QQ_Click(object sender, RoutedEventArgs e)
@@ -32,10 +60,6 @@ namespace SYSTools.Pages
             Process.Start("https://systools.hksstudio.work");
         }
 
-        private void Github_Click(object sender, RoutedEventArgs e)
-        {
-            Process.Start("https://github.com/Hikarisame-Technology/SYSTools");
-        }
 
         private void AutoUpdateVersion() {
             AutoUpdater.HttpUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36";
@@ -82,11 +106,6 @@ namespace SYSTools.Pages
             {
                 Process.Start(ToolsExecutablePath);
             }
-        }
-
-        private void Agreement_Click(object sender, RoutedEventArgs e)
-        {
-            
         }
 
         private async void Privacy_Click(object sender, RoutedEventArgs e)
@@ -141,5 +160,12 @@ namespace SYSTools.Pages
         {
             Process.Start(new ProcessStartInfo("https://github.com/Hikarisame-Technology/SYSTools/issues") { UseShellExecute = true });
         }
+
+    }
+
+    public class Library
+    {
+        public string Name { get; set; }
+        public string Uri { get; set; }
     }
 }

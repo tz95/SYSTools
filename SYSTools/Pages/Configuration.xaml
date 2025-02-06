@@ -13,7 +13,7 @@
       Title="Configuration" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610">
     <Grid>
         <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="3" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Width="160" Height="90"/>
-        <muxc:ScrollViewerEx Grid.Row="1" Margin="0,20,0,0" Padding="0,0,20,0">
+        <muxc:ScrollViewerEx Grid.Row="1" Padding="0,0,20,0">
             <ikw:SimpleStackPanel Spacing="10">
 
                 <muxc:SettingsExpander x:Name="BackImageSettingsExpander"

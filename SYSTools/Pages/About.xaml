@@ -13,7 +13,7 @@
     <Grid>
         <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Source="/SYSTools;component/Resources/B-LOGO.png" Margin="0,0,-100,-100" Opacity="0.1" Grid.Column="1" Height="430"/>
 
-        <muxc:ScrollViewerEx Grid.Row="1" Margin="0,20,0,0" Padding="0,0,20,0">
+        <muxc:ScrollViewerEx Grid.Row="1" Padding="0,0,20,0">
 
             <ikw:SimpleStackPanel Spacing="10">
 
@@ -31,7 +31,7 @@
                                 </DockPanel>
                             </StackPanel>
                         </muxc:SettingsCard>
-                        
+
                         <muxc:SettingsCard ActionIconToolTip="打开网页" 
                                        Click="OnCardClicked_Repository" IsClickEnabled="True"
                                        Header="Github Repository / Github仓库" Description="https://github.com/Hikarisame-Technology/SYSTools"  IsEnabled="True">
@@ -48,22 +48,80 @@
                             </muxc:SettingsCard.ActionIcon>
                         </muxc:SettingsCard>
 
+                        <muxc:SettingsCard Header="联系我们" IsEnabled="True">
+                            <WrapPanel>
+                                <Button x:Name="QQ" Content="QQ群" Width="120" Height="33" Click="QQ_Click" Margin="0,0,20,0"/>
+                                <Button x:Name="Web" Content="官网" VerticalAlignment="Top" Width="120" Height="33" Click="Web_Click"/>
+                            </WrapPanel>
+                        </muxc:SettingsCard>
+
                         <muxc:SettingsCard HorizontalContentAlignment="Left"
                                 ContentAlignment="Left" >
                             <StackPanel Margin="-12,0,0,0" Orientation="Vertical">
                                 <TextBlock Text="开发人员 ＆ 设计人员 ＆ 外部支援" Margin="11,5,0,5" />
-                                <muxc:HyperlinkButton Content="ShizukuNanami" FontSize="15" NavigateUri="https://github.com/Shizuku-Nanami" Cursor="Hand"  VerticalAlignment="Top"/>
-                                <muxc:HyperlinkButton Content="39MiRai"  FontSize="15" NavigateUri="https://github.com/39MiRai" Cursor="Hand" VerticalAlignment="Top"/>
-                                <muxc:HyperlinkButton Content="Tz95" FontSize="15" NavigateUri="https://github.com/tz95" Cursor="Hand" VerticalAlignment="Top"/>
-
-                                <TextBlock Text="Prismatic Design Studio" VerticalAlignment="Top" FontSize="15" HorizontalAlignment="Left" Margin="11,5,0,5"/>
-
-                                <muxc:HyperlinkButton x:Name="KanChan" Content="偷税师柑柑" VerticalAlignment="Top" FontSize="15" VerticalContentAlignment="Top" NavigateUri="https://github.com/YorokobiMaster" Cursor="Hand"/>
+                                <WrapPanel>
+                                    <muxc:HyperlinkButton Content="ShizukuNanami" FontSize="15" NavigateUri="https://github.com/Shizuku-Nanami" Cursor="Hand"  VerticalAlignment="Top"/>
+                                    <muxc:HyperlinkButton Content="39MiRai"  FontSize="15" NavigateUri="https://github.com/39MiRai" Cursor="Hand" VerticalAlignment="Top"/>
+                                    <muxc:HyperlinkButton Content="Tz95" FontSize="15" NavigateUri="https://github.com/tz95" Cursor="Hand" VerticalAlignment="Top"/>
+                                </WrapPanel>
+                                <muxc:HyperlinkButton Content="Prismatic Design Studio" FontSize="15" Cursor="Cross" VerticalAlignment="Top"/>
+                                <muxc:HyperlinkButton Content="偷税师柑柑" VerticalAlignment="Top" FontSize="15" VerticalContentAlignment="Top" NavigateUri="https://github.com/YorokobiMaster" Cursor="Hand"/>
                             </StackPanel>
+                        </muxc:SettingsCard>
+
+                        <muxc:SettingsCard HorizontalContentAlignment="Left"
+                                ContentAlignment="Left" >
+                            <StackPanel Margin="-12,0,0,0" Orientation="Vertical">
+                                <TextBlock Text="Components and Corresponding Repositories Used in the Software / 软件中使用的组件及对应仓库" Margin="11,5,0,5" />
+                                <ItemsControl x:Name="librariesItemsControl">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <muxc:HyperlinkButton 
+                                                Content="{Binding Name}"
+                                                NavigateUri="{Binding Uri}"
+                                                HorizontalAlignment="Center"
+                                                UseSystemFocusVisuals="True"
+                                                FontSize="12"
+                                                Cursor="Hand"
+                                                Margin="0,5,0,0"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </muxc:SettingsCard>
+
+                    </muxc:SettingsExpander.Items>
+                </muxc:SettingsExpander>
+                <muxc:SettingsExpander Header="SYSTools Update" IsExpanded="True">
+                    <muxc:SettingsExpander.HeaderIcon>
+                        <muxc:FontIcon Glyph="&#xE117;"/>
+                    </muxc:SettingsExpander.HeaderIcon>
+                    <muxc:SettingsExpander.Items>
+                        
+                        <muxc:SettingsCard Header="工具更新 ＆ 工具包更新" IsEnabled="True">
+                            <WrapPanel>
+                                <Button x:Name="Update" Content="软件升级" Width="120" Height="33" Click="Update_Click" Margin="0,0,20,0"/>
+                                <Button x:Name="Tool_Update" Content="工具包升级" VerticalAlignment="Top" Width="120" Height="33" Click="Tool_Update_Click"/>
+                            </WrapPanel>
+                        </muxc:SettingsCard>
+
+                        <muxc:SettingsCard Header="隐私协议 ＆ 用户协议" IsEnabled="True">
+                            <WrapPanel>
+                                <Button x:Name="Privacy" Content="隐私协议" Width="120" Height="33" Click="Privacy_Click" Margin="0,0,0,0"/>
+                                <!--<Button x:Name="Privacy" Content="隐私协议" Width="120" Height="33" Click="Privacy_Click" Margin="0,0,20,0"/>-->
+                                <!--<Button x:Name="Agreement" Content="用户协议" VerticalAlignment="Top" Width="120" Height="33" Click="Agreement_Click"/>-->
+                            </WrapPanel>
                         </muxc:SettingsCard>
                     </muxc:SettingsExpander.Items>
                 </muxc:SettingsExpander>
             </ikw:SimpleStackPanel>
         </muxc:ScrollViewerEx>
+
+
     </Grid>
 </Page>
