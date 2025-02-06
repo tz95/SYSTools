@@ -131,5 +131,15 @@ namespace SYSTools.Pages
                 return Encoding.GetEncoding("GB2312").GetString(bytes);
             }
         }
+
+        private void OnCardClicked_Repository(object sender, RoutedEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo("https://github.com/Hikarisame-Technology/SYSTools") { UseShellExecute = true });
+        }
+
+        private void OnCardClicked_Issue(object sender, RoutedEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo("https://github.com/Hikarisame-Technology/SYSTools/issues") { UseShellExecute = true });
+        }
     }
 }
