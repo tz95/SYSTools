@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Collections.Generic;
+using SYSTools.Properties;
 
 namespace SYSTools.Pages
 {
@@ -18,9 +19,11 @@ namespace SYSTools.Pages
     public partial class About : Page
     {
         private static readonly HttpClient Client = new HttpClient();
+
         public About()
         {
             InitializeComponent();
+            DataContext = this;
             
             var libraries = new List<Library>
             {
@@ -141,6 +144,12 @@ namespace SYSTools.Pages
                 Process.Start(new ProcessStartInfo("https://systools.hksstudio.work/privacy.html") { UseShellExecute = true });
             }
         }
+
+        private void Agreement_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         // 获取txt文件内容，GB2312编码
         private async Task<string> GetTxtFromUrlAsync(string url)
         {

@@ -13,6 +13,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <muxc:ThemeResources RequestedTheme="{x:Null}"/>
                 <muxc:XamlControlsResources />
+                <ResourceDictionary>
+                    <ComponentResourceKey x:Key="ResourceProvider" TypeInTargetAssembly="{x:Type local:App}"/>
+                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
             <FontFamily x:Key="SegoeIcons">/SYSTools;component/Resources/#Segoe Fluent Icons</FontFamily>
             <!-- Other app resources here -->

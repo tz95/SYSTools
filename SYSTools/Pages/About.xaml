@@ -6,6 +6,8 @@
       xmlns:muxc="http://schemas.inkore.net/lib/ui/wpf/modern"
       xmlns:ikw="http://schemas.inkore.net/lib/ui/wpf"
       xmlns:local="clr-namespace:SYSTools.Pages"
+      xmlns:model="clr-namespace:SYSTools.Model"
+      xmlns:Properties="clr-namespace:SYSTools.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="610" d:DesignWidth="1040"
       KeepAlive="True"
@@ -42,13 +44,13 @@
 
                         <muxc:SettingsCard ActionIconToolTip="打开网页" 
                                        Click="OnCardClicked_Issue" IsClickEnabled="True"
-                                       Header="Github Issue / 有好的想法或者问题,欢迎提交." Description="https://github.com/Hikarisame-Technology/SYSTools/issues" IsEnabled="True">
+                                       Header="Github Issue / 有好的想法或者问题,欢迎提交Issue." Description="https://github.com/Hikarisame-Technology/SYSTools/issues" IsEnabled="True">
                             <muxc:SettingsCard.ActionIcon>
                                 <muxc:FontIcon Glyph="&#xE8A7;"/>
                             </muxc:SettingsCard.ActionIcon>
                         </muxc:SettingsCard>
 
-                        <muxc:SettingsCard Header="联系我们" IsEnabled="True">
+                        <muxc:SettingsCard Header="{model:Resource Key=ContactUs}" IsEnabled="True">
                             <WrapPanel>
                                 <Button x:Name="QQ" Content="QQ群" Width="120" Height="33" Click="QQ_Click" Margin="0,0,20,0"/>
                                 <Button x:Name="Web" Content="官网" VerticalAlignment="Top" Width="120" Height="33" Click="Web_Click"/>
@@ -112,9 +114,8 @@
 
                         <muxc:SettingsCard Header="隐私协议 ＆ 用户协议" IsEnabled="True">
                             <WrapPanel>
-                                <Button x:Name="Privacy" Content="隐私协议" Width="120" Height="33" Click="Privacy_Click" Margin="0,0,0,0"/>
-                                <!--<Button x:Name="Privacy" Content="隐私协议" Width="120" Height="33" Click="Privacy_Click" Margin="0,0,20,0"/>-->
-                                <!--<Button x:Name="Agreement" Content="用户协议" VerticalAlignment="Top" Width="120" Height="33" Click="Agreement_Click"/>-->
+                                <Button x:Name="Privacy" Content="隐私协议" Width="120" Height="33" Click="Privacy_Click" Margin="0,0,20,0"/>
+                                <Button x:Name="Agreement" Content="用户协议" VerticalAlignment="Top" Width="120" Height="33" Click="Agreement_Click" IsEnabled="False"/>
                             </WrapPanel>
                         </muxc:SettingsCard>
                     </muxc:SettingsExpander.Items>

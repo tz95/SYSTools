@@ -80,6 +80,17 @@
                     </ComboBox>
                 </muxc:SettingsCard>
 
+                <muxc:SettingsCard Header="语言设定"
+                         Description="设定程序显示的语言">
+                    <muxc:SettingsCard.HeaderIcon>
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE774;"/>
+                    </muxc:SettingsCard.HeaderIcon>
+                    <ComboBox x:Name="LanguageComboBox" SelectionChanged="LanguageComboBox_SelectionChanged">
+                        <ComboBoxItem Content="简体中文" Tag="zh-CN"/>
+                        <ComboBoxItem Content="English" Tag="en"/>
+                    </ComboBox>
+                </muxc:SettingsCard>
+
             </ikw:SimpleStackPanel>
         </muxc:ScrollViewerEx>
     </Grid>

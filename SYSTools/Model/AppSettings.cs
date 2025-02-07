@@ -17,6 +17,7 @@ namespace SYSTools.Model
         private double _backgroundImageOpacity;
         private bool _isBackgroundEnabled;
         private int _themeMode;
+        private string _language;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -106,6 +107,20 @@ namespace SYSTools.Model
             }
         }
 
+        public string Language
+        {
+            get => _language;
+            set
+            {
+                if (_language != value)
+                {
+                    _language = value;
+                    SaveSettings();
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         private void ApplyTheme()
         {
             switch (_themeMode)
@@ -134,7 +149,8 @@ namespace SYSTools.Model
                         new XElement("BackgroundImageBlurRadius", _backgroundImageBlurRadius),
                         new XElement("BackgroundImageOpacity", _backgroundImageOpacity),
                         new XElement("IsBackgroundEnabled", _isBackgroundEnabled),
-                        new XElement("ThemeMode", _themeMode)
+                        new XElement("ThemeMode", _themeMode),
+                        new XElement("Language", _language)
                     )
                 );
                 settings.Save(_settingsFilePath);
@@ -172,6 +188,7 @@ namespace SYSTools.Model
                         {
                             _themeMode = themeMode;
                         }
+                        _language = settings.Element("Language")?.Value ?? "zh-CN";
                     }
                 }
 
@@ -192,6 +209,7 @@ namespace SYSTools.Model
                 _backgroundImageOpacity = 100.0;
                 _isBackgroundEnabled = false;
                 _themeMode = 0; // 默认跟随系统 无需应用ApplyTheme变更程序主题
+                _language = "zh-CN";
             }
         }
 
