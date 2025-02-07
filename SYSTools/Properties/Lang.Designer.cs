@@ -61,11 +61,128 @@ namespace SYSTools.Properties {
         }
         
         /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string ComponentsLicense {
+            get {
+                return ResourceManager.GetString("ComponentsLicense", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 联系我们 的本地化字符串。
         /// </summary>
         internal static string ContactUs {
             get {
                 return ResourceManager.GetString("ContactUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string Developers {
+            get {
+                return ResourceManager.GetString("Developers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string GithubIssue {
+            get {
+                return ResourceManager.GetString("GithubIssue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string GithubRepo {
+            get {
+                return ResourceManager.GetString("GithubRepo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string PolicyAgreement {
+            get {
+                return ResourceManager.GetString("PolicyAgreement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string PrivacyPolicy {
+            get {
+                return ResourceManager.GetString("PrivacyPolicy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string QQGroup {
+            get {
+                return ResourceManager.GetString("QQGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string SoftwareToolkitUpdate {
+            get {
+                return ResourceManager.GetString("SoftwareToolkitUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string SoftwareUpdate {
+            get {
+                return ResourceManager.GetString("SoftwareUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string SYSToolsUpdate {
+            get {
+                return ResourceManager.GetString("SYSToolsUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string ToolkitUpdate {
+            get {
+                return ResourceManager.GetString("ToolkitUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string UserAgreement {
+            get {
+                return ResourceManager.GetString("UserAgreement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string WebSite {
+            get {
+                return ResourceManager.GetString("WebSite", resourceCulture);
             }
         }
     }

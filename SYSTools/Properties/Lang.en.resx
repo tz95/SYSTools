@@ -118,6 +118,45 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ContactUs" xml:space="preserve">
-    <value>Contact Us</value>
+    <value>User Agreement</value>
+  </data>
+  <data name="QQGroup" xml:space="preserve">
+    <value>QQ Group</value>
+  </data>
+  <data name="WebSite" xml:space="preserve">
+    <value>WebSite</value>
+  </data>
+  <data name="GithubRepo" xml:space="preserve">
+    <value>Github Repository</value>
+  </data>
+  <data name="GithubIssue" xml:space="preserve">
+    <value>Github Issue</value>
+  </data>
+  <data name="Developers" xml:space="preserve">
+    <value>Developers &amp; Designers &amp; External Support</value>
+  </data>
+  <data name="ComponentsLicense" xml:space="preserve">
+    <value>Components and Corresponding Repositories Used in the Software</value>
+  </data>
+  <data name="SYSToolsUpdate" xml:space="preserve">
+    <value>SYSTools Update</value>
+  </data>
+  <data name="SoftwareToolkitUpdate" xml:space="preserve">
+    <value>Software Update &amp; Toolkit Update</value>
+  </data>
+  <data name="SoftwareUpdate" xml:space="preserve">
+    <value>Software Update</value>
+  </data>
+  <data name="ToolkitUpdate" xml:space="preserve">
+    <value>Toolkit Update</value>
+  </data>
+  <data name="PolicyAgreement" xml:space="preserve">
+    <value>Privacy Policy &amp; User Agreement</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="UserAgreement" xml:space="preserve">
+    <value>User Agreement</value>
   </data>
 </root>

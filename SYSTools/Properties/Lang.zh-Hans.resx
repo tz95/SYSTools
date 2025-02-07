@@ -120,4 +120,43 @@
   <data name="ContactUs" xml:space="preserve">
     <value>联系我们</value>
   </data>
+  <data name="QQGroup" xml:space="preserve">
+    <value>QQ群</value>
+  </data>
+  <data name="WebSite" xml:space="preserve">
+    <value>官网</value>
+  </data>
+  <data name="GithubRepo" xml:space="preserve">
+    <value>Github仓库</value>
+  </data>
+  <data name="GithubIssue" xml:space="preserve">
+    <value>有好的想法或者问题,欢迎提交Issue.</value>
+  </data>
+  <data name="Developers" xml:space="preserve">
+    <value>开发人员 ＆ 设计人员 ＆ 外部支援</value>
+  </data>
+  <data name="ComponentsLicense" xml:space="preserve">
+    <value>软件中使用的组件及对应仓库</value>
+  </data>
+  <data name="SYSToolsUpdate" xml:space="preserve">
+    <value>SYSTools更新</value>
+  </data>
+  <data name="SoftwareToolkitUpdate" xml:space="preserve">
+    <value>软件更新 ＆ 工具包更新</value>
+  </data>
+  <data name="SoftwareUpdate" xml:space="preserve">
+    <value>软件更新</value>
+  </data>
+  <data name="ToolkitUpdate" xml:space="preserve">
+    <value>工具包更新</value>
+  </data>
+  <data name="PolicyAgreement" xml:space="preserve">
+    <value>隐私协议 ＆ 用户协议</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>隐私协议</value>
+  </data>
+  <data name="UserAgreement" xml:space="preserve">
+    <value>用户协议</value>
+  </data>
 </root>

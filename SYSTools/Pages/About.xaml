@@ -36,7 +36,7 @@
 
                         <muxc:SettingsCard ActionIconToolTip="打开网页" 
                                        Click="OnCardClicked_Repository" IsClickEnabled="True"
-                                       Header="Github Repository / Github仓库" Description="https://github.com/Hikarisame-Technology/SYSTools"  IsEnabled="True">
+                                       Header="{model:Resource Key=GithubRepo}" Description="https://github.com/Hikarisame-Technology/SYSTools"  IsEnabled="True">
                             <muxc:SettingsCard.ActionIcon>
                                 <muxc:FontIcon Glyph="&#xE8A7;"/>
                             </muxc:SettingsCard.ActionIcon>
@@ -44,7 +44,7 @@
 
                         <muxc:SettingsCard ActionIconToolTip="打开网页" 
                                        Click="OnCardClicked_Issue" IsClickEnabled="True"
-                                       Header="Github Issue / 有好的想法或者问题,欢迎提交Issue." Description="https://github.com/Hikarisame-Technology/SYSTools/issues" IsEnabled="True">
+                                       Header="{model:Resource Key=GithubIssue}" Description="https://github.com/Hikarisame-Technology/SYSTools/issues" IsEnabled="True">
                             <muxc:SettingsCard.ActionIcon>
                                 <muxc:FontIcon Glyph="&#xE8A7;"/>
                             </muxc:SettingsCard.ActionIcon>
@@ -52,29 +52,29 @@
 
                         <muxc:SettingsCard Header="{model:Resource Key=ContactUs}" IsEnabled="True">
                             <WrapPanel>
-                                <Button x:Name="QQ" Content="QQ群" Width="120" Height="33" Click="QQ_Click" Margin="0,0,20,0"/>
-                                <Button x:Name="Web" Content="官网" VerticalAlignment="Top" Width="120" Height="33" Click="Web_Click"/>
+                                <Button x:Name="QQ" Content="{model:Resource Key=QQGroup}" Width="120" Height="33" Click="QQ_Click" Margin="0,0,20,0"/>
+                                <Button x:Name="Web" Content="{model:Resource Key=WebSite}" VerticalAlignment="Top" Width="120" Height="33" Click="Web_Click"/>
                             </WrapPanel>
                         </muxc:SettingsCard>
 
                         <muxc:SettingsCard HorizontalContentAlignment="Left"
                                 ContentAlignment="Left" >
                             <StackPanel Margin="-12,0,0,0" Orientation="Vertical">
-                                <TextBlock Text="开发人员 ＆ 设计人员 ＆ 外部支援" Margin="11,5,0,5" />
+                                <TextBlock Text="{model:Resource Key=Developers}" Margin="11,5,0,5" />
                                 <WrapPanel>
                                     <muxc:HyperlinkButton Content="ShizukuNanami" FontSize="15" NavigateUri="https://github.com/Shizuku-Nanami" Cursor="Hand"  VerticalAlignment="Top"/>
                                     <muxc:HyperlinkButton Content="39MiRai"  FontSize="15" NavigateUri="https://github.com/39MiRai" Cursor="Hand" VerticalAlignment="Top"/>
                                     <muxc:HyperlinkButton Content="Tz95" FontSize="15" NavigateUri="https://github.com/tz95" Cursor="Hand" VerticalAlignment="Top"/>
                                 </WrapPanel>
                                 <muxc:HyperlinkButton Content="Prismatic Design Studio" FontSize="15" Cursor="Cross" VerticalAlignment="Top"/>
-                                <muxc:HyperlinkButton Content="偷税师柑柑" VerticalAlignment="Top" FontSize="15" VerticalContentAlignment="Top" NavigateUri="https://github.com/YorokobiMaster" Cursor="Hand"/>
+                                <muxc:HyperlinkButton Content="YorokobiMaster" VerticalAlignment="Top" FontSize="15" VerticalContentAlignment="Top" NavigateUri="https://github.com/YorokobiMaster" Cursor="Hand"/>
                             </StackPanel>
                         </muxc:SettingsCard>
 
                         <muxc:SettingsCard HorizontalContentAlignment="Left"
                                 ContentAlignment="Left" >
                             <StackPanel Margin="-12,0,0,0" Orientation="Vertical">
-                                <TextBlock Text="Components and Corresponding Repositories Used in the Software / 软件中使用的组件及对应仓库" Margin="11,5,0,5" />
+                                <TextBlock Text="{model:Resource Key=ComponentsLicense}" Margin="11,5,0,5" />
                                 <ItemsControl x:Name="librariesItemsControl">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
@@ -99,23 +99,23 @@
 
                     </muxc:SettingsExpander.Items>
                 </muxc:SettingsExpander>
-                <muxc:SettingsExpander Header="SYSTools Update" IsExpanded="True">
+                <muxc:SettingsExpander Header="{model:Resource Key=SYSToolsUpdate}" IsExpanded="True">
                     <muxc:SettingsExpander.HeaderIcon>
                         <muxc:FontIcon Glyph="&#xE117;"/>
                     </muxc:SettingsExpander.HeaderIcon>
                     <muxc:SettingsExpander.Items>
-                        
-                        <muxc:SettingsCard Header="工具更新 ＆ 工具包更新" IsEnabled="True">
+
+                        <muxc:SettingsCard Header="{model:Resource Key=SoftwareToolkitUpdate}" IsEnabled="True">
                             <WrapPanel>
-                                <Button x:Name="Update" Content="软件升级" Width="120" Height="33" Click="Update_Click" Margin="0,0,20,0"/>
-                                <Button x:Name="Tool_Update" Content="工具包升级" VerticalAlignment="Top" Width="120" Height="33" Click="Tool_Update_Click"/>
+                                <Button x:Name="Update" Content="{model:Resource Key=SoftwareUpdate}" Width="140" Height="33" Click="Update_Click" Margin="0,0,20,0"/>
+                                <Button x:Name="Tool_Update" Content="{model:Resource Key=ToolkitUpdate}" VerticalAlignment="Top" Width="140" Height="33" Click="Tool_Update_Click"/>
                             </WrapPanel>
                         </muxc:SettingsCard>
 
-                        <muxc:SettingsCard Header="隐私协议 ＆ 用户协议" IsEnabled="True">
+                        <muxc:SettingsCard Header="{model:Resource Key=PolicyAgreement}" IsEnabled="True">
                             <WrapPanel>
-                                <Button x:Name="Privacy" Content="隐私协议" Width="120" Height="33" Click="Privacy_Click" Margin="0,0,20,0"/>
-                                <Button x:Name="Agreement" Content="用户协议" VerticalAlignment="Top" Width="120" Height="33" Click="Agreement_Click" IsEnabled="False"/>
+                                <Button x:Name="Privacy" Content="{model:Resource Key=PrivacyPolicy}" Width="140" Height="33" Click="Privacy_Click" Margin="0,0,20,0"/>
+                                <Button x:Name="Agreement" Content="{model:Resource Key=UserAgreement}" VerticalAlignment="Top" Width="140" Height="33" Click="Agreement_Click" IsEnabled="False"/>
                             </WrapPanel>
                         </muxc:SettingsCard>
                     </muxc:SettingsExpander.Items>
