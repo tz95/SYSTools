@@ -10,6 +10,7 @@ using System.Windows;
 using System.IO.Compression;
 using System.Linq;
 using iNKORE.UI.WPF.Modern.Common.IconKeys;
+using System.Windows.Controls;
 
 namespace SYSTools.Utils
 {
@@ -96,10 +97,35 @@ namespace SYSTools.Utils
                 return;
             }
 
+            // 计算文件大小显示
+            string sizeDisplay;
+            if (updateInfo.FileSize < 1024) // 小于1KB
+            {
+                sizeDisplay = $"{updateInfo.FileSize} B";
+            }
+            else if (updateInfo.FileSize < 1024 * 1024) // 小于1MB
+            {
+                sizeDisplay = $"{updateInfo.FileSize / 1024.0:F2} KB";
+            }
+            else if (updateInfo.FileSize < 1024 * 1024 * 1024) // 小于1GB
+            {
+                sizeDisplay = $"{updateInfo.FileSize / 1024.0 / 1024.0:F2} MB";
+            }
+            else // GB及以上
+            {
+                sizeDisplay = $"{updateInfo.FileSize / 1024.0 / 1024.0 / 1024.0:F2} GB";
+            }
+
             var dialog = new ContentDialog
             {
                 Title = "发现新版本",
-                Content = $"当前有新版本 {updateInfo.Version} 可用\n\n更新说明:\n{updateInfo.ReleaseNotes}\n\n文件大小: {updateInfo.FileSize / 1024 / 1024:F2}MB\n更新类型: {(updateInfo.FileType == UpdateFileType.Executable ? "可执行文件" : "压缩包")}",
+                Content = $"当前有新版本 {updateInfo.Version} 可用\n" +
+                         $"━━━━━━━━━━━━━━━━━━━━━━\n" +
+                         $"更新说明:\n" +
+                         $"{updateInfo.ReleaseNotes}\n" +
+                         $"━━━━━━━━━━━━━━━━━━━━━━\n" +
+                         $"文件大小: {sizeDisplay}\n" +
+                         $"更新类型: {(updateInfo.FileType == UpdateFileType.Executable ? "可执行文件" : "压缩包")}",
                 PrimaryButtonText = "立即更新",
                 CloseButtonText = "取消"
             };
@@ -117,26 +143,78 @@ namespace SYSTools.Utils
                 "SYSTools_Update.exe" : "SYSTools_Update.zip";
             var tempPath = Path.Combine(Path.GetTempPath(), tempFileName);
             
+            var progressGrid = new Grid
+            {
+                RowDefinitions =
+                {
+                    new RowDefinition { Height = GridLength.Auto },
+                    new RowDefinition { Height = GridLength.Auto }
+                }
+            };
+
+            var progressBar = new iNKORE.UI.WPF.Modern.Controls.ProgressBar
+            {
+                IsIndeterminate = false,
+                Minimum = 0,
+                Maximum = 100,
+                Height = 4,
+                Margin = new Thickness(0, 0, 0, 5)
+            };
+
+            var statusText = new TextBlock
+            {
+                Text = "准备下载...",
+                TextWrapping = TextWrapping.Wrap
+            };
+
+            progressGrid.Children.Add(progressBar);
+            progressGrid.Children.Add(statusText);
+            Grid.SetRow(statusText, 1);
+
             var progressDialog = new ContentDialog
             {
                 Title = "正在下载更新",
-                Content = new ProgressBar
-                {
-                    IsIndeterminate = false,
-                    Minimum = 0,
-                    Maximum = 100,
-                    Height = 4
-                }
+                Content = progressGrid
             };
 
             try
             {
                 using (var webClient = new WebClient())
                 {
+                    var lastBytes = 0L;
+                    var lastTime = DateTime.Now;
+                    var updateInterval = TimeSpan.FromSeconds(1);
+
                     webClient.DownloadProgressChanged += (s, e) =>
                     {
-                        var progressBar = (ProgressBar)progressDialog.Content;
                         progressBar.Value = e.ProgressPercentage;
+                        
+                        var now = DateTime.Now;
+                        if (now - lastTime >= updateInterval)
+                        {
+                            var bytesChange = e.BytesReceived - lastBytes;
+                            var speed = bytesChange / (now - lastTime).TotalSeconds;
+                            
+                            string speedText;
+                            if (speed >= 1024 * 1024) // MB/s
+                            {
+                                speedText = $"{speed / 1024 / 1024:F2} MB/s";
+                            }
+                            else if (speed >= 1024) // KB/s
+                            {
+                                speedText = $"{speed / 1024:F2} KB/s";
+                            }
+                            else // B/s
+                            {
+                                speedText = $"{speed:F0} B/s";
+                            }
+
+                            statusText.Text = $"已下载: {FormatFileSize(e.BytesReceived)} / {FormatFileSize(e.TotalBytesToReceive)} ({e.ProgressPercentage}%)\n" +
+                                            $"下载速度: {speedText}";
+
+                            lastBytes = e.BytesReceived;
+                            lastTime = now;
+                        }
                     };
 
                     webClient.DownloadFileCompleted += async (s, e) =>
@@ -190,11 +268,28 @@ namespace SYSTools.Utils
             }
         }
 
+        private static string FormatFileSize(long bytes)
+        {
+            string[] sizes = { "B", "KB", "MB", "GB" };
+            int order = 0;
+            double size = bytes;
+            
+            while (size >= 1024 && order < sizes.Length - 1)
+            {
+                order++;
+                size = size / 1024;
+            }
+
+            return $"{size:F2} {sizes[order]}";
+        }
+
         private static async Task InstallZipUpdate(string zipPath)
         {
             try
             {
                 string appPath = AppDomain.CurrentDomain.BaseDirectory;
+
+                // 更新器路径
                 string updaterPath = Path.Combine(appPath, "SYSTools.Updater.exe");
 
                 // 检查更新器是否存在

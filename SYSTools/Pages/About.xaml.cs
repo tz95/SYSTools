@@ -1,6 +1,6 @@
-﻿using AutoUpdaterDotNET;
-using iNKORE.UI.WPF.Modern.Common.IconKeys;
+﻿using iNKORE.UI.WPF.Modern.Common.IconKeys;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
@@ -8,8 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Collections.Generic;
-using SYSTools.Properties;
 using SYSTools.Utils;
 
 namespace SYSTools.Pages
@@ -63,13 +61,6 @@ namespace SYSTools.Pages
         {
             Process.Start("https://systools.hksstudio.work");
         }
-
-
-        //private void AutoUpdateVersion() {
-        //    AutoUpdater.HttpUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36";
-        //    AutoUpdater.UpdateFormSize = new System.Drawing.Size(800, 600);
-        //    AutoUpdater.Start("https://systools.hksstudio.work/SYSTools_AutoUpdate.xml");
-        //}
 
         private async void Update_Click(object sender, RoutedEventArgs e)
         {

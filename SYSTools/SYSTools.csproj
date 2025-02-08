@@ -302,8 +302,5 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Lang.zh-Hans.resx" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SYSTools.Updater\SYSTools.Updater.csproj" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
