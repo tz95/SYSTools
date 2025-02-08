@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Collections.Generic;
 using SYSTools.Properties;
+using SYSTools.Utils;
 
 namespace SYSTools.Pages
 {
@@ -64,29 +65,31 @@ namespace SYSTools.Pages
         }
 
 
-        private void AutoUpdateVersion() {
-            AutoUpdater.HttpUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36";
-            AutoUpdater.UpdateFormSize = new System.Drawing.Size(800, 600);
-            AutoUpdater.Start("https://systools.hksstudio.work/SYSTools_AutoUpdate.xml");
-        }
+        //private void AutoUpdateVersion() {
+        //    AutoUpdater.HttpUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36";
+        //    AutoUpdater.UpdateFormSize = new System.Drawing.Size(800, 600);
+        //    AutoUpdater.Start("https://systools.hksstudio.work/SYSTools_AutoUpdate.xml");
+        //}
 
         private async void Update_Click(object sender, RoutedEventArgs e)
         {
-            //软件本体检查更新
-            HttpResponseMessage response = await Client.GetAsync("https://systools.hksstudio.work/SYSTools_Update_Version");
-            response.EnsureSuccessStatusCode();
-            string webCode = await response.Content.ReadAsStringAsync();
-
-            Version currentVersion = System.Windows.Application.ResourceAssembly.GetName().Version;
-            Version webVersion = new Version(webCode);
-
-            if (currentVersion >= webVersion)
+            try
             {
-                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("暂未获取更新", "暂无更新🤐",MessageBoxButton.OK,SegoeFluentIcons.UpdateRestore);
+                var currentVersion = System.Windows.Application.ResourceAssembly.GetName().Version;
+                var updateInfo = await CustomUpdater.CheckForUpdate("https://systools.hksstudio.work/SYSTools_Update_Version");
+                
+                if (currentVersion >= updateInfo.Version)
+                {
+                    iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("暂未获取更新", "暂无更新🤐", MessageBoxButton.OK, SegoeFluentIcons.UpdateRestore);
+                }
+                else
+                {
+                    await CustomUpdater.ShowUpdateDialog(updateInfo);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                AutoUpdateVersion();
+                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(ex.Message, "检查更新失败",MessageBoxButton.OK,SegoeFluentIcons.Error);
             }
         }
 

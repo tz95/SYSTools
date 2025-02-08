@@ -33,9 +33,10 @@
 - [x] 全局模糊度
 - [x] 基础功能
 - [x] 传感器查看
+- [x] 设置页面补全
+
 
 >未完成/待定
-- [ ] 设置页面补全
 - [ ] ADB功能(与ADBTools一共开发)
 - [ ] ~~WindowsTime更新时间线~~
 - [ ] 本机更新版本记录
@@ -46,13 +47,13 @@
 
 [iNKORE.UI.WPF.Modern](https://github.com/iNKORE-NET/UI.WPF.Modern)
 
-[Fluent UI System Icons](https://github.com/microsoft/fluentui-system-icons)
+[iNKORE.UI.WPF](https://github.com/iNKORE-NET/UI.WPF)
 
 [AutoUpdater.NET](https://github.com/ravibpatel/AutoUpdater.NET)
 
 <img src="https://visualstudio.microsoft.com/wp-content/uploads/2021/10/Product-Icon.svg" width="60"/>
 
->本项目使用 Visual Studio 2022
+>本项目使用 Visual Studio 2022 + .NET Framework 4.7.2
 
 ## 交流
 
