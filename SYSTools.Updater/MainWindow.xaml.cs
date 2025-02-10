@@ -166,53 +166,66 @@ namespace SYSTools.Updater
 
         private void WaitForMainProcess()
         {
-            UpdateStatus("等待主程序退出...");
-            System.Threading.Thread.Sleep(1000);
-            foreach (var process in Process.GetProcessesByName("SYSTools"))
+            // 判断是否为工具包更新，如果是则不等待主程序退出
+            if (!isToolkitUpdate)
             {
-                process.WaitForExit();
+                UpdateStatus("等待主程序退出...");
+                System.Threading.Thread.Sleep(1000);
+                foreach (var process in Process.GetProcessesByName("SYSTools"))
+                {
+                    process.WaitForExit();
+                }
             }
         }
 
         private async Task CreateBackup()
         {
-            UpdateStatus("正在创建备份...");
-            string timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
-            backupPath = Path.Combine(targetPath, $"backup_{timestamp}");
-            LogMessage($"创建备份: {backupPath}");
-
-            await Task.Run(() =>
+            UpdateStatus("检测到工具包更新...");
+            if (!isToolkitUpdate)
             {
-                if (!Directory.Exists(backupPath))
-                    Directory.CreateDirectory(backupPath);
+                UpdateStatus("正在创建备份...");
+                string timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
+                backupPath = Path.Combine(targetPath, $"backup_{timestamp}");
+                LogMessage($"创建备份: {backupPath}");
 
-                int totalFiles = Directory.GetFiles(targetPath, "*.*", SearchOption.AllDirectories).Length;
-                int processedFiles = 0;
-
-                foreach (string file in Directory.GetFiles(targetPath, "*.*", SearchOption.AllDirectories))
+                await Task.Run(() =>
                 {
-                    try
+                    if (!Directory.Exists(backupPath))
+                        Directory.CreateDirectory(backupPath);
+
+                    int totalFiles = Directory.GetFiles(targetPath, "*.*", SearchOption.AllDirectories).Length;
+                    int processedFiles = 0;
+
+                    foreach (string file in Directory.GetFiles(targetPath, "*.*", SearchOption.AllDirectories))
                     {
-                        if (!file.Contains("backup_"))
+                        try
                         {
-                            string relativePath = GetRelativePath(file, targetPath);
-                            string backupFile = Path.Combine(backupPath, relativePath);
-                            string backupDir = Path.GetDirectoryName(backupFile);
+                            if (!file.Contains("backup_"))
+                            {
+                                string relativePath = GetRelativePath(file, targetPath);
+                                string backupFile = Path.Combine(backupPath, relativePath);
+                                string backupDir = Path.GetDirectoryName(backupFile);
 
-                            if (!Directory.Exists(backupDir))
-                                Directory.CreateDirectory(backupDir);
+                                if (!Directory.Exists(backupDir))
+                                    Directory.CreateDirectory(backupDir);
 
-                            File.Copy(file, backupFile, true);
-                            processedFiles++;
-                            UpdateProgressValue((double)processedFiles / totalFiles * 100);
+                                File.Copy(file, backupFile, true);
+                                processedFiles++;
+                                UpdateProgressValue((double)processedFiles / totalFiles * 100);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            LogMessage($"备份文件失败: {file}, 错误: {ex.Message}");
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        LogMessage($"备份文件失败: {file}, 错误: {ex.Message}");
-                    }
-                }
-            });
+                });
+            }
+            else
+            {
+                LogMessage("工具包更新，跳过备份");
+                return;
+            }
         }
 
         private void ForceDeleteFile(string path)
@@ -340,6 +353,7 @@ namespace SYSTools.Updater
                 File.Delete(zipPath);
                 LogMessage("已删除临时文件");
 
+                // 非工具包更新时启动程序
                 if (!isToolkitUpdate)
                 {
                     string mainExe = Path.Combine(targetPath, "SYSTools.exe");
@@ -399,7 +413,6 @@ namespace SYSTools.Updater
                 {
                     // 工具包更新完成后的处理
                     UpdateStatus("工具包更新完成，正在清理历史备份...");
-                    CleanHistoryBackups();
                     LogMessage("工具包更新成功");
                     await Task.Delay(2000);
                 }

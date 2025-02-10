@@ -11,6 +11,7 @@ using System.IO.Compression;
 using System.Linq;
 using iNKORE.UI.WPF.Modern.Common.IconKeys;
 using System.Windows.Controls;
+using SYSTools.Pages;
 
 namespace SYSTools.Utils
 {
@@ -139,10 +140,20 @@ namespace SYSTools.Utils
 
         private static async Task DownloadAndInstall(UpdateInfo updateInfo)
         {
-            string tempFileName = updateInfo.FileType == UpdateFileType.Executable ? 
-                "SYSTools_Update.exe" : "SYSTools_Update.zip";
+            // 根据更新类型和文件类型确定临时文件名
+            string tempFileName;
+            if (updateInfo.DownloadUrl.Contains("ToolsPack.zip"))
+            {
+                tempFileName = "ToolsPack.zip";
+            }
+            else
+            {
+                tempFileName = updateInfo.FileType == UpdateFileType.Executable ? 
+                    "SYSTools_Update.exe" : "SYSTools_Update.zip";
+            }
+
             var tempPath = Path.Combine(Path.GetTempPath(), tempFileName);
-            
+
             var progressGrid = new Grid
             {
                 RowDefinitions =
@@ -292,7 +303,7 @@ namespace SYSTools.Utils
                 string tempUpdaterPath = Path.Combine(Path.GetTempPath(), "SYSTools.Updater.exe");
 
                 // 如果是工具包更新，确保目标目录存在
-                if (zipPath.Contains("Tools_Update"))
+                if (zipPath.Contains("ToolsPack.zip"))
                 {
                     string softwarePackagePath = Path.Combine(appPath, "Software Package");
                     if (!Directory.Exists(softwarePackagePath))
@@ -320,7 +331,7 @@ namespace SYSTools.Utils
                 // 清理和准备参数
                 string cleanZipPath = zipPath.Trim('"').TrimEnd('\\');
                 string cleanAppPath = appPath.Trim('"').TrimEnd('\\');
-                string updateType = cleanZipPath.Contains("Tools_Update") ? "toolkit" : "software";
+                string updateType = cleanZipPath.Contains("ToolsPack.zip") ? "toolkit" : "software";
 
                 // 构建参数数组并连接
                 string[] arguments = new[]
@@ -338,7 +349,12 @@ namespace SYSTools.Utils
                 };
 
                 Process.Start(startInfo);
-                Application.Current.Shutdown();
+
+                // 如果是软件更新，关闭当前进程
+                if (updateType == "software") { 
+                    Application.Current.Shutdown();
+                }
+                
             }
             catch (Exception ex)
             {
