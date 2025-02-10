@@ -19,6 +19,8 @@ namespace SYSTools.Updater
         private string targetPath;
         private string backupPath;
         private bool _isDarkMode;
+        private string _updateTitle;
+        private bool isToolkitUpdate;
 
         public bool IsDarkMode
         {
@@ -33,11 +35,25 @@ namespace SYSTools.Updater
             }
         }
 
+        public string UpdateTitle
+        {
+            get => _updateTitle;
+            set
+            {
+                if (_updateTitle != value)
+                {
+                    _updateTitle = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UpdateTitle)));
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
             UpdateProgress.IsIndeterminate = true;
             
             // 检测系统主题
@@ -99,15 +115,28 @@ namespace SYSTools.Updater
             try
             {
                 var args = Environment.GetCommandLineArgs();
-                if (args.Length < 3)
+                if (args.Length < 4)
                 {
-                    ShowError("参数不足");
+                    ShowError($"参数不足: 需要4个参数，当前只有{args.Length}个参数");
+                    LogMessage("参数列表:");
+                    for (int i = 0; i < args.Length; i++)
+                    {
+                        LogMessage($"参数[{i}]: {args[i]}");
+                    }
                     return;
                 }
 
                 zipPath = CleanPath(args[1].Trim('"'));
                 targetPath = CleanPath(args[2].Trim('"'));
+                isToolkitUpdate = args[3].Trim('"').Equals("toolkit", StringComparison.OrdinalIgnoreCase);
 
+                // 在UI线程上更新标题
+                Dispatcher.Invoke(() => 
+                {
+                    UpdateTitle = isToolkitUpdate ? "正在更新工具包..." : "正在更新 SYSTools...";
+                });
+
+                LogMessage($"更新类型: {(isToolkitUpdate ? "工具包更新" : "软件更新")}");
                 LogMessage($"更新包路径: {zipPath}");
                 LogMessage($"目标路径: {targetPath}");
 
@@ -186,6 +215,43 @@ namespace SYSTools.Updater
             });
         }
 
+        private void ForceDeleteFile(string path)
+        {
+            try
+            {
+                // 尝试解除文件占用并删除
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+
+                var processes = Process.GetProcesses();
+                foreach (var process in processes)
+                {
+                    try
+                    {
+                        foreach (var module in process.Modules.Cast<ProcessModule>())
+                        {
+                            if (module.FileName.Equals(path, StringComparison.OrdinalIgnoreCase))
+                            {
+                                process.Kill();
+                                process.WaitForExit(5000);
+                                break;
+                            }
+                        }
+                    }
+                    catch { }
+                }
+
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogMessage($"强制删除文件失败: {ex.Message}");
+            }
+        }
+
         private async Task ExtractUpdate()
         {
             UpdateStatus("正在更新文件...");
@@ -212,15 +278,20 @@ namespace SYSTools.Updater
                                 if (!Directory.Exists(destinationDir))
                                     Directory.CreateDirectory(destinationDir);
 
+                                // 尝试解除文件占用
+                                if (File.Exists(destinationPath))
+                                {
+                                    ForceDeleteFile(destinationPath);
+                                }
+
                                 entry.ExtractToFile(destinationPath, true);
                                 
                                 processedEntries++;
                                 processedSize += entry.Length;
                                 
-                                // 同时考虑文件数量和大小的进度
                                 double filesProgress = (double)processedEntries / totalEntries;
                                 double sizeProgress = (double)processedSize / totalSize;
-                                double totalProgress = (filesProgress + sizeProgress) * 50; // 平均两种进度
+                                double totalProgress = (filesProgress + sizeProgress) * 50;
 
                                 UpdateProgressValue(totalProgress);
                                 LogMessage($"已更新: {entry.FullName} ({processedEntries}/{totalEntries})");
@@ -232,10 +303,33 @@ namespace SYSTools.Updater
                         }
                     }
                     
-                    // 确保进度条到达100%
                     UpdateProgressValue(100);
                 }
             });
+        }
+
+        private void CleanHistoryBackups()
+        {
+            try
+            {
+                var backupFolders = Directory.GetDirectories(targetPath, "backup_*");
+                foreach (var folder in backupFolders)
+                {
+                    try
+                    {
+                        Directory.Delete(folder, true);
+                        LogMessage($"清理历史备份: {Path.GetFileName(folder)}");
+                    }
+                    catch (Exception ex)
+                    {
+                        LogMessage($"清理历史备份失败: {Path.GetFileName(folder)}, 错误: {ex.Message}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogMessage($"查找历史备份失败: {ex.Message}");
+            }
         }
 
         private async Task CleanupAndStart()
@@ -246,27 +340,72 @@ namespace SYSTools.Updater
                 File.Delete(zipPath);
                 LogMessage("已删除临时文件");
 
-                string mainExe = Path.Combine(targetPath, "SYSTools.exe");
-                UpdateStatus("正在启动程序...");
-                
-                var mainProcess = Process.Start(mainExe);
-                await Task.Delay(3000);
-
-                if (!mainProcess.HasExited)
+                if (!isToolkitUpdate)
                 {
-                    UpdateStatus("更新完成，正在清理备份...");
-                    if (Directory.Exists(backupPath))
+                    string mainExe = Path.Combine(targetPath, "SYSTools.exe");
+                    UpdateStatus("正在启动程序...");
+                    
+                    try
                     {
-                        Directory.Delete(backupPath, true);
-                        LogMessage("备份文件清理完成");
+                        var mainProcess = Process.Start(new ProcessStartInfo
+                        {
+                            FileName = mainExe,
+                            UseShellExecute = true
+                        });
+
+                        if (mainProcess != null)
+                        {
+                            await Task.Delay(3000);
+                            if (!mainProcess.HasExited)
+                            {
+                                UpdateStatus("更新完成，正在清理备份...");
+                                try
+                                {
+                                    // 先清理当前备份
+                                    if (Directory.Exists(backupPath))
+                                    {
+                                        Directory.Delete(backupPath, true);
+                                        LogMessage("当前备份文件清理完成");
+                                    }
+                                    
+                                    // 清理历史备份
+                                    UpdateStatus("正在清理历史备份...");
+                                    CleanHistoryBackups();
+                                }
+                                catch (Exception ex)
+                                {
+                                    LogMessage($"清理备份失败: {ex.Message}");
+                                }
+                            }
+                            else
+                            {
+                                ShowError("程序启动失败，保留备份文件");
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            ShowError("程序启动失败，保留备份文件");
+                            return;
+                        }
                     }
-                    await Task.Delay(1000);
-                    Close();
+                    catch (Exception ex)
+                    {
+                        ShowError($"启动程序失败: {ex.Message}");
+                        return;
+                    }
                 }
                 else
                 {
-                    ShowError("程序启动失败，保留备份文件");
+                    // 工具包更新完成后的处理
+                    UpdateStatus("工具包更新完成，正在清理历史备份...");
+                    CleanHistoryBackups();
+                    LogMessage("工具包更新成功");
+                    await Task.Delay(2000);
                 }
+
+                await Task.Delay(1000);
+                Application.Current.Shutdown();
             }
             catch (Exception ex)
             {

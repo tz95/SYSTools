@@ -108,6 +108,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if not exist "$(SolutionDir)SYSTools\$(OutDir)" mkdir "$(SolutionDir)SYSTools\$(OutDir)"
+
 xcopy /Y "$(TargetPath)" "$(SolutionDir)SYSTools\$(OutDir)"
 </PostBuildEvent>
   </PropertyGroup>

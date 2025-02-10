@@ -287,13 +287,26 @@ namespace SYSTools.Utils
         {
             try
             {
-                string appPath = AppDomain.CurrentDomain.BaseDirectory;
-
-                // 更新器路径
+                string appPath = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\');
                 string updaterPath = Path.Combine(appPath, "SYSTools.Updater.exe");
+                string tempUpdaterPath = Path.Combine(Path.GetTempPath(), "SYSTools.Updater.exe");
 
-                // 检查更新器是否存在
-                if (!File.Exists(updaterPath))
+                // 如果是工具包更新，确保目标目录存在
+                if (zipPath.Contains("Tools_Update"))
+                {
+                    string softwarePackagePath = Path.Combine(appPath, "Software Package");
+                    if (!Directory.Exists(softwarePackagePath))
+                    {
+                        Directory.CreateDirectory(softwarePackagePath);
+                    }
+                }
+
+                // 复制更新器到临时目录
+                if (File.Exists(updaterPath))
+                {
+                    File.Copy(updaterPath, tempUpdaterPath, true);
+                }
+                else
                 {
                     iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
                         "找不到更新器程序", 
@@ -304,11 +317,23 @@ namespace SYSTools.Utils
                     return;
                 }
 
-                // 启动更新器
+                // 清理和准备参数
+                string cleanZipPath = zipPath.Trim('"').TrimEnd('\\');
+                string cleanAppPath = appPath.Trim('"').TrimEnd('\\');
+                string updateType = cleanZipPath.Contains("Tools_Update") ? "toolkit" : "software";
+
+                // 构建参数数组并连接
+                string[] arguments = new[]
+                {
+                    $"\"{cleanZipPath}\"",
+                    $"\"{cleanAppPath}\"",
+                    updateType
+                };
+
                 ProcessStartInfo startInfo = new ProcessStartInfo
                 {
-                    FileName = updaterPath,
-                    Arguments = $"\"{zipPath}\" \"{appPath}\"",
+                    FileName = tempUpdaterPath,
+                    Arguments = string.Join(" ", arguments),
                     UseShellExecute = true
                 };
 

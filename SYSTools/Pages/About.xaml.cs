@@ -26,7 +26,6 @@ namespace SYSTools.Pages
             
             var libraries = new List<Library>
             {
-                new Library { Name = "AutoUpdater.NET (MIT License)", Uri = "https://github.com/ravibpatel/AutoUpdater.NET" },
                 new Library { Name = "iNKORE.UI.WPF (LGPL-2.1 license)", Uri = "https://github.com/iNKORE-NET/UI.WPF" },
                 new Library { Name = "iNKORE.UI.WPF.Modern (LGPL-2.1 license)", Uri = "https://github.com/iNKORE-Public/UI.WPF.Modern" },
                 new Library { Name = "LibreHardwareMonitorLib", Uri = "https://github.com/LibreHardwareMonitor/LibreHardwareMonitor" },
@@ -84,24 +83,56 @@ namespace SYSTools.Pages
             }
         }
 
+        private Version GetToolkitVersion()
+        {
+            try
+            {
+                string toolkitPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Software Package", "Version");
+                if (File.Exists(toolkitPath))
+                {
+                    string versionText = File.ReadAllText(toolkitPath);
+                    if (Version.TryParse(versionText.Trim(), out Version version))
+                    {
+                        return version;
+                    }
+                }
+                return new Version(0, 0, 0, 0); // 如果文件不存在或解析失败，返回0.0.0.0
+            }
+            catch
+            {
+                return new Version(0, 0, 0, 0);
+            }
+        }
+
         private async void Tool_Update_Click(object sender, RoutedEventArgs e)
         {
-            //工具包检查更新
-            string ToolsExecutablePath = Path.Combine(Directory.GetCurrentDirectory(), "SYSTools_Update(Tools).exe");
-
-            FileVersionInfo ToolsFileVersionInfo = FileVersionInfo.GetVersionInfo(ToolsExecutablePath);
-
-            HttpResponseMessage response = await Client.GetAsync("https://systools.hksstudio.work/Tools_Update/Tools_Update_Version");
-            response.EnsureSuccessStatusCode();
-            string webCode = await response.Content.ReadAsStringAsync();
-
-            if (ToolsFileVersionInfo.FileVersion == webCode)
+            try
             {
-                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("暂未获取更新", "暂无更新🤐", MessageBoxButton.OK, SegoeFluentIcons.UpdateRestore);
+                var currentVersion = GetToolkitVersion();
+                var updateInfo = await CustomUpdater.CheckForUpdate("https://systools.hksstudio.work/Tools_Update/Tools_Update_Version");
+
+                if (currentVersion >= updateInfo.Version)
+                {
+                    iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
+                        "暂未获取更新", 
+                        "暂无更新🤐", 
+                        MessageBoxButton.OK, 
+                        SegoeFluentIcons.UpdateRestore
+                    );
+                }
+                else
+                {
+                    await CustomUpdater.ShowUpdateDialog(updateInfo);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Process.Start(ToolsExecutablePath);
+                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
+                    ex.Message, 
+                    "检查更新失败", 
+                    MessageBoxButton.OK, 
+                    SegoeFluentIcons.Error
+                );
             }
         }
 

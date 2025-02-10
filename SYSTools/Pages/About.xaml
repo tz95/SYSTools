@@ -23,7 +23,7 @@
                     <muxc:SettingsExpander.HeaderIcon>
                         <Image Source="/SYSTools_LOGO_256.ico" RenderOptions.BitmapScalingMode="HighQuality"/>
                     </muxc:SettingsExpander.HeaderIcon>
-                    <TextBlock Foreground="{DynamicResource {x:Static muxc:ThemeKeys.TextFillColorSecondaryBrushKey}}" Text="0.7.3"/>
+                    <TextBlock Foreground="{DynamicResource {x:Static muxc:ThemeKeys.TextFillColorSecondaryBrushKey}}" Text="0.7.5"/>
                     <muxc:SettingsExpander.Items>
 
                         <muxc:SettingsCard ContentAlignment="Vertical" VerticalAlignment="Center">
