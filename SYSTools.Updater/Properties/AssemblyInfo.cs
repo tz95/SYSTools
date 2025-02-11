@@ -8,12 +8,12 @@ using System.Windows;
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("SYSTools.Updater")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("SYSTools更新器")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Hikarisame Technology Studio")]
 [assembly: AssemblyProduct("SYSTools.Updater")]
 [assembly: AssemblyCopyright("Copyright ©  2025")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("Hikarisame Technology Studio")]
 [assembly: AssemblyCulture("")]
 
 // 将 ComVisible 设置为 false 会使此程序集中的类型
