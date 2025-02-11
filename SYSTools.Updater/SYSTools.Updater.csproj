@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utils\FileUtils.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -72,6 +73,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Services\ILogger.cs" />
+    <Compile Include="Services\ThemeService.cs" />
+    <Compile Include="Services\UILogger.cs" />
+    <Compile Include="Services\UpdateService.cs" />
     <Compile Include="ThemeConverter.cs" />
   </ItemGroup>
   <ItemGroup>
