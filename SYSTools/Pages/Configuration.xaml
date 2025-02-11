@@ -17,8 +17,8 @@
             <ikw:SimpleStackPanel Spacing="10">
 
                 <muxc:SettingsExpander x:Name="BackImageSettingsExpander"
-                                Description="预览/设置 图片＆模糊度＆透明度"
-                                Header="背景图片设置">
+                                Description="{model:Resource Key=BackImageSetting_Description}"
+                                Header="{model:Resource Key=BackImageSetting_Header}">
                     <muxc:ToggleSwitch x:Name="BackgroundToggle" 
                                        IsOn="{Binding Source={x:Static model:AppSettings.Instance}, Path=IsBackgroundEnabled, Mode=TwoWay}"
                                        Toggled="BackgroundToggle_Toggled"/>
@@ -28,7 +28,7 @@
 
                     <muxc:SettingsExpander.Items>
 
-                        <muxc:SettingsCard Header="背景图片预览">
+                        <muxc:SettingsCard Header="{model:Resource Key=BackImagePreview}">
 
                             <Image x:Name="BackgroundPreview" Height="150" HorizontalAlignment="Left" Margin="15,0,0,0"
                                    Opacity="{Binding Source={x:Static model:AppSettings.Instance}, Path=ActualOpacity, Mode=OneWay}"

@@ -139,4 +139,13 @@
   <data name="UserAgreement" xml:space="preserve">
     <value></value>
   </data>
+  <data name="BackImageSetting_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="BackImageSetting_Header" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="BackImagePreview" xml:space="preserve">
+    <value></value>
+  </data>
 </root>

@@ -159,4 +159,13 @@
   <data name="UserAgreement" xml:space="preserve">
     <value>User Agreement</value>
   </data>
+  <data name="BackImageSetting_Description" xml:space="preserve">
+    <value>Preview/Settings Picture &amp; Blur &amp; Transparency</value>
+  </data>
+  <data name="BackImageSetting_Header" xml:space="preserve">
+    <value>Background Image Settings</value>
+  </data>
+  <data name="BackImagePreview" xml:space="preserve">
+    <value>Background Image Preview</value>
+  </data>
 </root>

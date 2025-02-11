@@ -63,6 +63,33 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
+        internal static string BackImagePreview {
+            get {
+                return ResourceManager.GetString("BackImagePreview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string BackImageSetting_Description {
+            get {
+                return ResourceManager.GetString("BackImageSetting_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string BackImageSetting_Header {
+            get {
+                return ResourceManager.GetString("BackImageSetting_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
         internal static string ComponentsLicense {
             get {
                 return ResourceManager.GetString("ComponentsLicense", resourceCulture);

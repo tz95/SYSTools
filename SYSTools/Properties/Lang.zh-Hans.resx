@@ -159,4 +159,13 @@
   <data name="UserAgreement" xml:space="preserve">
     <value>用户协议</value>
   </data>
+  <data name="BackImageSetting_Description" xml:space="preserve">
+    <value>预览/设置 图片＆模糊度＆透明度</value>
+  </data>
+  <data name="BackImageSetting_Header" xml:space="preserve">
+    <value>背景图片设置</value>
+  </data>
+  <data name="BackImagePreview" xml:space="preserve">
+    <value>背景图片预览</value>
+  </data>
 </root>
