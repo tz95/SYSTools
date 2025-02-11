@@ -10,31 +10,35 @@ namespace SYSTools.Updater.Utils
 {
     public static class FileUtils
     {
+        private static readonly string[] ExcludedFolders = new[] { "Software Package", "backup_" };
+
         public static void CreateBackup(string sourcePath, string backupPath, ILogger logger)
         {
             if (!Directory.Exists(backupPath))
                 Directory.CreateDirectory(backupPath);
 
-            int totalFiles = Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories).Length;
+            var files = Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories)
+                               .Where(file => !ExcludedFolders.Any(excluded => 
+                                   file.Contains(Path.DirectorySeparatorChar + excluded) || 
+                                   file.StartsWith(excluded)));
+
+            int totalFiles = files.Count();
             int processedFiles = 0;
 
-            foreach (string file in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
+            foreach (string file in files)
             {
                 try
                 {
-                    if (!file.Contains("backup_"))
-                    {
-                        string relativePath = GetRelativePath(file, sourcePath);
-                        string backupFile = Path.Combine(backupPath, relativePath);
-                        string backupDir = Path.GetDirectoryName(backupFile);
+                    string relativePath = GetRelativePath(file, sourcePath);
+                    string backupFile = Path.Combine(backupPath, relativePath);
+                    string backupDir = Path.GetDirectoryName(backupFile);
 
-                        if (!Directory.Exists(backupDir))
-                            Directory.CreateDirectory(backupDir);
+                    if (!Directory.Exists(backupDir))
+                        Directory.CreateDirectory(backupDir);
 
-                        File.Copy(file, backupFile, true);
-                        processedFiles++;
-                        logger.UpdateProgress((double)processedFiles / totalFiles * 100);
-                    }
+                    File.Copy(file, backupFile, true);
+                    processedFiles++;
+                    logger.UpdateProgress((double)processedFiles / totalFiles * 100);
                 }
                 catch (Exception ex)
                 {
