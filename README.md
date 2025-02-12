@@ -1,15 +1,18 @@
 ## SYSTools 基于C#重构的系统工具箱
 
 ![SYSTools](https://socialify.git.ci/Hikarisame-Technology/SYSTools/image?description=1&font=Jost&forks=1&issues=1&language=1&logo=https%3A%2F%2Fone.hksstudio.work%2Fd%2FOther%2FOther_Resource%2FSYSTools_LOGO.svg&name=1&owner=1&pattern=Floating%20Cogs&pulls=1&stargazers=1&theme=Dark)
-  
-<a href="https://learn.microsoft.com/en-us/dotnet/csharp">
-  <img src="https://img.shields.io/badge/Language-C%23-512BD4?style=for-the-badge&logo=dotnet">
-</a>
 
-<a href="https://docs.inkore.net/ui-wpf-modern/introduction">
-  <img src="https://github.com/iNKORE-NET/UI.WPF.Modern/blob/main/assets/images/badges/UI.WPF.Modern_Main_Button.svg">
-</a>
+<div align="center">
+
+[![](https://img.shields.io/badge/Language-C%23-512BD4?style=for-the-badge&logo=dotnet)](https://learn.microsoft.com/en-us/dotnet/csharp)
+[![](https://github.com/iNKORE-NET/UI.WPF.Modern/blob/main/assets/images/badges/UI.WPF.Modern_Main_Button.svg)](https://docs.inkore.net/ui-wpf-modern/introduction)
   
+[![Build .NET Framework 4.7.2](https://github.com/Hikarisame-Technology/SYSTools/actions/workflows/main.yml/badge.svg?branch=C%23)](https://github.com/Hikarisame-Technology/SYSTools/actions/workflows/main.yml)
+[![CodeQL](https://github.com/Hikarisame-Technology/SYSTools/actions/workflows/github-code-scanning/codeql/badge.svg?branch=C%23)](https://github.com/Hikarisame-Technology/SYSTools/actions/workflows/github-code-scanning/codeql)
+
+</div>  
+
+
 ### 截图
   
 ~~软件还没写完~~ 暂无
@@ -39,8 +42,10 @@
 >未完成/待定
 - [ ] ADB功能(与ADBTools一共开发)
 - [ ] ~~WindowsTime更新时间线~~
+- [ ] WindowsTools小工具
 - [ ] 本机更新版本记录
 - [ ] 自定义工具添加
+- [ ] 中英双语
 - [ ] 等待补充
 
 ### 特别鸣谢 
@@ -61,4 +66,4 @@
 
 ## 开源许可
 
-这种屎山代码还是先不开源的好（
+#### Mozilla Public License Version 2.0
