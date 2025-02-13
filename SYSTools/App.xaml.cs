@@ -17,10 +17,6 @@ namespace SYSTools
             
             TaskbarIcon = (TrayIcon)FindResource("Taskbar");
             TaskbarIcon.ToolTipText = "SYSTools Ver" + (Application.ResourceAssembly.GetName().Version.ToString());
-            
-            // 设置默认语言
-            string languageCode = AppSettings.Instance.Language ?? "zh-CN";
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(languageCode);
         }
     }
 }

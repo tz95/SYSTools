@@ -188,7 +188,7 @@ namespace SYSTools.Model
                         {
                             _themeMode = themeMode;
                         }
-                        _language = settings.Element("Language")?.Value ?? "zh-CN";
+                        _language = settings.Element("Language")?.Value;
                     }
                 }
 
@@ -206,10 +206,9 @@ namespace SYSTools.Model
                 // 如果加载失败，使用默认值
                 _backgroundImagePath = "pack://application:,,,/Resources/NoBackImage.png";
                 _backgroundImageBlurRadius = 0;
-                _backgroundImageOpacity = 100.0;
+                _backgroundImageOpacity = 100;
                 _isBackgroundEnabled = false;
                 _themeMode = 0; // 默认跟随系统 无需应用ApplyTheme变更程序主题
-                _language = "zh-CN";
             }
         }
 

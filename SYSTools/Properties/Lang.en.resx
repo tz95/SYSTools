@@ -168,4 +168,43 @@
   <data name="BackImagePreview" xml:space="preserve">
     <value>Background Image Preview</value>
   </data>
+  <data name="SelectBackgroundImage" xml:space="preserve">
+    <value>Select Background Image</value>
+  </data>
+  <data name="ClearBackgroundImage" xml:space="preserve">
+    <value>Clear Background Image</value>
+  </data>
+  <data name="BackgroundImageBlurRadius_Description" xml:space="preserve">
+    <value>Too much blurring effect tends to cause lag</value>
+  </data>
+  <data name="BackgroundImageBlurRadius_Header" xml:space="preserve">
+    <value>Image Blur Effect (Experimental)</value>
+  </data>
+  <data name="BackgroundImageOpacity_Header" xml:space="preserve">
+    <value>Image Opacity (Experimental)</value>
+  </data>
+  <data name="ProgramThemeSetting_Header" xml:space="preserve">
+    <value>Program Theme Setting</value>
+  </data>
+  <data name="ProgramThemeSetting_Description" xml:space="preserve">
+    <value>Setting the program's theme style to dark/light mode</value>
+  </data>
+  <data name="ThemeModeSetting_Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="ThemeModeSetting_Auto" xml:space="preserve">
+    <value>Auto</value>
+  </data>
+  <data name="ThemeModeSetting_Dark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="LanguageSetting_Header" xml:space="preserve">
+    <value>Language Setting</value>
+  </data>
+  <data name="LanguageSetting_Description" xml:space="preserve">
+    <value>Setting the language of the program display</value>
+  </data>
+  <data name="OpenWebsite" xml:space="preserve">
+    <value>Open WebSite</value>
+  </data>
 </root>

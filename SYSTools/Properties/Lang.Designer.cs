@@ -63,6 +63,33 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
+        internal static string BackgroundImageBlurRadius_Description {
+            get {
+                return ResourceManager.GetString("BackgroundImageBlurRadius_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string BackgroundImageBlurRadius_Header {
+            get {
+                return ResourceManager.GetString("BackgroundImageBlurRadius_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string BackgroundImageOpacity_Header {
+            get {
+                return ResourceManager.GetString("BackgroundImageOpacity_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
         internal static string BackImagePreview {
             get {
                 return ResourceManager.GetString("BackImagePreview", resourceCulture);
@@ -90,6 +117,15 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
+        internal static string ClearBackgroundImage {
+            get {
+                return ResourceManager.GetString("ClearBackgroundImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
         internal static string ComponentsLicense {
             get {
                 return ResourceManager.GetString("ComponentsLicense", resourceCulture);
@@ -97,7 +133,7 @@ namespace SYSTools.Properties {
         }
         
         /// <summary>
-        ///   查找类似 联系我们 的本地化字符串。
+        ///   查找类似  的本地化字符串。
         /// </summary>
         internal static string ContactUs {
             get {
@@ -135,6 +171,33 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
+        internal static string LanguageSetting_Description {
+            get {
+                return ResourceManager.GetString("LanguageSetting_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string LanguageSetting_Header {
+            get {
+                return ResourceManager.GetString("LanguageSetting_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string OpenWebsite {
+            get {
+                return ResourceManager.GetString("OpenWebsite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
         internal static string PolicyAgreement {
             get {
                 return ResourceManager.GetString("PolicyAgreement", resourceCulture);
@@ -153,9 +216,36 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
+        internal static string ProgramThemeSetting_Description {
+            get {
+                return ResourceManager.GetString("ProgramThemeSetting_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string ProgramThemeSetting_Header {
+            get {
+                return ResourceManager.GetString("ProgramThemeSetting_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
         internal static string QQGroup {
             get {
                 return ResourceManager.GetString("QQGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string SelectBackgroundImage {
+            get {
+                return ResourceManager.GetString("SelectBackgroundImage", resourceCulture);
             }
         }
         
@@ -183,6 +273,33 @@ namespace SYSTools.Properties {
         internal static string SYSToolsUpdate {
             get {
                 return ResourceManager.GetString("SYSToolsUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string ThemeModeSetting_Auto {
+            get {
+                return ResourceManager.GetString("ThemeModeSetting_Auto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string ThemeModeSetting_Dark {
+            get {
+                return ResourceManager.GetString("ThemeModeSetting_Dark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string ThemeModeSetting_Light {
+            get {
+                return ResourceManager.GetString("ThemeModeSetting_Light", resourceCulture);
             }
         }
         

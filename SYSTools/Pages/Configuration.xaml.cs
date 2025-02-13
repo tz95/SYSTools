@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using SYSTools.Model;
 using System.Linq;
+using System.Windows.Media;
 
 namespace SYSTools.Pages
 {
@@ -23,8 +24,25 @@ namespace SYSTools.Pages
 
         private void InitializeLanguageSelection()
         {
+            // 检查是否是第一次启动
+            if (string.IsNullOrEmpty(AppSettings.Instance.Language))
+            {
+                // 获取系统语言
+                string systemLanguage = System.Globalization.CultureInfo.CurrentUICulture.Name.ToLower();
+                
+                // 设置默认语言，如果系统是中文则使用中文，否则使用英文
+                string defaultLanguage = systemLanguage.StartsWith("zh-") ? "zh-CN" : "en";
+                AppSettings.Instance.Language = defaultLanguage;
+                
+                // 设置默认背景不透明度为100
+                AppSettings.Instance.BackgroundImageOpacity = 100;
+                
+                // 应用语言设置
+                ApplyLanguageChange(defaultLanguage);
+            }
+
             // 根据当前语言设置选中对应的选项
-            string currentLanguage = AppSettings.Instance.Language ?? "zh-CN";
+            string currentLanguage = AppSettings.Instance.Language;
             foreach (ComboBoxItem item in LanguageComboBox.Items)
             {
                 if (item.Tag.ToString() == currentLanguage)
@@ -41,20 +59,25 @@ namespace SYSTools.Pages
             {
                 string languageCode = selectedItem.Tag.ToString();
                 AppSettings.Instance.Language = languageCode;
-                
-                // 切换语言资源
-                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(languageCode);
-                
-                // 通知所有使用ResourceExtension的绑定更新
-                Model.ResourceExtension.NotifyLanguageChanged();
-                
-                // 刷新所有窗口以应用新的语言
-                foreach (Window window in Application.Current.Windows)
+                ApplyLanguageChange(languageCode);
+            }
+        }
+
+        // 提取公共的语言切换逻辑到单独的方法
+        private void ApplyLanguageChange(string languageCode)
+        {
+            // 切换语言资源
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(languageCode);
+            
+            // 通知所有使用ResourceExtension的绑定更新
+            Model.ResourceExtension.NotifyLanguageChanged();
+            
+            // 刷新所有窗口以应用新的语言
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.Content is FrameworkElement content)
                 {
-                    if (window.Content is FrameworkElement content)
-                    {
-                        content.Language = System.Windows.Markup.XmlLanguage.GetLanguage(languageCode);
-                    }
+                    content.Language = System.Windows.Markup.XmlLanguage.GetLanguage(languageCode);
                 }
             }
         }
@@ -117,5 +140,6 @@ namespace SYSTools.Pages
         {
             BackImageSettingsExpander.IsExpanded = BackgroundToggle.IsOn;
         }
+
     }
 }

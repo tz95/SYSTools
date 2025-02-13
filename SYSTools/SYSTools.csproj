@@ -198,9 +198,6 @@
     <Resource Include="Resources\SegoeIcons.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="iNKORE.UI.WPF">
       <Version>1.2.8</Version>
     </PackageReference>
@@ -296,4 +293,8 @@
     <EmbeddedResource Include="Properties\Lang.zh-Hans.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>del /f /q "$(TargetDir)*.pdb"
+</PostBuildEvent>
+  </PropertyGroup>
 </Project>
