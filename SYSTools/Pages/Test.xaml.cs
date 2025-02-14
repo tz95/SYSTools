@@ -49,6 +49,9 @@ namespace SYSTools.Pages
             ManagementObjectSearcher Monitor = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE service='monitor'");
             ManagementObjectCollection MonitorService = Monitor.Get();
 
+            ManagementObjectSearcher DiskDrive = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+            ManagementObjectCollection DiskDriveDevice = DiskDrive.Get();
+
             XmlWriterSettings XmlSettings = new XmlWriterSettings();
             XmlSettings.Indent = true;
 
@@ -86,6 +89,20 @@ namespace SYSTools.Pages
                     foreach (ManagementObject CPU in CPUPr)
                     {
                         Xml_Writer.WriteElementString("Properties", "CPU型号:" + Convert.ToChar(32) + CPU.GetPropertyValue("Name").ToString() + Convert.ToChar(32) + CPU.GetPropertyValue("NumberOfCores").ToString() + "核" + CPU.GetPropertyValue("NumberOfLogicalProcessors").ToString() + "线程");
+                    }
+                    Xml_Writer.WriteEndElement();
+
+                    Xml_Writer.WriteStartElement("Attribute", "硬盘信息");
+                    foreach (ManagementObject Disk in DiskDriveDevice)
+                    {
+                        ulong size = Convert.ToUInt64(Disk.GetPropertyValue("Size"));
+                        double sizeInGB = size / (1024.0 * 1024.0 * 1024.0);
+                        double sizeInTB = sizeInGB / 1024.0;
+                        
+                        string model = Disk.GetPropertyValue("Model").ToString();
+
+                        Xml_Writer.WriteElementString("Properties", $"型号: {model}" + Convert.ToChar(32));
+                        Xml_Writer.WriteElementString("Properties", $"容量: {sizeInGB:F2}GB ({sizeInTB:F2}TB)");
                     }
                     Xml_Writer.WriteEndElement();
 
@@ -286,6 +303,5 @@ namespace SYSTools.Pages
                 }
             }
         }
-
     }
 }

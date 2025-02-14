@@ -33,7 +33,8 @@ namespace SYSTools.Pages
                 IsMemoryEnabled = true,
                 IsMotherboardEnabled = true,
                 IsStorageEnabled = true,
-                IsNetworkEnabled = true
+                IsNetworkEnabled = true,
+                IsBatteryEnabled = true
             };
             
             try
