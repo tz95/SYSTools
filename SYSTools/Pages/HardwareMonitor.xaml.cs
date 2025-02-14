@@ -59,7 +59,14 @@ namespace SYSTools.Pages
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error initializing hardware monitoring: {ex}");
-                MessageBox.Show($"初始化硬件监控时出错: {ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Warning);
+                var errorMessage = Properties.Lang.ResourceManager.GetString("HardwareMonitorInitError", System.Globalization.CultureInfo.CurrentUICulture);
+                var errorTitle = Properties.Lang.ResourceManager.GetString("ErrorTitle", System.Globalization.CultureInfo.CurrentUICulture);
+                
+                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
+                    string.Format(errorMessage ?? "Hardware monitor initialization error: {0}", ex.Message),
+                    errorTitle ?? "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
             }
 
             // 初始化定时器

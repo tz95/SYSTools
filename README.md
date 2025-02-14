@@ -54,8 +54,6 @@
 
 [iNKORE.UI.WPF](https://github.com/iNKORE-NET/UI.WPF)
 
-[AutoUpdater.NET](https://github.com/ravibpatel/AutoUpdater.NET)
-
 <img src="https://visualstudio.microsoft.com/wp-content/uploads/2021/10/Product-Icon.svg" width="60"/>
 
 >本项目使用 Visual Studio 2022 + .NET Framework 4.7.2

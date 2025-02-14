@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Management;
 using System.Net.Http;
 using System.Text.RegularExpressions;
@@ -27,7 +28,7 @@ namespace SYSTools.Pages
             OpenTime.Text = UPTime.ToLongDateString();
 
             //欢迎头部文本
-            Home_SP_Tip.ToolTip = "您好 :" + Convert.ToChar(32) + Environment.UserName;
+            Home_SP_Tip.ToolTip = "您好:" + Convert.ToChar(32) + Environment.UserName;
 
 
             //一言卡片获取
@@ -108,6 +109,7 @@ namespace SYSTools.Pages
             catch (Exception IPv4Error)
             {
                 IPv4.Text = "当前网络可能没有IPV4地址或获取失败";
+                Debug.WriteLine(IPv4Error);
             }
         }
 
@@ -124,6 +126,7 @@ namespace SYSTools.Pages
             catch (Exception IPv6Error)
             {
                 IPv6.Text = "当前网络可能没有IPV6地址或获取失败";
+                Debug.WriteLine(IPv6Error);
             }
         }
     }

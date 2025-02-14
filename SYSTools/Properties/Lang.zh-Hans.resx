@@ -207,4 +207,19 @@
   <data name="OpenWebsite" xml:space="preserve">
     <value>打开网页</value>
   </data>
+  <data name="HardwareMonitor_TextBlock" xml:space="preserve">
+    <value>传感器信息收集 ( 基于 LibreHardwareMonitor ) 信息仅供参考</value>
+  </data>
+  <data name="CollapseAll" xml:space="preserve">
+    <value>全部收起</value>
+  </data>
+  <data name="ExpandAll" xml:space="preserve">
+    <value>全部展开</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="HardwareMonitorInitError" xml:space="preserve">
+    <value>初始化硬件监控时出错:</value>
+  </data>
 </root>

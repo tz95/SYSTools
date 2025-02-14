@@ -5,14 +5,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Security.Principal;
 using System.Windows;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using SYSTools.Model;
 using SYSTools.Pages;
 using Page = System.Windows.Controls.Page;
-using System.Security.Principal;
-using iNKORE.UI.WPF.Modern;
 
 namespace SYSTools
 {

@@ -207,4 +207,19 @@
   <data name="OpenWebsite" xml:space="preserve">
     <value>Open WebSite</value>
   </data>
+  <data name="HardwareMonitor_TextBlock" xml:space="preserve">
+    <value>Sensor Information Collection (based on LibreHardwareMonitor)</value>
+  </data>
+  <data name="ExpandAll" xml:space="preserve">
+    <value>Expand All</value>
+  </data>
+  <data name="CollapseAll" xml:space="preserve">
+    <value>Collapse All</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="HardwareMonitorInitError" xml:space="preserve">
+    <value>Hardware Monitor Init Error:</value>
+  </data>
 </root>

@@ -126,6 +126,15 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
+        internal static string CollapseAll {
+            get {
+                return ResourceManager.GetString("CollapseAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
         internal static string ComponentsLicense {
             get {
                 return ResourceManager.GetString("ComponentsLicense", resourceCulture);
@@ -153,6 +162,24 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
+        internal static string ErrorTitle {
+            get {
+                return ResourceManager.GetString("ErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string ExpandAll {
+            get {
+                return ResourceManager.GetString("ExpandAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
         internal static string GithubIssue {
             get {
                 return ResourceManager.GetString("GithubIssue", resourceCulture);
@@ -165,6 +192,24 @@ namespace SYSTools.Properties {
         internal static string GithubRepo {
             get {
                 return ResourceManager.GetString("GithubRepo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string HardwareMonitor_TextBlock {
+            get {
+                return ResourceManager.GetString("HardwareMonitor_TextBlock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string HardwareMonitorInitError {
+            get {
+                return ResourceManager.GetString("HardwareMonitorInitError", resourceCulture);
             }
         }
         

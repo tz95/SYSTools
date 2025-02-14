@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:muxc="http://schemas.inkore.net/lib/ui/wpf/modern"
+      xmlns:model="clr-namespace:SYSTools.Model"
       xmlns:local="clr-namespace:SYSTools.Pages"
       mc:Ignorable="d" 
       KeepAlive="True"
@@ -16,10 +17,10 @@
 
         <Border  BorderThickness="1" CornerRadius="5" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
 
-        <TextBlock x:Name="textBlock" Margin="20,17,0,0" TextWrapping="Wrap" Text="传感器信息收集 ( 基于 LibreHardwareMonitor ) 信息仅供参考" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" UseLayoutRounding="True"/>
+        <TextBlock Margin="20,17,0,0" TextWrapping="Wrap" Text="{model:Resource Key=HardwareMonitor_TextBlock}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" UseLayoutRounding="True"/>
 
-        <Button x:Name="CollapseAllButton" Content="全部收起" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="920,13.5,0,0" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" Click="CollapseAllButton_Click" Background="{x:Null}" BorderBrush="#33000000"/>
-        <Button x:Name="ExpandAllButton" Content="全部展开" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="800,13.5,0,0" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" Click="ExpandAllButton_Click" Background="{x:Null}" BorderBrush="#33000000"/>
+        <Button x:Name="CollapseAllButton" Content="{model:Resource Key=CollapseAll}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="920,13.5,0,0" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" Click="CollapseAllButton_Click" Background="{x:Null}" BorderBrush="#33000000"/>
+        <Button x:Name="ExpandAllButton" Content="{model:Resource Key=ExpandAll}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="800,13.5,0,0" MinWidth="70" FontSize="15" MinHeight="32.05" IsTabStop="False" Click="ExpandAllButton_Click" Background="{x:Null}" BorderBrush="#33000000"/>
 
         <Border BorderBrush="#CC202020" BorderThickness="1" CornerRadius="5" Margin="10,60,10,10">
             <TreeView x:Name="TestView" IsTabStop="False" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderThickness="0" >
