@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:muxc="http://schemas.inkore.net/lib/ui/wpf/modern"
+      xmlns:model="clr-namespace:SYSTools.Model"
       xmlns:local="clr-namespace:SYSTools.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="610" d:DesignWidth="1040"
@@ -20,45 +21,73 @@
             <RowDefinition Height="76*"/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
-        <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="3" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Width="160" Height="90"/>
+        <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Width="160" Height="90"/>
         
         <Border  BorderThickness="1" CornerRadius="5" Grid.RowSpan="4" Grid.ColumnSpan="2"/>
         
-        <StackPanel x:Name="Home_SP_Tip" Margin="270,0" Height="100" Width="500" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" ToolTip="" Grid.ColumnSpan="2">
+        <StackPanel x:Name="Home_SP_Tip" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Grid.ColumnSpan="2">
             <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xF1AD;" HorizontalAlignment="Center" VerticalAlignment="Center" Width="70" Height="70" FontSize="45" Margin="15,0,0,0"  />
-            <TextBlock VerticalAlignment="Center" Text="欢迎使用SYSTools工具箱" FontSize="30 " HorizontalAlignment="Center"  d:IsLocked="True" />
+            <TextBlock VerticalAlignment="Center" Text="{model:Resource Key=Welcome}" FontSize="30 " HorizontalAlignment="Center"  d:IsLocked="True" />
         </StackPanel>
         <Border BorderThickness="1" Margin="10" Grid.Row="3" CornerRadius="5" Padding="25,0,0,0" Grid.ColumnSpan="2" BorderBrush="#CC202020" >
             <StackPanel Margin="0" Orientation="Horizontal">
                 <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE141;" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"   />
-                <TextBlock VerticalAlignment="Center" Text="Tip" FontSize="20" HorizontalAlignment="Center"  d:IsLocked="True" Margin="10,0,0,0"/>
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="当前版本暂未加入Adb功能" FontSize="20"   d:IsLocked="True" Margin="20,0,0,0" />
+                <TextBlock VerticalAlignment="Center" Text="{model:Resource Key=Notice}" FontSize="20" HorizontalAlignment="Center"  d:IsLocked="True" Margin="10,0,0,0"/>
+                <TextBlock x:Name="PublicNotice" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{model:Resource Key=LoadingNotice}" FontSize="20" Margin="20,0,0,0">
+                    <TextBlock.Triggers>
+                        <EventTrigger RoutedEvent="TextBlock.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetProperty="Opacity"
+                                        From="0.0" To="1.0" Duration="0:0:0.5"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </TextBlock.Triggers>
+                </TextBlock>
             </StackPanel>
         </Border>
 
         <Border BorderThickness="1" Margin="10,10,10,0" Grid.Row="1" CornerRadius="5" Grid.RowSpan="2" BorderBrush="#CC202020"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,30,0,0" HorizontalAlignment="Center">
+            <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE2AD;" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,10,0"  />
+
+            <TextBlock TextWrapping="Wrap" 
+                       Text="{model:Resource Key=SystemTime}" 
+                       Grid.Row="1" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Margin="20,75,20,10">
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" 
+                   Text="{model:Resource Key=SystemStartTime}" 
+                   VerticalAlignment="Center" 
+                   Grid.Row="1" FontSize="20" Margin="0,0,0,10"/>
+
+            <TextBlock x:Name="OpenTime" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Grid.Row="1" FontSize="20"/>
+
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" 
+                   Text="{model:Resource Key=SystemRunTime}" 
+                   VerticalAlignment="Center" 
+                   Grid.Row="1" FontSize="20" Margin="0,10,0,10"/>
+
+            <TextBlock x:Name="RunTime" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Grid.Row="1" FontSize="20" Margin="0,0,0,10"/>
+
+        </StackPanel>
         
-        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE2AD;" HorizontalAlignment="Center" VerticalAlignment="Top"  Margin="89,22,179,0" Grid.Row="1"  />
         
-        <TextBlock  HorizontalAlignment="Center" TextWrapping="Wrap" Text="系统时间" VerticalAlignment="Top" Margin="113,20,103,0" Grid.Row="1" FontSize="18"/>
-        
-        <TextBlock  HorizontalAlignment="Center" TextWrapping="Wrap" Text="系统启动时间" VerticalAlignment="Center" Margin="84,67.3,84,165.2" Grid.Row="1" FontSize="20"/>
-        
-        <TextBlock x:Name="OpenTime" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Margin="0,0,0,25" Grid.Row="1" FontSize="20"/>
-        
-        <TextBlock  HorizontalAlignment="Center" TextWrapping="Wrap" Text="系统运行时间" VerticalAlignment="Center" Margin="84,147.3,84,85.2" Grid.Row="1" FontSize="20"/>
-        
-        <TextBlock x:Name="RunTime" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Margin="0,125,0,0" Grid.Row="1" FontSize="20"/>
-        
-        <TextBlock Text="当前系统为" VerticalAlignment="Top" Grid.Row="2" FontSize="18" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+        <TextBlock Text="{model:Resource Key=CurrentSystem}" 
+                   VerticalAlignment="Top" Grid.Row="2" FontSize="18" 
+                   TextWrapping="Wrap" HorizontalAlignment="Center"/>
         
         <TextBlock x:Name="Windows_Name" Text="" VerticalAlignment="Top" Grid.Row="2" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,40,0,0" Visibility="Visible" TextTrimming="None" FontStretch="Normal" MaxWidth="230" Block.TextAlignment="Center" FontSize="16"/>
         
         <TextBlock x:Name="Windows_Version" Text="" VerticalAlignment="Top" Grid.Row="2" FontSize="16" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,90,0,0"/>
 
         <Border BorderThickness="1" Grid.Column="1" Margin="0,10,10,0" Grid.Row="1" CornerRadius="5" BorderBrush="#CC202020" />
-        
-        <TextBlock x:Name="IP" TextWrapping="Wrap" Text="公网IP ( IPv4 : ipip.net &amp; IPv6 : neu6.edu ) 点击星号获取" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" Margin="0,20,0,0" Grid.Column="1" Grid.Row="1" ToolTip="左键单击获取 右键单击隐藏"/>
+
+        <TextBlock x:Name="IP" TextWrapping="Wrap" Text="{model:Resource Key=IP}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" Margin="0,20,0,0" Grid.Column="1" Grid.Row="1" ToolTip="{model:Resource Key=LR_ToolTip}"/>
         <TextBlock x:Name="IPv4" Text="***.***.***.***" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Margin="0,-40,0,0" Grid.Column="1" Grid.Row="1" MouseLeftButtonDown="IPv4_MouseLeftButtonDown" MouseRightButtonDown="IPv4_MouseRightButtonDown"/>
         <TextBlock x:Name="IPv6" Text="****:****:****:****:****:****:****:****" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Margin="0,0,0,-100" Grid.Column="1" Grid.Row="1" MouseLeftButtonDown="IPv6_MouseLeftButtonDown" MouseRightButtonDown="IPv6_MouseRightButtonDown"/>
 

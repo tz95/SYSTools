@@ -7,6 +7,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using System.Linq;
+using System.Collections.Generic;
+using System.Windows.Media.Animation;
 
 namespace SYSTools.Pages
 {
@@ -17,10 +20,23 @@ namespace SYSTools.Pages
     {
         static readonly HttpClient client = new HttpClient();
         DateTime UPTime = DateTime.Now.AddMilliseconds(-(Environment.TickCount));
+        private List<string> notices = new List<string>();
+        private int currentNoticeIndex = 0;
+        private DispatcherTimer noticeTimer;
 
         public Home()
         {
             InitializeComponent();
+            
+            // 初始化公告计时器
+            noticeTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(3)
+            };
+            noticeTimer.Tick += NoticeTimer_Tick;
+            
+            // 注册Unloaded事件
+            this.Unloaded += Home_Unloaded;
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
@@ -28,7 +44,7 @@ namespace SYSTools.Pages
             OpenTime.Text = UPTime.ToLongDateString();
 
             //欢迎头部文本
-            Home_SP_Tip.ToolTip = "您好:" + Convert.ToChar(32) + Environment.UserName;
+            Home_SP_Tip.ToolTip = Properties.Lang.ResourceManager.GetString("Hello", System.Globalization.CultureInfo.CurrentUICulture) + Convert.ToChar(32) + Environment.UserName;
 
 
             //一言卡片获取
@@ -41,10 +57,10 @@ namespace SYSTools.Pages
             }
             catch (Exception)
             {
-                Hitokoto.Text = "！- 网络或网站出现问题 - ！";
+                Hitokoto.Text = "！- " + Properties.Lang.ResourceManager.GetString("NetError", System.Globalization.CultureInfo.CurrentUICulture) + " - ！";
             }
 
-            if (Hitokoto.Text == "！- 网络或网站出现问题 - ！")
+            if (Hitokoto.Text == "！- " + Properties.Lang.ResourceManager.GetString("NetError", System.Globalization.CultureInfo.CurrentUICulture) + " - ！")
             {
                 IPv4.Text = "!";
                 IPv6.Text = "!";
@@ -59,6 +75,48 @@ namespace SYSTools.Pages
                 Windows_Version.Text = OpSys.GetPropertyValue("Version").ToString();
             }
 
+            // 获取公告
+            try
+            {
+                // 根据当前语言选择公告URL
+                string noticeUrl = System.Globalization.CultureInfo.CurrentUICulture.Name.StartsWith("zh") 
+                    ? "http://systools.hksstudio.work/PublicNotice"          // 中文公告
+                    : "http://systools.hksstudio.work/PublicNotice_EN";      // 英文公告
+
+                HttpResponseMessage response = await client.GetAsync(noticeUrl);
+                response.EnsureSuccessStatusCode();
+                string noticeContent = await response.Content.ReadAsStringAsync();
+                
+                // 按行分割公告内容
+                notices = noticeContent.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries)
+                                     .Select(n => n.Trim())
+                                     .Where(n => !string.IsNullOrEmpty(n))
+                                     .ToList();
+
+                if (notices.Count > 0)
+                {
+                    string firstNotice = notices[0];
+                    PublicNotice.Text = firstNotice;
+                    
+                    if (notices.Count > 1)
+                    {
+                        // 设置初始间隔
+                        noticeTimer.Interval = firstNotice.Length > 15 ? 
+                            TimeSpan.FromSeconds(5) : TimeSpan.FromSeconds(3);
+                        noticeTimer.Start();
+                    }
+                }
+                else
+                {
+                    PublicNotice.Text = Properties.Lang.ResourceManager.GetString("NoticeInfo", System.Globalization.CultureInfo.CurrentUICulture);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"获取公告失败: {ex}");
+                PublicNotice.Text = Properties.Lang.ResourceManager.GetString("NoticeError", System.Globalization.CultureInfo.CurrentUICulture);
+            }
+
             // 计时器
             DispatcherTimer Timer = new DispatcherTimer();
             Timer.Tick += Timer_Tick;
@@ -71,9 +129,39 @@ namespace SYSTools.Pages
         {
             // 启动时间获取并更新
             TimeSpan Nows = DateTime.Now - UPTime;
-            string RunTime_ = Nows.Days + " 天 " + Nows.Hours + " 时 " + Nows.Minutes + " 分 " + Nows.Seconds + " 秒 ";
+            
+            // 获取本地化的时间单位
+            var dayUnit = Properties.Lang.ResourceManager.GetString("TimeUnitDay", System.Globalization.CultureInfo.CurrentUICulture);
+            var hourUnit = Properties.Lang.ResourceManager.GetString("TimeUnitHour", System.Globalization.CultureInfo.CurrentUICulture);
+            var minuteUnit = Properties.Lang.ResourceManager.GetString("TimeUnitMinute", System.Globalization.CultureInfo.CurrentUICulture);
+            var secondUnit = Properties.Lang.ResourceManager.GetString("TimeUnitSecond", System.Globalization.CultureInfo.CurrentUICulture);
+            
+            string RunTime_ = $"{Nows.Days} {dayUnit} {Nows.Hours} {hourUnit} {Nows.Minutes} {minuteUnit} {Nows.Seconds} {secondUnit}";
             RunTime.Text = RunTime_;
             CommandManager.InvalidateRequerySuggested();
+        }
+
+        private void NoticeTimer_Tick(object sender, EventArgs e)
+        {
+            if (notices.Count > 1)
+            {
+                currentNoticeIndex = (currentNoticeIndex + 1) % notices.Count;
+                PublicNotice.Opacity = 0;
+                string nextNotice = notices[currentNoticeIndex];
+                PublicNotice.Text = nextNotice;
+                
+                // 根据文本长度调整显示时间
+                int textLength = nextNotice.Length;
+                TimeSpan interval = textLength > 15 ? TimeSpan.FromSeconds(5) : TimeSpan.FromSeconds(3);
+                noticeTimer.Interval = interval;
+                
+                PublicNotice.BeginAnimation(UIElement.OpacityProperty, new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(500)));
+            }
+        }
+
+        private void Home_Unloaded(object sender, RoutedEventArgs e)
+        {
+            noticeTimer.Stop();
         }
 
         private void IPv4_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

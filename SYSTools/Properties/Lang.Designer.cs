@@ -153,6 +153,15 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
+        internal static string CurrentSystem {
+            get {
+                return ResourceManager.GetString("CurrentSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
         internal static string Developers {
             get {
                 return ResourceManager.GetString("Developers", resourceCulture);
@@ -216,6 +225,24 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
+        internal static string Hello {
+            get {
+                return ResourceManager.GetString("Hello", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string IP {
+            get {
+                return ResourceManager.GetString("IP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
         internal static string LanguageSetting_Description {
             get {
                 return ResourceManager.GetString("LanguageSetting_Description", resourceCulture);
@@ -228,6 +255,60 @@ namespace SYSTools.Properties {
         internal static string LanguageSetting_Header {
             get {
                 return ResourceManager.GetString("LanguageSetting_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string LoadingNotice {
+            get {
+                return ResourceManager.GetString("LoadingNotice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string LR_ToolTip {
+            get {
+                return ResourceManager.GetString("LR_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string NetError {
+            get {
+                return ResourceManager.GetString("NetError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string Notice {
+            get {
+                return ResourceManager.GetString("Notice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string NoticeError {
+            get {
+                return ResourceManager.GetString("NoticeError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string NoticeInfo {
+            get {
+                return ResourceManager.GetString("NoticeInfo", resourceCulture);
             }
         }
         
@@ -315,6 +396,33 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
+        internal static string SystemRunTime {
+            get {
+                return ResourceManager.GetString("SystemRunTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string SystemStartTime {
+            get {
+                return ResourceManager.GetString("SystemStartTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string SystemTime {
+            get {
+                return ResourceManager.GetString("SystemTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
         internal static string SYSToolsUpdate {
             get {
                 return ResourceManager.GetString("SYSToolsUpdate", resourceCulture);
@@ -351,6 +459,42 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
+        internal static string TimeUnitDay {
+            get {
+                return ResourceManager.GetString("TimeUnitDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string TimeUnitHour {
+            get {
+                return ResourceManager.GetString("TimeUnitHour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string TimeUnitMinute {
+            get {
+                return ResourceManager.GetString("TimeUnitMinute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string TimeUnitSecond {
+            get {
+                return ResourceManager.GetString("TimeUnitSecond", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
         internal static string ToolkitUpdate {
             get {
                 return ResourceManager.GetString("ToolkitUpdate", resourceCulture);
@@ -372,6 +516,15 @@ namespace SYSTools.Properties {
         internal static string WebSite {
             get {
                 return ResourceManager.GetString("WebSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string Welcome {
+            get {
+                return ResourceManager.GetString("Welcome", resourceCulture);
             }
         }
     }

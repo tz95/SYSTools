@@ -222,4 +222,55 @@
   <data name="HardwareMonitorInitError" xml:space="preserve">
     <value>Hardware Monitor Init Error:</value>
   </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome to the SYSTools Toolbox</value>
+  </data>
+  <data name="Notice" xml:space="preserve">
+    <value>Notice</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hello：</value>
+  </data>
+  <data name="LoadingNotice" xml:space="preserve">
+    <value>Loading notice...</value>
+  </data>
+  <data name="NetError" xml:space="preserve">
+    <value>Network or website issue detected.</value>
+  </data>
+  <data name="NoticeInfo" xml:space="preserve">
+    <value>No notices available.</value>
+  </data>
+  <data name="NoticeError" xml:space="preserve">
+    <value>Unable to retrieve notice.</value>
+  </data>
+  <data name="TimeUnitDay" xml:space="preserve">
+    <value>d</value>
+  </data>
+  <data name="TimeUnitHour" xml:space="preserve">
+    <value>h</value>
+  </data>
+  <data name="TimeUnitMinute" xml:space="preserve">
+    <value>m</value>
+  </data>
+  <data name="TimeUnitSecond" xml:space="preserve">
+    <value>s</value>
+  </data>
+  <data name="SystemTime" xml:space="preserve">
+    <value>System Time</value>
+  </data>
+  <data name="SystemStartTime" xml:space="preserve">
+    <value>System Start Time</value>
+  </data>
+  <data name="SystemRunTime" xml:space="preserve">
+    <value>System Running Time</value>
+  </data>
+  <data name="CurrentSystem" xml:space="preserve">
+    <value>Current System</value>
+  </data>
+  <data name="LR_ToolTip" xml:space="preserve">
+    <value>Left-click to get, right-click to hide.</value>
+  </data>
+  <data name="IP" xml:space="preserve">
+    <value>Public IP (IPv4: ipip.net &amp; IPv6: neu6.edu) Click the asterisk to retrieve.</value>
+  </data>
 </root>
