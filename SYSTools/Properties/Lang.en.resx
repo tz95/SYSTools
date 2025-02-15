@@ -273,4 +273,34 @@
   <data name="IP" xml:space="preserve">
     <value>Public IP (IPv4: ipip.net &amp; IPv6: neu6.edu) Click the asterisk to retrieve.</value>
   </data>
+  <data name="UpdateHistory" xml:space="preserve">
+    <value>Windows Update History</value>
+  </data>
+  <data name="UpdateTitle" xml:space="preserve">
+    <value>Update Title</value>
+  </data>
+  <data name="UpdateDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="UpdateStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="UpdateHistoryError" xml:space="preserve">
+    <value>Error loading update history</value>
+  </data>
+  <data name="UpdateStatusSuccess" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="UpdateStatusFailed" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="UpdateStatusUnknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="LoadUpdateHistory" xml:space="preserve">
+    <value>Load Update History</value>
+  </data>
+  <data name="ClearList" xml:space="preserve">
+    <value>Clear List</value>
+  </data>
 </root>

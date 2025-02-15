@@ -273,4 +273,34 @@
   <data name="IP" xml:space="preserve">
     <value></value>
   </data>
+  <data name="UpdateHistory" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="UpdateTitle" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="UpdateDate" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="UpdateStatus" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="UpdateHistoryError" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="UpdateStatusSuccess" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="UpdateStatusFailed" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="UpdateStatusUnknown" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="LoadUpdateHistory" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ClearList" xml:space="preserve">
+    <value></value>
+  </data>
 </root>

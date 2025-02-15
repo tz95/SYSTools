@@ -126,6 +126,15 @@ namespace SYSTools.Properties {
         /// <summary>
         ///   查找类似  的本地化字符串。
         /// </summary>
+        internal static string ClearList {
+            get {
+                return ResourceManager.GetString("ClearList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
         internal static string CollapseAll {
             get {
                 return ResourceManager.GetString("CollapseAll", resourceCulture);
@@ -264,6 +273,15 @@ namespace SYSTools.Properties {
         internal static string LoadingNotice {
             get {
                 return ResourceManager.GetString("LoadingNotice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string LoadUpdateHistory {
+            get {
+                return ResourceManager.GetString("LoadUpdateHistory", resourceCulture);
             }
         }
         
@@ -498,6 +516,78 @@ namespace SYSTools.Properties {
         internal static string ToolkitUpdate {
             get {
                 return ResourceManager.GetString("ToolkitUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string UpdateDate {
+            get {
+                return ResourceManager.GetString("UpdateDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string UpdateHistory {
+            get {
+                return ResourceManager.GetString("UpdateHistory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string UpdateHistoryError {
+            get {
+                return ResourceManager.GetString("UpdateHistoryError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string UpdateStatus {
+            get {
+                return ResourceManager.GetString("UpdateStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string UpdateStatusFailed {
+            get {
+                return ResourceManager.GetString("UpdateStatusFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string UpdateStatusSuccess {
+            get {
+                return ResourceManager.GetString("UpdateStatusSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string UpdateStatusUnknown {
+            get {
+                return ResourceManager.GetString("UpdateStatusUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        internal static string UpdateTitle {
+            get {
+                return ResourceManager.GetString("UpdateTitle", resourceCulture);
             }
         }
         

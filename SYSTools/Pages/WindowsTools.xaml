@@ -8,94 +8,37 @@
       mc:Ignorable="d" 
       d:DesignHeight="610" d:DesignWidth="1040"
       KeepAlive="True"
-      Title="WindowsTools" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610" >
-    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Border  BorderThickness="1" CornerRadius="5" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
+      Title="WindowsTools" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1040" MinHeight="610" Loaded="Window_Loading">
+    <Grid>
+
         <Image x:Name="image" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="3" Source="/SYSTools;component/Resources/LOGO.png" Opacity="0.5" Width="160" Height="90"/>
-        <ScrollViewer  VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <!--按钮固定上下大小66(px?)-->
-                <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Top" Header="快捷启动" IsExpanded="True" FontSize="17" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" UseLayoutRounding="False" Margin="10,10,10,0"
-                          ExpandDirection="Down"
-                          Style="{StaticResource {x:Static muxc:ThemeKeys.ExpanderCardStyleKey}}" >
-                    <Expander.Content>
-                        <WrapPanel>
-                            <Button x:Name="CMD" Margin="5,5,0,0" Width="140" Height="40" Content="CMD终端" FontSize="15" Click="CMD_Click" Background="{x:Null}"/>
-                            <Button x:Name="PowerShell" Margin="5,5,0,0" Width="140" Height="40" Content="PowerShell终端" FontSize="15" Click="PowerShell_Click" Background="{x:Null}"/>
-                            <Button x:Name="Regedit" Margin="5,5,0,0" Width="140" Height="40" Content="注册表" FontSize="15" Click="Regedit_Click" Background="{x:Null}"/>
-                            <Button x:Name="Control" Margin="5,5,0,0" Width="140" Height="40" Content="控制面板" FontSize="15" Click="Control_Click" Background="{x:Null}"/>
-                            <Button x:Name="compmgmt" Margin="5,5,0,0" Width="140" Height="40" Content="计算机管理" FontSize="15" Click="compmgmt_Click" Background="{x:Null}"/>
-                            <Button x:Name="Eventvwr" Margin="5,5,0,0" Width="140" Height="40" Content="事件查看器" FontSize="15" Click="Eventvwr_Click" Background="{x:Null}"/>
-                            <Button x:Name="Devmgmt" Margin="5,5,0,0" Width="140" Height="40" Content="设备管理器" FontSize="15" Click="Devmgmt_Click" Background="{x:Null}"/>
-                            <Button x:Name="Gpedit" Margin="5,5,0,5" Width="140" Height="40" Content="组策略" FontSize="15" Click="Gpedit_Click" Background="{x:Null}"/>
-                            <Button x:Name="Taskschd" Margin="5,5,0,5" Width="140" Height="40" Content="计划任务" FontSize="15" Background="{x:Null}" Click="Taskschd_Click"/>
-                            <Button x:Name="GodMode" Margin="5,5,0,5" Width="140" Height="40" Content="上帝模式" FontSize="15" Click="GodMode_Click" Background="{x:Null}"/>
-                            <Button x:Name="Winver" Margin="5,5,0,5" Width="140" Height="40" Content="Windows版本" FontSize="15" Click="Winver_Click" Background="{x:Null}"/>
-                            <Button x:Name="Explorer_Restart" Margin="5,5,0,5" Width="140" Height="40" Content="重启资源管理器" FontSize="15" Click="Explorer_Re" Background="{x:Null}"/>
-                        </WrapPanel>
-                    </Expander.Content>
-                </Expander>
-                <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Stretch" Header="网络工具( 管理员权限 需要手动重启 )" IsExpanded="True" FontSize="17" Margin="10,10,10,0"
-                          ExpandDirection="Down"
-                          Style="{StaticResource {x:Static muxc:ThemeKeys.ExpanderCardStyleKey}}"  >
-                    <Expander.Content>
-                        <WrapPanel>
-                            <Button x:Name="ClearDNS" Margin="5,5,0,5" Width="140" Height="40" Content="清除DNS缓存" FontSize="15" Click="ClearDNS_Click" Background="{x:Null}"/>
-                            <Button x:Name="ResetWS" Margin="5,5,0,5" Width="140" Height="40" Content="重置Winsock" FontSize="15" Click="ResetWS_Click" Background="{x:Null}"/>
-                            <Button x:Name="ResetWS_LSP" Margin="5,5,0,5" Width="140" Height="40" Content="重置LSP" FontSize="15" Click="ResetWS_LSP_Click" Background="{x:Null}"/>
-                            <Button x:Name="ResetTCP" Margin="5,5,0,5" Width="140" Height="40" Content="重置TCP/IP栈" FontSize="15" Click="ResetTCP_Click" Background="{x:Null}"/>
-                        </WrapPanel>
-                    </Expander.Content>
-                </Expander>
-                <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Stretch" Header="Explorer功能( 重启资源管理器生效 )" IsExpanded="True" FontSize="17" Margin="10,10,10,0"
-                          ExpandDirection="Down"
-                          Style="{StaticResource {x:Static muxc:ThemeKeys.ExpanderCardStyleKey}}" >
-                    <Expander.Content>
-                        <WrapPanel Orientation="Vertical">
-                            <WrapPanel>
-                                <ToggleButton x:Name="ShowFileExt" Margin="5,5,0,0" Width="140" Height="40" 
-                                          Content="文件夹后缀" FontSize="15" Background="{x:Null}" 
-                                          Checked="ShowFileExt_Toggled" Unchecked="ShowFileExt_Toggled"/>
-                                <ToggleButton x:Name="ShowHidden" Margin="5,5,0,0" Width="140" Height="40" 
-                                          Content="隐藏文件/文件夹" FontSize="15" Background="{x:Null}"
-                                          Checked="ShowHidden_Toggled" Unchecked="ShowHidden_Toggled"/>
-                                <ToggleButton x:Name="ShowSuper" Margin="5,5,0,0" Width="140" Height="40" 
-                                          Content="显示受保护文件" FontSize="15" Background="{x:Null}"
-                                          Checked="ShowSuper_Toggled" Unchecked="ShowSuper_Toggled"/>
-                                <ToggleButton x:Name="HideArrow" Margin="5,5,0,0" Width="140" Height="40" 
-                                          Content="去快捷小箭头" FontSize="15" Background="{x:Null}"
-                                          Checked="HideArrow_Toggled" Unchecked="HideArrow_Toggled"/>
-                                <ToggleButton x:Name="HideText" Margin="5,5,0,0" Width="140" Height="40" 
-                                          Content="去快捷文本" FontSize="15" Background="{x:Null}"
-                                          Checked="HideText_Toggled" Unchecked="HideText_Toggled"/>
-                                <ToggleButton x:Name="HideUAC" Margin="5,5,0,0" Width="140" Height="40" 
-                                          Content="去UAC盾牌" FontSize="15" Background="{x:Null}"
-                                          Checked="HideUAC_Toggled" Unchecked="HideUAC_Toggled"/>
-                            </WrapPanel>
-                            <WrapPanel Margin="5,5,0,5">
-                                <ComboBox x:Name="MenuStyle" 
-                                          Margin="5,5,0,0" 
-                                          muxc:ControlHelper.Header="右键菜单风格" 
-                                          FontSize="15" 
-                                          Width="140"
-                                          SelectionChanged="MenuStyle_SelectionChanged">
-                                    <ComboBoxItem Content="Win10风格"/>
-                                    <ComboBoxItem Content="Win11风格"/>
-                                </ComboBox>
-                                <ComboBox x:Name="ExplorerDefault" 
-                                          Margin="5,5,0,0" 
-                                          muxc:ControlHelper.Header="资源管理器打开默认" 
-                                          FontSize="15" 
-                                          Width="140"
-                                          SelectionChanged="ExplorerDefault_SelectionChanged">
-                                    <ComboBoxItem Content="此电脑"/>
-                                    <ComboBoxItem Content="快速访问"/>
-                                </ComboBox>
-                            </WrapPanel>
-                        </WrapPanel>
-                    </Expander.Content>
-                </Expander>
-            </StackPanel>
-        </ScrollViewer>
+
+        <muxc:NavigationView x:Name="ToolsNavigation" PaneDisplayMode="Top" SelectionFollowsFocus="Enabled" IsBackButtonVisible="Collapsed" HorizontalContentAlignment="Center" IsTitleBarAutoPaddingEnabled="True" IsSettingsVisible="False" IsBackEnabled="False" AlwaysShowHeader="True" ItemInvoked="NavigationTriggered">
+
+            <FrameworkElement.Resources>
+                <SolidColorBrush x:Key="{x:Static muxc:ThemeKeys.NavigationViewContentBackgroundKey}" Color="Transparent"/>
+                <SolidColorBrush x:Key="{x:Static muxc:ThemeKeys.ExpanderHeaderBorderBrushKey}" Color="Transparent"/>
+                <Thickness x:Key="NavigationViewContentGridBorderThickness">0,0,0,0</Thickness>
+            </FrameworkElement.Resources>
+
+            <muxc:NavigationView.MenuItems>
+
+                <muxc:NavigationViewItem Content="实用工具" Tag="SYSTools.WindowsToolsPages.WindowsUtilities" x:Name="WindowsUtilities" IsTabStop="False" IsSelected="True">
+                    <muxc:NavigationViewItem.Icon>
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xEC7A;" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+
+                <muxc:NavigationViewItem Content="系统更新日志" Tag="SYSTools.WindowsToolsPages.WindowsUpdateHistory" x:Name="WindowsUpdateHistory" IsTabStop="False">
+                    <muxc:NavigationViewItem.Icon>
+                        <muxc:FontIcon FontFamily="{DynamicResource SegoeIcons}" Glyph="&#xE81C;" />
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+
+            </muxc:NavigationView.MenuItems>
+
+            <muxc:Frame x:Name="CurrentPage" />
+
+        </muxc:NavigationView>
     </Grid>
 </Page>

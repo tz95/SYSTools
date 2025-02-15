@@ -125,6 +125,12 @@
       <DependentUpon>TestTools.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\CustomUpdater.cs" />
+    <Compile Include="WindowsToolsPages\WindowsUpdateHistory.xaml.cs">
+      <DependentUpon>WindowsUpdateHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowsToolsPages\WindowsUtilities.xaml.cs">
+      <DependentUpon>WindowsUtilities.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -188,6 +194,14 @@
     <Page Include="ToolPages\TestTools.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowsToolsPages\WindowsUpdateHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowsToolsPages\WindowsUtilities.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -291,6 +305,17 @@
       <CustomToolNamespace>SYSTools.Properties</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Lang.zh-Hans.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="WUApiLib">
+      <Guid>{B596CC9F-56E5-419E-A622-E01BB457431E}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
