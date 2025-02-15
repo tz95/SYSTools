@@ -72,7 +72,7 @@ namespace SYSTools.WindowsToolsPages
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error loading update history: {ex}");
-                MessageBox.Show(
+                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
                     Properties.Lang.ResourceManager.GetString("UpdateHistoryError", System.Globalization.CultureInfo.CurrentUICulture),
                     Properties.Lang.ResourceManager.GetString("ErrorTitle", System.Globalization.CultureInfo.CurrentUICulture),
                     MessageBoxButton.OK,
