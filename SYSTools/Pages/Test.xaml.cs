@@ -8,6 +8,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Xml;
+using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace SYSTools.Pages
 {
@@ -21,6 +23,29 @@ namespace SYSTools.Pages
             InitializeComponent();
             CommandBindings.Add(new CommandBinding(ApplicationCommands.Copy, CopyCommandExecuted));
             iNKORE.UI.WPF.Modern.Controls.MessageBox.DefaultBackdropType = BackdropType.Acrylic11;
+        }
+
+        private async void TestBotton_Click(object sender, RoutedEventArgs e)
+        {
+            try 
+            {
+                await Task.Run(() => HardwareTestAsync());
+                Xml(); // 加载XML到TreeView
+                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
+                    "配置获取成功", 
+                    "系统配置测试", 
+                    MessageBoxButton.OK, 
+                    SegoeFluentIcons.SpecialEffectSize);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error getting hardware info: {ex}");
+                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show(
+                    "系统配置获取失败 请联系开发者", 
+                    "系统配置测试", 
+                    MessageBoxButton.OK, 
+                    MessageBoxImage.Warning);
+            }
         }
 
         private void HardwareTestAsync()
@@ -191,13 +216,9 @@ namespace SYSTools.Pages
                     Xml_Writer.WriteEndElement();
                     Xml_Writer.WriteEndDocument();
                 }
-                
-                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("配置获取成功", "系统配置测试", MessageBoxButton.OK, SegoeFluentIcons.SpecialEffectSize);
             }
             catch (Exception)
             {
-                iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("系统配置获取失败 请联系开发者", "系统配置测试", MessageBoxButton.OK, MessageBoxImage.Warning);
-
                 using (XmlWriter Xml_Writer = XmlWriter.Create("Info.xml", XmlSettings))
                 {
                     Xml_Writer.WriteStartDocument();
@@ -209,6 +230,7 @@ namespace SYSTools.Pages
                     Xml_Writer.WriteEndElement();
                     Xml_Writer.WriteEndDocument();
                 }
+                throw; // 重新抛出异常以便上层处理
             }
         }
 
@@ -267,12 +289,6 @@ namespace SYSTools.Pages
         private void Info_Click(object sender, RoutedEventArgs e)
         {
             iNKORE.UI.WPF.Modern.Controls.MessageBox.Show("配置提取基于WMI, 获取时会发生短暂卡顿(根据电脑配置). \r\n正常现象 耐心等待, 文件保存至软件根目录下Info.xml", "系统配置测试 ( 疑问 )", MessageBoxButton.OK, MessageBoxImage.Question);
-        }
-
-        private void TestBotton_Click(object sender, RoutedEventArgs e)
-        {
-            HardwareTestAsync();
-            Xml();
         }
 
         private void AddContextMenu(TreeViewItem item)

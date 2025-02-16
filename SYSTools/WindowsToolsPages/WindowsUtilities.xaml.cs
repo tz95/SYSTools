@@ -1,5 +1,6 @@
 ﻿using iNKORE.UI.WPF.Modern.Controls;
 using Microsoft.Win32;
+using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -275,29 +276,25 @@ namespace SYSTools.WindowsToolsPages
         //网络工具分类
         private void ClearDNS_Click(object sender, RoutedEventArgs e)
         {
-            string command = "ipconfig /flushdns";
-            string output = RunCommand(command);
+            string output = RunCommand("ipconfig /flushdns");
             ShowMessage(output);
         }
 
         private void ResetWS_Click(object sender, RoutedEventArgs e)
         {
-            string command = "netsh winsock reset";
-            string output = RunCommand(command);
+            string output = RunCommand("netsh winsock reset");
             ShowMessage(output);
         }
 
         private void ResetWS_LSP_Click(object sender, RoutedEventArgs e)
         {
-            string command = "netsh winsock reset catalog";
-            string output = RunCommand(command);
+            string output = RunCommand("netsh winsock reset catalog");
             ShowMessage(output);
         }
 
         private void ResetTCP_Click(object sender, RoutedEventArgs e)
         {
-            string command = "netsh int ip reset";
-            string output = RunCommand(command);
+            string output = RunCommand("netsh int ip reset");
             ShowMessage(output);
         }
 
@@ -309,25 +306,45 @@ namespace SYSTools.WindowsToolsPages
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = "cmd.exe",
-                    Arguments = $"/c {command}",
+                    Arguments = $"/c chcp 65001 > nul && {command}", // 切换到UTF-8代码页
                     RedirectStandardOutput = true,
+                    RedirectStandardError = true,
                     UseShellExecute = false,
-                    CreateNoWindow = true
+                    CreateNoWindow = true,
+                    StandardOutputEncoding = System.Text.Encoding.UTF8,
+                    StandardErrorEncoding = System.Text.Encoding.UTF8
                 }
             };
+            
             process.Start();
             string output = process.StandardOutput.ReadToEnd();
+            string error = process.StandardError.ReadToEnd();
             process.WaitForExit();
-            return output;
+            
+            return string.IsNullOrEmpty(error) ? output.Trim() : error.Trim();
         }
 
         // 窗口提示
         private async void ShowMessage(string message)
         {
+            var scrollViewer = new ScrollViewer
+            {
+                MaxHeight = 400, // 设置最大高度
+                VerticalScrollBarVisibility = ScrollBarVisibility.Auto
+            };
+
+            var textBlock = new TextBlock
+            {
+                Text = message,
+                TextWrapping = TextWrapping.Wrap
+            };
+
+            scrollViewer.Content = textBlock;
+
             ContentDialog dialog = new ContentDialog
             {
-                Title = "提示",
-                Content = message,
+                Title = "命令执行结果",
+                Content = scrollViewer,
                 CloseButtonText = "确定"
             };
 
