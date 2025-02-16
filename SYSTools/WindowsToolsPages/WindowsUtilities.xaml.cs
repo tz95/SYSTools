@@ -55,6 +55,9 @@ namespace SYSTools.WindowsToolsPages
                 }
             }
 
+            // 初始化电源计划选择
+            InitializePowerConfig();
+
             isInitializing = false;
         }
 
@@ -297,6 +300,74 @@ namespace SYSTools.WindowsToolsPages
             string output = RunCommand("netsh int ip reset");
             ShowMessage(output);
         }
+
+        // 电源计划
+        private void InitializePowerConfig()
+        {
+            string output = RunCommand("powercfg /list");
+            string[] lines = output.Split('\n');
+            string currentGuid = RunCommand("powercfg /getactivescheme").Split('\n')[0].Trim();
+
+            foreach (string line in lines)
+            {
+                if (line.Contains("电源方案 GUID"))
+                {
+                    if (line.Contains("(节能)") || line.Contains("最佳能效"))
+                    {
+                        if (line.Contains(currentGuid))
+                            PowerConfig.SelectedIndex = 0;
+                    }
+                    else if (line.Contains("(平衡)") || line.Contains("平衡"))
+                    {
+                        if (line.Contains(currentGuid))
+                            PowerConfig.SelectedIndex = 1;
+                    }
+                    else if (line.Contains("(高性能)") || line.Contains("最佳性能"))
+                    {
+                        if (line.Contains(currentGuid))
+                            PowerConfig.SelectedIndex = 2;
+                    }
+                    else if (line.Contains("卓越性能"))
+                    {
+                        if (line.Contains(currentGuid))
+                            PowerConfig.SelectedIndex = 3;
+                    }
+                }
+            }
+        }
+
+        private void PowerConfig_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (isInitializing) return;
+
+            string scheme = "";
+            switch (PowerConfig.SelectedIndex)
+            {
+                case 0: // 最佳能效
+                    scheme = "a1841308-3541-4fab-bc81-f71556f20b4a";
+                    break;
+                case 1: // 平衡
+                    scheme = "381b4222-f694-41f0-9685-ff5bb260df2e";
+                    break;
+                case 2: // 最佳性能
+                    scheme = "8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c";
+                    break;
+                case 3: // 卓越性能
+                    // 先创建卓越性能方案
+                    RunCommand("powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61");
+                    scheme = "e9a42b02-d5df-448d-aa00-03f14749eb61";
+                    break;
+            }
+
+            if (!string.IsNullOrEmpty(scheme))
+            {
+                string output = RunCommand($"powercfg /setactive {scheme}");
+                ShowMessage("电源计划已更改: " + output);
+            }
+        }
+
+
+
 
         // cmd命令执行
         static string RunCommand(string command)

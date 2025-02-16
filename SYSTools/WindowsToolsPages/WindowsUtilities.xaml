@@ -36,7 +36,7 @@
                         </WrapPanel>
                     </Expander.Content>
                 </Expander>
-                <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Stretch" Header="网络工具( 管理员权限 需要手动重启 )" IsExpanded="True" FontSize="17" Margin="10,10,10,0"
+                <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Stretch" Header="网络工具( 管理员权限 需要手动重启系统 )" IsExpanded="True" FontSize="17" Margin="10,10,10,0"
                           ExpandDirection="Down"
                           Style="{StaticResource {x:Static muxc:ThemeKeys.ExpanderCardStyleKey}}"  >
                     <Expander.Content>
@@ -96,6 +96,28 @@
                         </WrapPanel>
                     </Expander.Content>
                 </Expander>
+
+                <Expander HorizontalContentAlignment="Left" Padding="0" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Stretch" Header="性能设置" IsExpanded="True" FontSize="17" Margin="10,10,10,0"
+                          ExpandDirection="Down"
+                          Style="{StaticResource {x:Static muxc:ThemeKeys.ExpanderCardStyleKey}}" >
+                    <Expander.Content>
+                        <WrapPanel Margin="5,5,0,5">
+                            <ComboBox x:Name="PowerConfig" 
+                                        Margin="5,5,0,0" 
+                                        muxc:ControlHelper.Header="电源计划" 
+                                        FontSize="15" 
+                                        Width="140"
+                                        SelectionChanged="PowerConfig_SelectionChanged">
+                                <ComboBoxItem Content="最佳能效"/>
+                                <ComboBoxItem Content="平衡"/>
+                                <ComboBoxItem Content="最佳性能"/>
+                                <ComboBoxItem Content="卓越性能"/>
+                            </ComboBox>
+                        </WrapPanel>
+                    </Expander.Content>
+                </Expander>
+
+
             </StackPanel>
         </ScrollViewer>
     </Grid>
