@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using System;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -265,8 +266,38 @@ namespace SYSTools.WindowsToolsPages
             //关于Windows
             Process.Start("winver");
         }
+        private void SystemProperties_Click(object sender, RoutedEventArgs e)
+        {
+            // 系统属性
+            Process.Start("control.exe", "system");
+        }
+        private void PerfMon_Click(object sender, RoutedEventArgs e)
+        {
+            // 性能监视器
+            Process.Start("perfmon.exe");
+        }
+        private void ResMon_Click(object sender, RoutedEventArgs e)
+        {
+            // 资源监视器
+            Process.Start("resmon.exe");
+        }
+        private void TaskMgr_Click(object sender, RoutedEventArgs e)
+        {
+            // 任务管理器
+            Process.Start("taskmgr.exe");
+        }
+        private void MSConfig_Click(object sender, RoutedEventArgs e)
+        {
+            // 系统配置
+            Process.Start("msconfig.exe");
+        }
+        private void DisplaySettings_Click(object sender, RoutedEventArgs e)
+        {
+            // 显示设置
+            Process.Start("displays.cpl");
+        }
 
-        private void Explorer_Re(object sender, RoutedEventArgs e)
+        private void Explorer_Restart_Click(object sender, RoutedEventArgs e)
         {
             // 重启资源管理器
             Process[] processes = Process.GetProcessesByName("explorer");
@@ -354,8 +385,10 @@ namespace SYSTools.WindowsToolsPages
                     break;
                 case 3: // 卓越性能
                     // 先创建卓越性能方案
-                    RunCommand("powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61");
-                    scheme = "e9a42b02-d5df-448d-aa00-03f14749eb61";
+                    string PowerOut = RunCommand("powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61");
+                    string PowerRegex = @"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}";
+                    Match match = Regex.Match(PowerOut, PowerRegex);
+                    scheme = match.Value;
                     break;
             }
 
@@ -366,6 +399,38 @@ namespace SYSTools.WindowsToolsPages
             }
         }
 
+        private void PowerSetting_Click(object sender, RoutedEventArgs e)
+        {
+            //控制面板 -> 电源设置
+            Process.Start("control","powercfg.cpl");
+        }
+
+        private void PowerOptions_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "control.exe",
+                    Arguments = "powercfg.cpl,,3",
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                ShowMessage("无法打开电源计划编辑页面: " + ex.Message);
+            }
+        }
+
+        private void Advanced_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("SystemPropertiesAdvanced.exe");     // 高级系统设置
+        }
+
+        private void Performance_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("SystemPropertiesPerformance.exe");  // 性能选项
+        }
 
 
 
@@ -421,6 +486,7 @@ namespace SYSTools.WindowsToolsPages
 
             await dialog.ShowAsync();
         }
+
     }
 }
 
